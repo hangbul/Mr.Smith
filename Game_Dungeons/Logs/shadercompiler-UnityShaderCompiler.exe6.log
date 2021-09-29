@@ -1,4 +1,6 @@
 Base path: 'D:/backup/공부/4학년/2학기/게임엔진2/2021.1.19f1/Editor/Data', plugins path 'D:/backup/공부/4학년/2학기/게임엔진2/2021.1.19f1/Editor/Data/PlaybackEngines'
 Cmd: initializeCompiler
 
+Cmd: initializeCompiler
+
 Cmd: shutdown
