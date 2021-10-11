@@ -1,6 +1,5 @@
 sceneSetups:
-- path: "D:/backup/\uACF5\uBD80/4\uD559\uB144/2\uD559\uAE30/\uAC8C\uC784\uC5D4\uC9C42/dungeon
-    generation/Random-Dungeon-Generation/IsaacGenTut/Assets/Scenes/Tutorial.unity"
+- path: Assets/Scenes/Tutorial.unity
   isLoaded: 1
   isActive: 1
   isSubScene: 0
