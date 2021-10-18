@@ -105,7 +105,7 @@
 -define:ENABLE_TERRAIN
 -define:ENABLE_TILEMAP
 -define:ENABLE_TIMELINE
--define:ENABLE_LEGACY_INPUT_MANAGER
+-define:ENABLE_INPUT_SYSTEM
 -define:CSHARP_7_OR_LATER
 -define:CSHARP_7_3_OR_NEWER
 -r:"D:/backup/공부/4학년/2학기/게임엔진2/2021.1.24f1/Editor/Data/Managed/UnityEngine/UnityEditor.CoreModule.dll"
@@ -304,6 +304,7 @@
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/Unity.2D.Tilemap.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/Unity.2D.Tilemap.Extras.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/Unity.2D.Tilemap.Extras.ref.dll"
+-r:"Library/Bee/artifacts/1900b0aEDbg.dag/Unity.InputSystem.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/Unity.PlasticSCM.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/Unity.Rider.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/Unity.TextMeshPro.Editor.ref.dll"
@@ -321,10 +322,12 @@
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/UnityEngine.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/VSSettingsProvider.ref.dll"
-"Assets/Scripts/AddRoom.cs"
-"Assets/Scripts/Destroyer.cs"
-"Assets/Scripts/RoomSpawner.cs"
-"Assets/Scripts/RoomTemplates.cs"
+"Assets/Scripts/Follow.cs"
+"Assets/Scripts/InputSystem/PlayerMovement.cs"
+"Assets/Scripts/RandomRoomGenerate/AddRoom.cs"
+"Assets/Scripts/RandomRoomGenerate/Destroyer.cs"
+"Assets/Scripts/RandomRoomGenerate/RoomSpawner.cs"
+"Assets/Scripts/RandomRoomGenerate/RoomTemplates.cs"
 -langversion:8.0
 
 /deterministic
