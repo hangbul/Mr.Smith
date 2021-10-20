@@ -323,11 +323,16 @@
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/UnityEngine.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aEDbg.dag/VSSettingsProvider.ref.dll"
 "Assets/Scripts/Follow.cs"
+"Assets/Scripts/HealthBar.cs"
+"Assets/Scripts/InputSystem/PlayerControls.cs"
+"Assets/Scripts/InputSystem/PlayerInfo.cs"
 "Assets/Scripts/InputSystem/PlayerMovement.cs"
 "Assets/Scripts/RandomRoomGenerate/AddRoom.cs"
 "Assets/Scripts/RandomRoomGenerate/Destroyer.cs"
 "Assets/Scripts/RandomRoomGenerate/RoomSpawner.cs"
 "Assets/Scripts/RandomRoomGenerate/RoomTemplates.cs"
+"Assets/Scripts/Weapon.cs"
+"Assets/Scripts/WeaponType.cs"
 -langversion:8.0
 
 /deterministic

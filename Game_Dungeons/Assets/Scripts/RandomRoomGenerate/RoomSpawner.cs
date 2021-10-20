@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using UnityEngine;
 using Debug = System.Diagnostics.Debug;
 
-public class RoomSpawner : MonoBehaviour {
-
+public class RoomSpawner : MonoBehaviour
+{
 	public int openingDirection;
 	// 1 --> need bottom door
 	// 2 --> need top door

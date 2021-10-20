@@ -6,8 +6,10 @@ TagManager:
   tags:
   - SpawnPoint
   - Rooms
-  - Rooms
   - Centry Room
+  - MeleeWeapon
+  - Rooms
+  - Boss
   layers:
   - Default
   - TransparentFX

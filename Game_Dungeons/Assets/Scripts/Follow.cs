@@ -18,13 +18,8 @@ public class Follow : MonoBehaviour
     
     void LateUpdate()
     {
-        //천천히 회전
-        float currYAngle =
-            Mathf.LerpAngle(camTransform.eulerAngles.y, target.eulerAngles.y, smoothRotate * Time.deltaTime);
         
-        Quaternion rot = Quaternion.Euler(0,currYAngle, 0);
-
-        camTransform.position = target.position - (rot * Vector3.forward * dist) + (Vector3.up * height);
+        camTransform.position = target.position - (Vector3.forward * dist) + (Vector3.up * height);
     
         camTransform.LookAt(target);
     }

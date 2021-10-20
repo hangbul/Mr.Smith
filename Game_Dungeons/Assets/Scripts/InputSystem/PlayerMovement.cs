@@ -1,28 +1,81 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using System.Collections;
 
-public class PlayerMovement : MonoBehaviour
+namespace Assets.Scripts.InputSystem
 {
-    private CharacterController _characterController;
+    public class PlayerMovement : MonoBehaviour
+    {
+        [SerializeField] private float speed = 2.0f;
+        [SerializeField] Camera mainCam;
+        [SerializeField] GameObject weapon;
 
-    private Vector2 _playerInput;
-    
-    private void Awake()
-    {
-        _characterController = GetComponent<CharacterController>();
-    }
-    
-    void Update()
-    {
-        var forward = new Vector3(_playerInput.x, 0, _playerInput.y);
-        _characterController.SimpleMove(forward);
-        transform.rotation = Quaternion.LookRotation(forward);
-    }
-    
-    void OnMove(InputValue inputVal)
-    {
-        _playerInput = inputVal.Get<Vector2>();
+        private CharacterController _characterController;
+        private PlayerInfo P_info;
+        private Vector2 _playerInput;
+        private Vector2 MousePos;
+        private bool mouseLDown;
+        
+        private void Awake()
+        {
+            _characterController = GetComponent<CharacterController>();
+            mouseLDown = false;
+        }
+
+        void Update()
+        {
+            var forward = new Vector3(_playerInput.x, 0, _playerInput.y);
+            _characterController.SimpleMove(forward * speed);
+            
+            if (mouseLDown)
+            {
+                Ray ray = mainCam.ScreenPointToRay(MousePos);
+                RaycastHit hit;
+                if(Physics.Raycast(ray, out hit, 15))
+                {
+                    Vector3 next = hit.point - transform.position;
+                    var from = transform.rotation;
+                    var to =  Quaternion.LookRotation(new Vector3(next.x, 0, next.z));
+                    transform.rotation = Quaternion.Lerp(from,to, Time.deltaTime * speed);
+                }
+            }
+            else
+            {
+                var from = transform.rotation;
+                var to = Quaternion.LookRotation(forward);
+                transform.rotation = Quaternion.Lerp(from,to, Time.deltaTime * speed);
+            }
+
+        }
+
+        public void OnMove(InputAction.CallbackContext callback)
+        {
+            _playerInput = callback.ReadValue<Vector2>();
+        }
+
+        public void OnAttack(InputAction.CallbackContext callback)
+        {
+            
+        }
+        
+        public void GetMousePosition(InputAction.CallbackContext callback)
+        {
+            MousePos = callback.ReadValue<Vector2>();
+        }
+
+        public void OnAim(InputAction.CallbackContext callback)
+        {
+            switch (callback.phase)
+            {
+                case InputActionPhase.Started:
+                    mouseLDown = true;
+                    break;
+                case InputActionPhase.Canceled:
+                    mouseLDown = false;
+                    break;
+                
+            }
+
+        }
     }
 }
