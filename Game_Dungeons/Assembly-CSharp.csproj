@@ -42,16 +42,20 @@
   </PropertyGroup>
   <ItemGroup>
      <Compile Include="Assets\Scripts\RandomRoomGenerate\RoomSpawner.cs" />
+     <Compile Include="Assets\Scripts\HealthBar.cs" />
      <Compile Include="Assets\Scripts\RandomRoomGenerate\RoomTemplates.cs" />
+     <Compile Include="Assets\Scripts\Weapon.cs" />
      <Compile Include="Assets\Scripts\RandomRoomGenerate\Destroyer.cs" />
      <Compile Include="Assets\Scripts\Follow.cs" />
+     <Compile Include="Assets\Scripts\WeaponType.cs" />
      <Compile Include="Assets\Scripts\InputSystem\PlayerMovement.cs" />
      <Compile Include="Assets\Scripts\InputSystem\PlayerControls.cs" />
      <Compile Include="Assets\Scripts\RandomRoomGenerate\AddRoom.cs" />
-     <Compile Include="Assets\Scripts\WeaponType.cs" />
-     <Compile Include="Assets\Scripts\Weapon.cs" />
-     <Compile Include="Assets\Scripts\HealthBar.cs" />
      <Compile Include="Assets\Scripts\InputSystem\PlayerInfo.cs" />
+     <Compile Include="Assets\Scripts\Enemy\EnemyState.cs" />
+     <Compile Include="Assets\Scripts\Enemy\EnemyStateUI.cs" />
+     <Compile Include="Assets\Scripts\Enemy\Enemy.cs" />
+     <Compile Include="Assets\EnemySpawn.cs" />
      <None Include="Assets\FreeAssets\kenney_platformerkit2\License.txt" />
      <None Include="Assets\FreeAssets\kenney_graveyardkit_3\License.txt" />
      <Reference Include="UnityEngine">
