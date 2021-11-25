@@ -49,6 +49,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Dodge"",
+                    ""type"": ""Button"",
+                    ""id"": ""10dd2f24-4abb-4b89-9d1f-08bab625e8c9"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -139,6 +147,17 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Aiming"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""f2e28f84-b0fe-4c6a-8284-36e21d8a5165"",
+                    ""path"": ""<Keyboard>/LeftShift"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""MainControlScheme"",
+                    ""action"": ""Dodge"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -168,6 +187,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_GamePlayerMaps_Attack = m_GamePlayerMaps.FindAction("Attack", throwIfNotFound: true);
         m_GamePlayerMaps_MousePosition = m_GamePlayerMaps.FindAction("MousePosition", throwIfNotFound: true);
         m_GamePlayerMaps_Aiming = m_GamePlayerMaps.FindAction("Aiming", throwIfNotFound: true);
+        m_GamePlayerMaps_Dodge = m_GamePlayerMaps.FindAction("Dodge", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -221,6 +241,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_GamePlayerMaps_Attack;
     private readonly InputAction m_GamePlayerMaps_MousePosition;
     private readonly InputAction m_GamePlayerMaps_Aiming;
+    private readonly InputAction m_GamePlayerMaps_Dodge;
     public struct GamePlayerMapsActions
     {
         private @PlayerControls m_Wrapper;
@@ -229,6 +250,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Attack => m_Wrapper.m_GamePlayerMaps_Attack;
         public InputAction @MousePosition => m_Wrapper.m_GamePlayerMaps_MousePosition;
         public InputAction @Aiming => m_Wrapper.m_GamePlayerMaps_Aiming;
+        public InputAction @Dodge => m_Wrapper.m_GamePlayerMaps_Dodge;
         public InputActionMap Get() { return m_Wrapper.m_GamePlayerMaps; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -250,6 +272,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Aiming.started -= m_Wrapper.m_GamePlayerMapsActionsCallbackInterface.OnAiming;
                 @Aiming.performed -= m_Wrapper.m_GamePlayerMapsActionsCallbackInterface.OnAiming;
                 @Aiming.canceled -= m_Wrapper.m_GamePlayerMapsActionsCallbackInterface.OnAiming;
+                @Dodge.started -= m_Wrapper.m_GamePlayerMapsActionsCallbackInterface.OnDodge;
+                @Dodge.performed -= m_Wrapper.m_GamePlayerMapsActionsCallbackInterface.OnDodge;
+                @Dodge.canceled -= m_Wrapper.m_GamePlayerMapsActionsCallbackInterface.OnDodge;
             }
             m_Wrapper.m_GamePlayerMapsActionsCallbackInterface = instance;
             if (instance != null)
@@ -266,6 +291,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Aiming.started += instance.OnAiming;
                 @Aiming.performed += instance.OnAiming;
                 @Aiming.canceled += instance.OnAiming;
+                @Dodge.started += instance.OnDodge;
+                @Dodge.performed += instance.OnDodge;
+                @Dodge.canceled += instance.OnDodge;
             }
         }
     }
@@ -285,5 +313,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnMousePosition(InputAction.CallbackContext context);
         void OnAiming(InputAction.CallbackContext context);
+        void OnDodge(InputAction.CallbackContext context);
     }
 }

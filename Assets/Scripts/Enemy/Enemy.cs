@@ -21,7 +21,8 @@ public class Enemy : MonoBehaviour
     private Vector3 currentRandomPos;
     private GameObject _player;
     private NavMeshAgent _navMeshAgent;
-
+    private Animator anim;
+    
     private float _idelTimer;
     private float _searchTimer;
     private float _loseTimer;
@@ -35,6 +36,7 @@ public class Enemy : MonoBehaviour
         _player = GameObject.FindWithTag("Player");
         _navMeshAgent = GetComponent<NavMeshAgent>();
         currentHitPoint = maxhitPoint;
+        anim = GetComponentInChildren<Animator>();
 
         //stateGameObject.GetComponent<EnenyStateUI>().SetEnemy(this);
         StartCoroutine(EnenmyStateMachine());
@@ -59,6 +61,7 @@ public class Enemy : MonoBehaviour
             {
                 if (_idelTimer > idleTime)
                 {
+                    anim.SetBool("isWalk", true);
                     _enemyState = EnemyState.Search;
                     _idelTimer = 0f;
                     currentRandomPos = new Vector3(Random.Range(transform.position.x - 5, transform.position.x + 5), 0, 
@@ -78,6 +81,8 @@ public class Enemy : MonoBehaviour
             {
                 if (_searchTimer > searchTime)
                 {
+                    anim.SetBool("isWalk", false);
+
                     _enemyState = EnemyState.Idle;
                     _searchTimer = 0f;
                 }

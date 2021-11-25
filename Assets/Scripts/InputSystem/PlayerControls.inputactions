@@ -36,6 +36,14 @@
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": ""
+                },
+                {
+                    "name": "Dodge",
+                    "type": "Button",
+                    "id": "10dd2f24-4abb-4b89-9d1f-08bab625e8c9",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": ""
                 }
             ],
             "bindings": [
@@ -124,6 +132,17 @@
                     "processors": "",
                     "groups": "MainControlScheme",
                     "action": "Aiming",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "f2e28f84-b0fe-4c6a-8284-36e21d8a5165",
+                    "path": "<Keyboard>/LeftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "MainControlScheme",
+                    "action": "Dodge",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
