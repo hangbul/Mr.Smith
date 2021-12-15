@@ -7,7 +7,8 @@ public class IntroManager : MonoBehaviour
 {
     public GameObject StartPanel;
     public GameObject IntroPanel;
-    
+    public GameObject SoundMenu;
+
     void Start()
     {
         StartCoroutine(DelayTime(4));
@@ -16,14 +17,23 @@ public class IntroManager : MonoBehaviour
     IEnumerator DelayTime(float time)
     {
         yield return new WaitForSeconds(time);
-        
         IntroPanel.SetActive(false);
         StartPanel.SetActive(true);
     }
 
+    public void OpenSoundMenu()
+    {
+        SoundMenu.SetActive(true);
+    }
+
+    public void CloseSoundMenu()
+    {
+        SoundMenu.SetActive(false);
+    }
+
     public void GoGameScene()
     {
-        SceneManager.LoadScene(1);
+        SceneManager.LoadScene("GameScene");
     }
     
 }
