@@ -1,0 +1,36 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 62514bcbdd12fad4b985146e6c263449, type: 3}
+  m_Name: WeaponeDatabase
+  m_EditorClassIdentifier: 
+  WeaponDatas:
+  - weaponSpriteimage: {fileID: 21300000, guid: 1c436558df0caa04eb65bf6f8d065918,
+      type: 3}
+    weaponPrefab: {fileID: 8392343855928513822, guid: 07cdfbd8b5aa7bf4a90965a9ca1327f2,
+      type: 3}
+    weaponName: Hammer
+    WeaponType: 0
+    attack_dmg: 10
+  - weaponSpriteimage: {fileID: 21300000, guid: d839aa1982367874bac74affe829c2e4,
+      type: 3}
+    weaponPrefab: {fileID: 1509416925549156319, guid: a2e051660762cbe4494c17a095a95e10,
+      type: 3}
+    weaponName: BowGun
+    WeaponType: 1
+    attack_dmg: 5
+  - weaponSpriteimage: {fileID: 21300000, guid: d839aa1982367874bac74affe829c2e4,
+      type: 3}
+    weaponPrefab: {fileID: 1509416925549156319, guid: a2e051660762cbe4494c17a095a95e10,
+      type: 3}
+    weaponName: ' HammerGun'
+    WeaponType: 1
+    attack_dmg: 5

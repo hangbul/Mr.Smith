@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using Unity.VisualScripting;
 
 namespace Assets.Scripts.InputSystem
 {
@@ -25,6 +26,8 @@ namespace Assets.Scripts.InputSystem
         private float speed = 5.0f;
         private float ATKDelay;
         private Animator anim;
+
+        private GameObject nearObj;
         
         private void Awake()
         {
@@ -112,6 +115,25 @@ namespace Assets.Scripts.InputSystem
                 
             }
 
+        }
+
+        void OnTriggerEnter(Collider other)
+        {
+            
+        }
+        void OnTriggerStay(Collider other)
+        {
+            if (other.tag == "Weapon")
+            {
+                nearObj = other.gameObject;
+            }
+        }
+        void OnTriggerExit(Collider other)
+        {
+            if (other.tag == "Weapon")
+            {
+                nearObj = null;
+            }
         }
     }
 }
