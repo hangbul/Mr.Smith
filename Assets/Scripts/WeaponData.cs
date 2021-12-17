@@ -10,5 +10,6 @@ public struct WeaponData
     public string weaponName;
     public WeapneType WeaponType;
     public float attack_dmg;
-    
+    public int ID;
+
 }

@@ -20,6 +20,7 @@ MonoBehaviour:
     weaponName: Hammer
     WeaponType: 0
     attack_dmg: 10
+    ID: 0
   - weaponSpriteimage: {fileID: 21300000, guid: d839aa1982367874bac74affe829c2e4,
       type: 3}
     weaponPrefab: {fileID: 1509416925549156319, guid: a2e051660762cbe4494c17a095a95e10,
@@ -27,10 +28,12 @@ MonoBehaviour:
     weaponName: BowGun
     WeaponType: 1
     attack_dmg: 5
+    ID: 0
   - weaponSpriteimage: {fileID: 21300000, guid: d839aa1982367874bac74affe829c2e4,
       type: 3}
-    weaponPrefab: {fileID: 1509416925549156319, guid: a2e051660762cbe4494c17a095a95e10,
+    weaponPrefab: {fileID: 4577505940884596632, guid: b27ff071c9f09f84baa33b35cccbd832,
       type: 3}
     weaponName: ' HammerGun'
     WeaponType: 1
     attack_dmg: 5
+    ID: 0

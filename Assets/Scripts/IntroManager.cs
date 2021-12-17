@@ -35,5 +35,9 @@ public class IntroManager : MonoBehaviour
     {
         SceneManager.LoadScene("GameScene");
     }
+    public void CloseGame()
+    {
+        Application.Quit();
+    }
     
 }

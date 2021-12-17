@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class Destroyer : MonoBehaviour {
 	void OnTriggerEnter(Collider other){
-		if(!other.CompareTag("Player")&&!other.CompareTag("Centry Room"))
+		if(!other.CompareTag("Player")&&!other.CompareTag("Centry Room") && !other.CompareTag("Weapon"))
 			Destroy(other.gameObject);
 	}
 }

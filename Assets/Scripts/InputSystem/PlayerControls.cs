@@ -57,6 +57,22 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Interaction"",
+                    ""type"": ""Button"",
+                    ""id"": ""93656698-e3f1-42c6-ae9b-11fa420e42cd"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
+                },
+                {
+                    ""name"": ""Swap"",
+                    ""type"": ""Button"",
+                    ""id"": ""9807b2a9-bd74-4007-b939-5d65237d25c8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -158,6 +174,28 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""action"": ""Dodge"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4933f3c5-8f90-46b4-b4a4-0cb109a6d216"",
+                    ""path"": ""<Keyboard>/e"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Interaction"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""988586c3-17aa-48c8-a427-dd7fd290294e"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Swap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -188,6 +226,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_GamePlayerMaps_MousePosition = m_GamePlayerMaps.FindAction("MousePosition", throwIfNotFound: true);
         m_GamePlayerMaps_Aiming = m_GamePlayerMaps.FindAction("Aiming", throwIfNotFound: true);
         m_GamePlayerMaps_Dodge = m_GamePlayerMaps.FindAction("Dodge", throwIfNotFound: true);
+        m_GamePlayerMaps_Interaction = m_GamePlayerMaps.FindAction("Interaction", throwIfNotFound: true);
+        m_GamePlayerMaps_Swap = m_GamePlayerMaps.FindAction("Swap", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -242,6 +282,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_GamePlayerMaps_MousePosition;
     private readonly InputAction m_GamePlayerMaps_Aiming;
     private readonly InputAction m_GamePlayerMaps_Dodge;
+    private readonly InputAction m_GamePlayerMaps_Interaction;
+    private readonly InputAction m_GamePlayerMaps_Swap;
     public struct GamePlayerMapsActions
     {
         private @PlayerControls m_Wrapper;
@@ -251,6 +293,8 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @MousePosition => m_Wrapper.m_GamePlayerMaps_MousePosition;
         public InputAction @Aiming => m_Wrapper.m_GamePlayerMaps_Aiming;
         public InputAction @Dodge => m_Wrapper.m_GamePlayerMaps_Dodge;
+        public InputAction @Interaction => m_Wrapper.m_GamePlayerMaps_Interaction;
+        public InputAction @Swap => m_Wrapper.m_GamePlayerMaps_Swap;
         public InputActionMap Get() { return m_Wrapper.m_GamePlayerMaps; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -275,6 +319,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Dodge.started -= m_Wrapper.m_GamePlayerMapsActionsCallbackInterface.OnDodge;
                 @Dodge.performed -= m_Wrapper.m_GamePlayerMapsActionsCallbackInterface.OnDodge;
                 @Dodge.canceled -= m_Wrapper.m_GamePlayerMapsActionsCallbackInterface.OnDodge;
+                @Interaction.started -= m_Wrapper.m_GamePlayerMapsActionsCallbackInterface.OnInteraction;
+                @Interaction.performed -= m_Wrapper.m_GamePlayerMapsActionsCallbackInterface.OnInteraction;
+                @Interaction.canceled -= m_Wrapper.m_GamePlayerMapsActionsCallbackInterface.OnInteraction;
+                @Swap.started -= m_Wrapper.m_GamePlayerMapsActionsCallbackInterface.OnSwap;
+                @Swap.performed -= m_Wrapper.m_GamePlayerMapsActionsCallbackInterface.OnSwap;
+                @Swap.canceled -= m_Wrapper.m_GamePlayerMapsActionsCallbackInterface.OnSwap;
             }
             m_Wrapper.m_GamePlayerMapsActionsCallbackInterface = instance;
             if (instance != null)
@@ -294,6 +344,12 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Dodge.started += instance.OnDodge;
                 @Dodge.performed += instance.OnDodge;
                 @Dodge.canceled += instance.OnDodge;
+                @Interaction.started += instance.OnInteraction;
+                @Interaction.performed += instance.OnInteraction;
+                @Interaction.canceled += instance.OnInteraction;
+                @Swap.started += instance.OnSwap;
+                @Swap.performed += instance.OnSwap;
+                @Swap.canceled += instance.OnSwap;
             }
         }
     }
@@ -314,5 +370,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnMousePosition(InputAction.CallbackContext context);
         void OnAiming(InputAction.CallbackContext context);
         void OnDodge(InputAction.CallbackContext context);
+        void OnInteraction(InputAction.CallbackContext context);
+        void OnSwap(InputAction.CallbackContext context);
     }
 }

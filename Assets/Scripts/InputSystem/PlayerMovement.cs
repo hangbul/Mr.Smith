@@ -1,6 +1,7 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
 using System.Collections;
+using System.Collections.Generic;
 using Unity.VisualScripting;
 
 namespace Assets.Scripts.InputSystem
@@ -11,6 +12,15 @@ namespace Assets.Scripts.InputSystem
         [SerializeField] Camera mainCam;
         [SerializeField] GameObject weapon;
 
+        public GameObject[] weapons;
+        public Weapon equipweapons;
+        
+        
+        public bool[] inx_weapons;
+        int idx = -1;
+
+        private float fireDelay;
+        private bool isFireReady;
         private CharacterController _characterController;
         private PlayerInfo P_info;
         private Vector2 _playerInput;
@@ -22,7 +32,9 @@ namespace Assets.Scripts.InputSystem
         private bool mouseLDown;
         private bool isDodge = false;
         private bool isATKReady;
+        private bool inter_Active = false;
         
+        private int weaponSlot =0;
         private float speed = 5.0f;
         private float ATKDelay;
         private Animator anim;
@@ -70,7 +82,7 @@ namespace Assets.Scripts.InputSystem
                     transform.rotation = Quaternion.LookRotation(dodgeVec);
                 }
             }
-
+        
         }
 
         public void OnMove(InputAction.CallbackContext callback)
@@ -81,9 +93,36 @@ namespace Assets.Scripts.InputSystem
 
         public void OnAttack(InputAction.CallbackContext callback)
         {
-            
+            if (equipweapons == null)
+                return;
+            fireDelay += Time.deltaTime;
+            isFireReady = equipweapons.rate < fireDelay;
+
+            if (isFireReady && !isDodge)
+            {
+                equipweapons.Use();
+                anim.SetTrigger("doSwing");
+                fireDelay = 0;
+            }
+
         }
-        
+
+        public void Swap(InputAction.CallbackContext callback)
+        {
+            idx += 1;
+            if (idx > inx_weapons.Length)
+                idx = -1;
+            if (inx_weapons[idx])
+            {
+                if (!isDodge)
+                {
+                    if (equipweapons != null)
+                        equipweapons.gameObject.SetActive(false);
+                    equipweapons = weapons[idx].GetComponent<Weapon>();
+                    equipweapons.gameObject.SetActive(true);
+                }
+            }
+        }
         public void OnDodge(InputAction.CallbackContext callback)
         {
             speed = 10.0f;
@@ -116,24 +155,37 @@ namespace Assets.Scripts.InputSystem
             }
 
         }
+        public void Interaction(InputAction.CallbackContext callback)
+        {
+            if (nearObj != null && inter_Active && !isDodge)
+            {
+                if (nearObj.CompareTag("Weapon"))
+                {
+                    Weapon weapon = nearObj.GetComponent<Weapon>();
+                    int idx = weapon.idx;
+                    inx_weapons[idx] = true;
+                    
+                    Destroy(nearObj);
+                }
+            }
 
+        }
         void OnTriggerEnter(Collider other)
         {
             
         }
-        void OnTriggerStay(Collider other)
+        void OnTriggerStay (Collider other)
         {
-            if (other.tag == "Weapon")
+            if (other.CompareTag("Weapon"))
             {
                 nearObj = other.gameObject;
+                inter_Active = true;
             }
+
         }
         void OnTriggerExit(Collider other)
         {
-            if (other.tag == "Weapon")
-            {
-                nearObj = null;
-            }
+            nearObj = null;
         }
     }
 }
