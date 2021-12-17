@@ -172,7 +172,8 @@ namespace Assets.Scripts.InputSystem
         }
         void OnTriggerEnter(Collider other)
         {
-            
+            if (other.CompareTag("Goal"))
+                Application.Quit();
         }
         void OnTriggerStay (Collider other)
         {

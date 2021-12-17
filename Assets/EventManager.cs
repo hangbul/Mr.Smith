@@ -35,8 +35,8 @@ public class EventManager : MonoBehaviour
     }
 
     public void GamneExit()
-    {
-        SceneManager.LoadScene("IntroScene");
+    {       
+        Application.Quit();
     }
     
 }
