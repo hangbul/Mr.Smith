@@ -6,33 +6,24 @@ using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.Networking;
 
+
 public class phploader : MonoBehaviour
 {
-   
-   public class UserData
-   {
-      public string twitchID;
-      public string twitchNickname;
-      public int userNumber;
-      public int point;
-   }
-   
-   public class ResUserData
-   {
-      public List<UserData> UserDatas;
-   }
+   private int DBCount;
 
    private void Start()
    {
-      StartCoroutine(getSQLData());
+      StartCoroutine(getDBCount());
+    
    }
 
-   IEnumerator getSQLData()
+   //DB전체 count 받아옴
+   IEnumerator getDBCount()
    {
       WWWForm form = new WWWForm();
 
       using (UnityWebRequest webRequest =
-             UnityWebRequest.Post("http://ljch0407.cafe24.com/LoadMySQL.php", form))
+             UnityWebRequest.Post("http://ljch0407.cafe24.com/DBCountLoad.php", form))
       {
          yield return webRequest.SendWebRequest();
 
@@ -44,8 +35,8 @@ public class phploader : MonoBehaviour
          {
             string data = webRequest.downloadHandler.text;
             Debug.Log(data);
+            DBCount = Convert.ToInt32(data);
          }
       }
-
    }
 }
