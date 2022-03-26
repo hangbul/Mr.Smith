@@ -5,28 +5,21 @@ using System.Collections.Generic;
 [RequireComponent(typeof(TwitchIRC))]
 public class TwitchChatExample : MonoBehaviour
 {
-    public int maxMessages = 100; //we start deleting UI elements when the count is larger than this var.
-    private LinkedList<GameObject> messages =
-        new LinkedList<GameObject>();
-    public UnityEngine.UI.InputField inputField;
-    public UnityEngine.UI.Button submitButton;
+    public int maxMessages = 100; 
     public UnityEngine.RectTransform chatBox;
-    public UnityEngine.UI.ScrollRect scrollRect;
+    
     private TwitchIRC IRC;
-    //when message is recieved from IRC-server or our own message.
+    private GameObject go;
+    
+    private UnityEngine.UI.Text text;
+    private UnityEngine.UI.LayoutElement layout;
+    
     void OnChatMsgRecieved(string msg)
     {
         //parse from buffer.
         int msgIndex = msg.IndexOf("PRIVMSG #");
         string msgString = msg.Substring(msgIndex + IRC.channelName.Length + 11);
         string user = msg.Substring(1, msg.IndexOf('!') - 1);
-
-        //remove old messages for performance reasons.
-        if (messages.Count > maxMessages)
-        {
-            Destroy(messages.First.Value);
-            messages.RemoveFirst();
-        }
 
         //add new message.
         CreateUIMessage(user, msgString);
@@ -35,29 +28,18 @@ public class TwitchChatExample : MonoBehaviour
     {
         Color32 c = ColorFromUsername(userName);
         string nameColor = "#" + c.r.ToString("X2") + c.g.ToString("X2") + c.b.ToString("X2");
-        GameObject go = new GameObject("twitchMsg");
-        var text = go.AddComponent<UnityEngine.UI.Text>();
-        var layout = go.AddComponent<UnityEngine.UI.LayoutElement>();
+        
         go.transform.SetParent(chatBox);
-        messages.AddLast(go);
+        go.transform.position = chatBox.transform.position;
+        go.GetComponent<RectTransform>().anchorMin = new Vector2 (0.2f,0.5f);
+        go.GetComponent<RectTransform>().anchorMax = new Vector2 (1-0.2f,0.5f);
 
-        layout.minHeight = 5f;
-        text.text = "<color=" + nameColor + "><b>" + userName + "</b></color>" + ": " + msgString;
+        text.text = msgString;
         text.color = Color.black;
         text.fontSize = 20;
         text.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
-        scrollRect.velocity = new Vector2(0, 1000f);
     }
-    //when Submit button is clicked or ENTER is pressed.
-    public void OnSubmit()
-    {
-        if (inputField.text.Length > 0)
-        {
-            IRC.SendMsg(inputField.text); //send message.
-            CreateUIMessage(IRC.nickName, inputField.text); //create ui element.
-            inputField.text = "";
-        }
-    }
+
     Color ColorFromUsername(string username)
     {
         Random.seed = username.Length + (int)username[0] + (int)username[username.Length - 1];
@@ -68,6 +50,14 @@ public class TwitchChatExample : MonoBehaviour
     {
         IRC = this.GetComponent<TwitchIRC>();
         //IRC.SendCommand("CAP REQ :twitch.tv/tags"); //register for additional data such as emote-ids, name color etc.
+        go = new GameObject("twitchMsg");
+        text = go.AddComponent<UnityEngine.UI.Text>();
+        layout = go.AddComponent<UnityEngine.UI.LayoutElement>();
+        layout.minHeight = 5f;
+        text.text = "  ";
+        text.color = Color.black;
+        text.fontSize = 20;
+        text.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
         IRC.messageRecievedEvent.AddListener(OnChatMsgRecieved);
     }
 }

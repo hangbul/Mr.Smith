@@ -1438,7 +1438,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   oauth: oauth:0hbmyni5a8uzwzpnq5klqk6v8y429h
   nickName: hangbul
-  channelName: box930205
+  channelName: zilioner
 --- !u!4 &967440954
 Transform:
   m_ObjectHideFlags: 0
