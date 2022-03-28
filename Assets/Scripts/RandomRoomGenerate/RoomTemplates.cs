@@ -24,7 +24,7 @@ public class RoomTemplates : MonoBehaviour {
 		{
 			Vector3 bossPos = rooms[rooms.Count - 1].transform.position;
 			bossPos.y = bossPos.y + 3.0f;
-			Instantiate(boss, bossPos, Quaternion.Euler(90,0,0));
+			Instantiate(boss, bossPos, Quaternion.Euler(0,0,0));
 			spawnedBoss = true;
 		}
 		else {

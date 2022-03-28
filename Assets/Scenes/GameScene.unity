@@ -557,7 +557,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 323774689}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -1.95, y: 2.31, z: 1.825}
+  m_LocalPosition: {x: 0, y: 2, z: 0}
   m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_Children: []
   m_Father: {fileID: 2107125171}
@@ -785,6 +785,51 @@ Transform:
     type: 3}
   m_PrefabInstance: {fileID: 1561154067}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &657611291
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 657611292}
+  - component: {fileID: 657611293}
+  m_Layer: 0
+  m_Name: ChatPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &657611292
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657611291}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 3.01, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2107125171}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &657611293
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 657611291}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3fc735d03e35ed848bae982cbdaaf9b5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  chatView: {fileID: 950790731}
+  camera: {fileID: 2046494574}
 --- !u!1 &759074605 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 2102314303514370777, guid: 30c41d5dfe9cbf84e9ab34698918c5e7,
@@ -1022,7 +1067,7 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 950790731}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -1032,7 +1077,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 4.1077, y: 4.9727}
+  m_AnchoredPosition: {x: 4.107788, y: 4.9727783}
   m_SizeDelta: {x: 294.4736, y: 111.0405}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &967440952
@@ -1094,7 +1139,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b8776c3f757ee9f4aa800371b0d69d48, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  chatBox: {fileID: 1388398780}
+  chatBox: {fileID: 950790731}
 --- !u!1 &974865520
 GameObject:
   m_ObjectHideFlags: 0
@@ -3153,7 +3198,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1384366362914734, guid: 10c65f0c164d2e04e9c3daf97304609a, type: 3}
       propertyPath: m_Name
-      value: Entry Room (1)
+      value: Entry Room
       objectReference: {fileID: 0}
     - target: {fileID: 1384366362914734, guid: 10c65f0c164d2e04e9c3daf97304609a, type: 3}
       propertyPath: m_TagString
@@ -4215,7 +4260,6 @@ GameObject:
   m_Component:
   - component: {fileID: 2107125171}
   - component: {fileID: 2107125170}
-  - component: {fileID: 2107125169}
   m_Layer: 0
   m_Name: Fairy
   m_TagString: Untagged
@@ -4223,20 +4267,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &2107125169
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2107125168}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3fc735d03e35ed848bae982cbdaaf9b5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  elementalText: {fileID: 1388398779}
-  camera: {fileID: 2046494574}
 --- !u!114 &2107125170
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4250,7 +4280,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 2
-  rotateSpeed: 2
   player: {fileID: 759074605}
 --- !u!4 &2107125171
 Transform:
@@ -4260,10 +4289,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2107125168}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0, y: 2.65, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 323774694}
+  - {fileID: 657611292}
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

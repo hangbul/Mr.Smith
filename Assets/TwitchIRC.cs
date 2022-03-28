@@ -9,7 +9,7 @@ public class TwitchIRC : MonoBehaviour
     public string channelName;
     private string server = "irc.twitch.tv";
     private int port = 6667;
-
+    private GameObject _introManager;
     //event(buffer).
     public class MsgEvent : UnityEngine.Events.UnityEvent<string> { }
     public MsgEvent messageRecievedEvent = new MsgEvent();
@@ -53,7 +53,6 @@ public class TwitchIRC : MonoBehaviour
 
             buffer = input.ReadLine();
 
-            //was message?
             if (buffer.Contains("PRIVMSG #"))
             {
                 lock (recievedMsgs)
@@ -61,14 +60,11 @@ public class TwitchIRC : MonoBehaviour
                     recievedMsgs.Add(buffer);
                 }
             }
-
-            //Send pong reply to any ping messages
+            
             if (buffer.StartsWith("PING "))
             {
                 SendCommand(buffer.Replace("PING", "PONG"));
             }
-
-            //After server sends 001 command, we can join a channel
             if (buffer.Split(' ')[1] == "001")
             {
                 SendCommand("JOIN #" + channelName);
@@ -83,10 +79,8 @@ public class TwitchIRC : MonoBehaviour
         {
             lock (commandQueue)
             {
-                if (commandQueue.Count > 0) //do we have any commands to send?
+                if (commandQueue.Count > 0) 
                 {
-                    // https://github.com/justintv/Twitch-API/blob/master/IRC.md#command--message-limit 
-                    //have enough time passed since we last sent a message/command?
                     if (stopWatch.ElapsedMilliseconds > 1750)
                     {
                         //send msg.
@@ -121,6 +115,8 @@ public class TwitchIRC : MonoBehaviour
     //MonoBehaviour Events.
     void Start()
     {
+        _introManager = GameObject.Find("IntroManager");
+        channelName = _introManager.GetComponent<IntroManager>().channelName;
     }
     void OnEnable()
     {
@@ -130,16 +126,10 @@ public class TwitchIRC : MonoBehaviour
     void OnDisable()
     {
         stopThreads = true;
-        //while (inProc.IsAlive || outProc.IsAlive) ;
-        //print("inProc:" + inProc.IsAlive.ToString());
-        //print("outProc:" + outProc.IsAlive.ToString());
     }
     void OnDestroy()
     {
         stopThreads = true;
-        //while (inProc.IsAlive || outProc.IsAlive) ;
-        //print("inProc:" + inProc.IsAlive.ToString());
-        //print("outProc:" + outProc.IsAlive.ToString());
     }
     void Update()
     {
