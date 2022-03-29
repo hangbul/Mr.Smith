@@ -9,12 +9,15 @@ using Random = System.Random;
 
 public class phploader : MonoBehaviour
 {
-   private int DBCount;
+   public int DBCount;
+   public string twitchID;
+   private int userSkill;
 
    private void Start()
    {
       StartCoroutine(getDBCount());
       StartCoroutine(getUserSkill());
+      StartCoroutine(getUserID());
    }
 
    //DB전체 count 받아옴
@@ -66,7 +69,29 @@ public class phploader : MonoBehaviour
          else
          {
             string data = webRequest.downloadHandler.text;
-            Debug.Log(data);
+            userSkill = Convert.ToInt32(data);
+         }
+      } 
+   }
+   
+   IEnumerator getUserID()
+   {
+      WWWForm form = new WWWForm();
+      form.AddField ("UserNumberPost", getRandomNumber());
+
+      using (UnityWebRequest webRequest =
+             UnityWebRequest.Post("http://ljch0407.cafe24.com/LoadID.php", form))
+      {
+         yield return webRequest.SendWebRequest();
+
+         if (webRequest.isNetworkError || webRequest.isHttpError)
+         {
+            Debug.Log(webRequest.error);
+         }
+         else
+         {
+            string data = webRequest.downloadHandler.text;
+            twitchID = data.ToString();
          }
       } 
    }

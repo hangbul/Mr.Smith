@@ -11,6 +11,7 @@ public class TwitchChatExample : MonoBehaviour
     private GameObject go;
     private UnityEngine.UI.Text text;
     private UnityEngine.UI.LayoutElement layout;
+    private string twitchID;
 
     void OnChatMsgRecieved(string msg)
     {
@@ -51,6 +52,8 @@ public class TwitchChatExample : MonoBehaviour
     }
     void Start()
     {
+        phploader php = this.GetComponent<phploader>();
+        //twitchID = php.twitchID;
         chatBox.SetActive(false);
         IRC = this.GetComponent<TwitchIRC>();
         go = new GameObject("twitchMsg");
