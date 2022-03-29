@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4740692003269406}
   - component: {fileID: 212425817950729992}
+  - component: {fileID: 7553905825533138189}
   m_Layer: 0
   m_Name: EndPoint
-  m_TagString: Boss
+  m_TagString: Goal
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -84,6 +85,20 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!136 &7553905825533138189
+CapsuleCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1898445321837384}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_Enabled: 1
+  m_Radius: 2
+  m_Height: 5
+  m_Direction: 1
+  m_Center: {x: 0, y: -1, z: 0}
 --- !u!1 &357699653623914265
 GameObject:
   m_ObjectHideFlags: 0
@@ -95,7 +110,6 @@ GameObject:
   - component: {fileID: 2269834108548189141}
   - component: {fileID: 5278025292644707939}
   - component: {fileID: 293490278105863854}
-  - component: {fileID: 7497194669912487872}
   m_Layer: 0
   m_Name: Cube
   m_TagString: Untagged
@@ -112,7 +126,7 @@ Transform:
   m_GameObject: {fileID: 357699653623914265}
   m_LocalRotation: {x: 0, y: 0.38268343, z: 0, w: 0.92387956}
   m_LocalPosition: {x: 0, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 3, z: 1}
+  m_LocalScale: {x: 0.53347, y: 3, z: 1.0421891}
   m_Children: []
   m_Father: {fileID: 4740692003269406}
   m_RootOrder: 0
@@ -167,16 +181,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &7497194669912487872
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 357699653623914265}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}

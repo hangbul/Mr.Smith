@@ -11,7 +11,7 @@ public class RoomSpawner : MonoBehaviour
 	// 3 --> need left door
 	// 4 --> need right door
 
-
+	private GameObject _gameObject;
 	private RoomTemplates templates;
 	private int rand;
 	public bool spawned = false;

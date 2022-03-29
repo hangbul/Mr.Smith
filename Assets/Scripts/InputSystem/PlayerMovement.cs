@@ -3,6 +3,7 @@ using UnityEngine.InputSystem;
 using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting;
+using UnityEngine.SceneManagement;
 
 namespace Assets.Scripts.InputSystem
 {
@@ -21,6 +22,7 @@ namespace Assets.Scripts.InputSystem
 
         private float fireDelay;
         private bool isFireReady;
+        private bool keyInput;
         private CharacterController _characterController;
         private PlayerInfo P_info;
         private Vector2 _playerInput;
@@ -28,6 +30,7 @@ namespace Assets.Scripts.InputSystem
         
         private Vector3 moveVec;
         private Vector3 dodgeVec;
+        private Vector3 forward;
 
         private bool mouseLDown;
         private bool isDodge = false;
@@ -43,6 +46,7 @@ namespace Assets.Scripts.InputSystem
         
         private void Awake()
         {
+            moveVec = Vector3.zero;
             anim = GetComponentInChildren<Animator>();
             _characterController = GetComponent<CharacterController>();
             mouseLDown = false;
@@ -50,15 +54,15 @@ namespace Assets.Scripts.InputSystem
 
         void Update()
         {
-            moveVec = new Vector3(_playerInput.x, 0, _playerInput.y);
-            var forward = moveVec;
-            if(!isDodge)
-                _characterController.SimpleMove(forward * speed);
-            else
+            if (keyInput)
             {
+                moveVec = new Vector3(_playerInput.x, 0, _playerInput.y);
+            }
+            forward = moveVec;
+            if(!isDodge && keyInput)
+                _characterController.Move(forward * speed *Time.deltaTime);
+            else if(isDodge)
                 _characterController.SimpleMove(dodgeVec * speed);
-
-            }        
             if (mouseLDown)
             {
                 Ray ray = mainCam.ScreenPointToRay(MousePos);
@@ -75,9 +79,9 @@ namespace Assets.Scripts.InputSystem
             {
                 var from = transform.rotation;
                 var to = Quaternion.LookRotation(forward);
-                if(!isDodge)
+                if(!isDodge && keyInput)
                     transform.rotation = Quaternion.Lerp(from,to, Time.deltaTime * speed);
-                else
+                else if(isDodge)
                 {
                     transform.rotation = Quaternion.LookRotation(dodgeVec);
                 }
@@ -89,6 +93,14 @@ namespace Assets.Scripts.InputSystem
         {
             _playerInput = callback.ReadValue<Vector2>();
             anim.SetBool("IsRun", _playerInput != Vector2.zero);
+            if (callback.ReadValue<Vector2>() != Vector2.zero)
+            {
+                keyInput = true;
+            }
+            else
+            {
+                keyInput = false;
+            }
         }
 
         public void OnAttack(InputAction.CallbackContext callback)
@@ -173,7 +185,10 @@ namespace Assets.Scripts.InputSystem
         void OnTriggerEnter(Collider other)
         {
             if (other.CompareTag("Goal"))
-                Application.Quit();
+            {
+                SceneManager.LoadScene("TownScene");
+
+            }
         }
         void OnTriggerStay (Collider other)
         {

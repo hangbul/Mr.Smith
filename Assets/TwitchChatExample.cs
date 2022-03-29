@@ -25,7 +25,6 @@ public class TwitchChatExample : MonoBehaviour
             CreateUIMessage(user, msgString);
             Invoke("delay", 2);
         }
-        CreateUIMessage(user, msgString);
 
     }
 
