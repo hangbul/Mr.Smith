@@ -51,7 +51,6 @@ namespace Assets.Scripts.InputSystem
             anim = GetComponentInChildren<Animator>();
             _characterController = GetComponent<CharacterController>();
             mouseLDown = false;
-            posY = transform.position.y;
         }
 
         void Update()
