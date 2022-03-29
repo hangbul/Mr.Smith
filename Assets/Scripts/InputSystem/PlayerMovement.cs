@@ -43,17 +43,20 @@ namespace Assets.Scripts.InputSystem
         private Animator anim;
 
         private GameObject nearObj;
-        
+
+        private float posY;
         private void Awake()
         {
             moveVec = Vector3.zero;
             anim = GetComponentInChildren<Animator>();
             _characterController = GetComponent<CharacterController>();
             mouseLDown = false;
+            posY = transform.position.y;
         }
 
         void Update()
         {
+            
             if (keyInput)
             {
                 moveVec = new Vector3(_playerInput.x, 0, _playerInput.y);
@@ -86,7 +89,6 @@ namespace Assets.Scripts.InputSystem
                     transform.rotation = Quaternion.LookRotation(dodgeVec);
                 }
             }
-        
         }
 
         public void OnMove(InputAction.CallbackContext callback)

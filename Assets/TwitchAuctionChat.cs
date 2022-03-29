@@ -26,6 +26,8 @@ public class TwitchAuctionChat : MonoBehaviour
         }
 
         CreateUIMessage(user, msgString);
+        Invoke("delay", 5);
+
     }
     void CreateUIMessage(string userName, string msgString)
     {
@@ -34,13 +36,22 @@ public class TwitchAuctionChat : MonoBehaviour
         GameObject go = new GameObject("twitchMsg");
         var text = go.AddComponent<UnityEngine.UI.Text>();
         var layout = go.AddComponent<UnityEngine.UI.LayoutElement>();
-        go.transform.SetParent(chatPanel); 
-        float posX = Random.Range(chatPanel.rect.xMin, chatPanel.rect.xMax);
-        float posY = Random.Range(chatPanel.rect.yMin, chatPanel.rect.yMax);
-        go.transform.position = new Vector3(posX, posY, 0); 
+        go.transform.SetParent(chatPanel);
+        
+        float minX = -chatPanel.rect.width/2 + 15f;
+        float maxX = chatPanel.rect.width/2 - 15f;
+        float minY = -chatPanel.rect.height/2 + 10f;
+        float maxY = chatPanel.rect.height/2 - 10f;
+        
+        float posX = Random.Range(minX, maxX);
+        float posY = Random.Range(minY, maxY);
+        
+        go.transform.localPosition = new Vector3(posX, posY, 0); 
         
         messages.AddLast(go);
+        layout.minWidth = 30f;
         layout.minHeight = 20f;
+        
         text.text = "<color=" + nameColor + "><b>" + userName + "</b></color>" + ": " + msgString;
         text.color = Color.black;
         text.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
@@ -54,6 +65,11 @@ public class TwitchAuctionChat : MonoBehaviour
     {
         IRC = this.GetComponent<TwitchIRC>();
         IRC.messageRecievedEvent.AddListener(OnChatMsgRecieved);
+    }
+    void delay()
+    {
+        Destroy(messages.First.Value);
+        messages.RemoveFirst();
     }
   
 }

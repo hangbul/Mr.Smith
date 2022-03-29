@@ -380,10 +380,10 @@ RectTransform:
   m_Father: {fileID: 1166489062}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 1, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -300}
-  m_SizeDelta: {x: -400, y: 300}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 0, y: -298}
+  m_SizeDelta: {x: 1520, y: 300}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1810997107
 MonoBehaviour:
@@ -433,7 +433,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1825513857}
   - component: {fileID: 1825513856}
-  - component: {fileID: 1825513855}
   - component: {fileID: 1825513854}
   m_Layer: 0
   m_Name: TwitchIRC
@@ -456,19 +455,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   maxMessages: 100
   chatPanel: {fileID: 1810997106}
---- !u!114 &1825513855
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1825513853}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b8776c3f757ee9f4aa800371b0d69d48, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  chatBox: {fileID: 0}
 --- !u!114 &1825513856
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -481,7 +467,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ad2cd2c971ac1104aa561e69071e0aac, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  channelName: radiyu
+  channelName: kumikomii
 --- !u!4 &1825513857
 Transform:
   m_ObjectHideFlags: 0
