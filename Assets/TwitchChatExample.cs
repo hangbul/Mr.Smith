@@ -18,13 +18,14 @@ public class TwitchChatExample : MonoBehaviour
         string msgString = msg.Substring(msgIndex + IRC.channelName.Length + 11);
         string user = msg.Substring(1, msg.IndexOf('!') - 1);
         
-        if (user == IRC.nickName) //추후 수정
+        if (user == "hangbul") //추후 수정
         {
             chatBox.SetActive(true);
             CreateUIMessage(user, msgString);
             Invoke("delay", 2);
         }
-        
+        CreateUIMessage(user, msgString);
+
     }
 
     void CreateUIMessage(string userName, string msgString)
