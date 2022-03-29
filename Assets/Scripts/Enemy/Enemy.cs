@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using Assets.Scripts.InputSystem;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
@@ -29,6 +32,21 @@ public class Enemy : MonoBehaviour
     private float _deadAnimationTimer;
     private int currentHitPoint;
 
+    public int curHealth;
+    public int maxHealth;
+
+    private Rigidbody rigid;
+    private CapsuleCollider collider;
+    private Material mat;
+
+
+    private void Awake()
+    {
+        rigid = GetComponent<Rigidbody>();
+        collider = GetComponent<CapsuleCollider>();
+        mat = GetComponentInChildren<MeshRenderer>().material;
+    }
+
     void Start()
     {
         _enemyState = EnemyState.Idle;
@@ -48,9 +66,27 @@ public class Enemy : MonoBehaviour
         
     }
 
-    private void OntriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        //hit
+        if (other.tag == "MeleeWeapon")
+        {
+            Weapon weapon = other.GetComponent<Weapon>();
+            curHealth -= weapon.damage;
+            StartCoroutine(OnDamage());
+        }
+    }
+
+
+    IEnumerator OnDamage()
+    {
+        mat.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+        if (curHealth > 0)
+            mat.color = Color.white;
+        if (curHealth <= 0)
+        {
+            Destroy(gameObject,2.0f);
+        }
     }
 
     IEnumerator EnenmyStateMachine()
