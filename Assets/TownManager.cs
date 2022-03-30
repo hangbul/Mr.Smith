@@ -19,6 +19,9 @@ public class TownManager : MonoBehaviour
     {
         SceneManager.LoadScene("GameScene");
     }
-    
+    public void GoAutioncene()
+    {
+        SceneManager.LoadScene("AuctionScene");
+    }
     
 }
