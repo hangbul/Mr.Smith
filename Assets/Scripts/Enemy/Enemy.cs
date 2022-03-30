@@ -42,6 +42,9 @@ public class Enemy : MonoBehaviour
 
     private void Awake()
     {
+        maxHealth = 30;
+        curHealth = maxHealth;
+
         rigid = GetComponent<Rigidbody>();
         collider = GetComponent<BoxCollider>();
         mat = GetComponentInChildren<MeshRenderer>().material;
