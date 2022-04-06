@@ -17,9 +17,6 @@ public class phploader : MonoBehaviour
    private void Start()
    {
       StartCoroutine(getDBCount());
-      StartCoroutine(getUserSkill());
-      StartCoroutine(getUserID());
-      StartCoroutine(getUserSkillLv());
    }
 
    //DB전체 count 받아옴
@@ -54,7 +51,7 @@ public class phploader : MonoBehaviour
       return result;
    }
 
-   IEnumerator getUserSkill()
+   public void getUserSkill()
    {
       WWWForm form = new WWWForm();
       form.AddField ("UserNumberPost", getRandomNumber());
@@ -62,7 +59,7 @@ public class phploader : MonoBehaviour
       using (UnityWebRequest webRequest =
              UnityWebRequest.Post("http://ljch0407.cafe24.com/LoadSkill.php", form))
       {
-         yield return webRequest.SendWebRequest();
+         webRequest.SendWebRequest();
 
          if (webRequest.isNetworkError || webRequest.isHttpError)
          {
@@ -76,7 +73,7 @@ public class phploader : MonoBehaviour
       } 
    }
    
-   IEnumerator getUserID()
+   public void getUserID()
    {
       WWWForm form = new WWWForm();
       form.AddField ("UserNumberPost", getRandomNumber());
@@ -84,7 +81,7 @@ public class phploader : MonoBehaviour
       using (UnityWebRequest webRequest =
              UnityWebRequest.Post("http://ljch0407.cafe24.com/LoadID.php", form))
       {
-         yield return webRequest.SendWebRequest();
+         webRequest.SendWebRequest();
 
          if (webRequest.isNetworkError || webRequest.isHttpError)
          {
@@ -98,7 +95,7 @@ public class phploader : MonoBehaviour
       } 
    }
    
-   IEnumerator getUserSkillLv()
+  public void getUserSkillLv()
    {
       WWWForm form = new WWWForm();
       form.AddField ("UserNumberPost", getRandomNumber());
@@ -106,7 +103,7 @@ public class phploader : MonoBehaviour
       using (UnityWebRequest webRequest =
              UnityWebRequest.Post("http://ljch0407.cafe24.com/LoadSkillLv.php", form))
       {
-         yield return webRequest.SendWebRequest();
+         webRequest.SendWebRequest();
 
          if (webRequest.isNetworkError || webRequest.isHttpError)
          {
