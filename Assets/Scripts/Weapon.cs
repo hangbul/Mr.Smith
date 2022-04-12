@@ -32,8 +32,7 @@ public class Weapon : MonoBehaviour
 
         yield return new WaitForSeconds(0.3f);
         traileEffect.enabled = false;
-
-
+        
     }
 }
 
