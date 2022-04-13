@@ -1,0 +1,13 @@
+fileFormatVersion: 2
+guid: a82fa07603776cd4a9be0b90c8a0d0a7
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _Main_Texture: {fileID: 2800000, guid: 8d21b35fab1359d4aa689ddf302e1b01, type: 3}
+  - _Noise_Texture: {fileID: 2800000, guid: ca13f4c0cd8f4eb4fb22f7b62e6e0d7e, type: 3}
+  - _Sword_Texture: {fileID: 2800000, guid: 222487ca0da15c240b14f9edf6e79f20, type: 3}
+  - _Dissolve_Texture: {fileID: 2800000, guid: 8d21b35fab1359d4aa689ddf302e1b01, type: 3}
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
