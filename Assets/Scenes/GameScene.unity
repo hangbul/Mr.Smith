@@ -4071,9 +4071,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 560219084}
-  dist: 5
-  height: 6
-  smoothRotate: 5
+  dist: 10
+  height: 8
+  smoothRotate: 10
 --- !u!1 &2076546877
 GameObject:
   m_ObjectHideFlags: 0
