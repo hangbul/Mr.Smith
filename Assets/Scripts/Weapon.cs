@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class Weapon : MonoBehaviour
 {
+    
     public WeapneType type;
     public int idx = 0;
     public int damage;

@@ -118,13 +118,18 @@ namespace Assets.Scripts.InputSystem
             fireDelay += Time.deltaTime;
             isFireReady = equipweapons.rate < fireDelay;
             
-            if (equipweapons.type == WeapneType.Melee && equipweapons.curAmmo == 0)
+            if (equipweapons.type == WeapneType.Missile && equipweapons.curAmmo == 0)
                 return;
 
             if (isFireReady && !isDodge && !isSwap)
             {
                 equipweapons.Use();
-                anim.SetTrigger(equipweapons.type == WeapneType.Melee ? "doSwing" : "doShot");
+                
+                if(equipweapons.type == WeapneType.Melee)
+                    anim.SetTrigger("doSwing");
+                else if(equipweapons.type == WeapneType.Missile)
+                    anim.SetTrigger("doShot");
+                
                 fireDelay = 0;
             }
 
