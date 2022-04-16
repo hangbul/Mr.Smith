@@ -73,6 +73,14 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """"
+                },
+                {
+                    ""name"": ""Reload"",
+                    ""type"": ""Button"",
+                    ""id"": ""1fc4efab-1e36-4b0d-a18c-cee0d7c86a77"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """"
                 }
             ],
             ""bindings"": [
@@ -189,11 +197,22 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""988586c3-17aa-48c8-a427-dd7fd290294e"",
-                    ""path"": ""<Keyboard>/r"",
+                    ""path"": ""<Keyboard>/v"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": """",
                     ""action"": ""Swap"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""5def0178-f587-457e-95df-ecf03b60ea8d"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Reload"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -228,6 +247,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         m_GamePlayerMaps_Dodge = m_GamePlayerMaps.FindAction("Dodge", throwIfNotFound: true);
         m_GamePlayerMaps_Interaction = m_GamePlayerMaps.FindAction("Interaction", throwIfNotFound: true);
         m_GamePlayerMaps_Swap = m_GamePlayerMaps.FindAction("Swap", throwIfNotFound: true);
+        m_GamePlayerMaps_Reload = m_GamePlayerMaps.FindAction("Reload", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -284,6 +304,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
     private readonly InputAction m_GamePlayerMaps_Dodge;
     private readonly InputAction m_GamePlayerMaps_Interaction;
     private readonly InputAction m_GamePlayerMaps_Swap;
+    private readonly InputAction m_GamePlayerMaps_Reload;
     public struct GamePlayerMapsActions
     {
         private @PlayerControls m_Wrapper;
@@ -295,6 +316,7 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         public InputAction @Dodge => m_Wrapper.m_GamePlayerMaps_Dodge;
         public InputAction @Interaction => m_Wrapper.m_GamePlayerMaps_Interaction;
         public InputAction @Swap => m_Wrapper.m_GamePlayerMaps_Swap;
+        public InputAction @Reload => m_Wrapper.m_GamePlayerMaps_Reload;
         public InputActionMap Get() { return m_Wrapper.m_GamePlayerMaps; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -325,6 +347,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Swap.started -= m_Wrapper.m_GamePlayerMapsActionsCallbackInterface.OnSwap;
                 @Swap.performed -= m_Wrapper.m_GamePlayerMapsActionsCallbackInterface.OnSwap;
                 @Swap.canceled -= m_Wrapper.m_GamePlayerMapsActionsCallbackInterface.OnSwap;
+                @Reload.started -= m_Wrapper.m_GamePlayerMapsActionsCallbackInterface.OnReload;
+                @Reload.performed -= m_Wrapper.m_GamePlayerMapsActionsCallbackInterface.OnReload;
+                @Reload.canceled -= m_Wrapper.m_GamePlayerMapsActionsCallbackInterface.OnReload;
             }
             m_Wrapper.m_GamePlayerMapsActionsCallbackInterface = instance;
             if (instance != null)
@@ -350,6 +375,9 @@ public class @PlayerControls : IInputActionCollection, IDisposable
                 @Swap.started += instance.OnSwap;
                 @Swap.performed += instance.OnSwap;
                 @Swap.canceled += instance.OnSwap;
+                @Reload.started += instance.OnReload;
+                @Reload.performed += instance.OnReload;
+                @Reload.canceled += instance.OnReload;
             }
         }
     }
@@ -372,5 +400,6 @@ public class @PlayerControls : IInputActionCollection, IDisposable
         void OnDodge(InputAction.CallbackContext context);
         void OnInteraction(InputAction.CallbackContext context);
         void OnSwap(InputAction.CallbackContext context);
+        void OnReload(InputAction.CallbackContext context);
     }
 }
