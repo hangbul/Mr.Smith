@@ -13,6 +13,7 @@ TagManager:
   - Enemy
   - Weapon
   - Goal
+  - bullet
   layers:
   - Default
   - TransparentFX
@@ -22,9 +23,9 @@ TagManager:
   - UI
   - Weapon
   - Goal
-  - 
-  - 
-  - 
+  - Enemy
+  - EnemyDead
+  - bullet
   - 
   - 
   - 
