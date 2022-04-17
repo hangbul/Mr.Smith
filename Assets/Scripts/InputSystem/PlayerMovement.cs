@@ -34,23 +34,30 @@ namespace Assets.Scripts.InputSystem
 
         private bool mouseLDown;
         private bool isDodge = false;
+        private bool isSwap = false;
+        private bool isReload =false;
+        
         private bool isATKReady;
         private bool inter_Active = false;
         
         private int weaponSlot =0;
         private float speed = 5.0f;
+        private float rotationSpeed = 15.0f;
         private float ATKDelay;
         private Animator anim;
 
         private GameObject nearObj;
-
         private float posY;
+
+        private PlayerInfo _playerInfo;
+        
         private void Awake()
         {
             moveVec = Vector3.zero;
             anim = GetComponentInChildren<Animator>();
             _characterController = GetComponent<CharacterController>();
             mouseLDown = false;
+            _playerInfo = GetComponent<PlayerInfo>();
         }
 
         void Update()
@@ -74,7 +81,7 @@ namespace Assets.Scripts.InputSystem
                     Vector3 next = hit.point - transform.position;
                     var from = transform.rotation;
                     var to =  Quaternion.LookRotation(new Vector3(next.x, 0, next.z));
-                    transform.rotation = Quaternion.Lerp(from,to, Time.deltaTime * speed);
+                    transform.rotation = Quaternion.Lerp(from,to, Time.deltaTime * rotationSpeed);
                 }
             }
             else
@@ -82,7 +89,7 @@ namespace Assets.Scripts.InputSystem
                 var from = transform.rotation;
                 var to = Quaternion.LookRotation(forward);
                 if(!isDodge && keyInput)
-                    transform.rotation = Quaternion.Lerp(from,to, Time.deltaTime * speed);
+                    transform.rotation = Quaternion.Lerp(from,to, Time.deltaTime * rotationSpeed);
                 else if(isDodge)
                 {
                     transform.rotation = Quaternion.LookRotation(dodgeVec);
@@ -110,11 +117,19 @@ namespace Assets.Scripts.InputSystem
                 return;
             fireDelay += Time.deltaTime;
             isFireReady = equipweapons.rate < fireDelay;
+            
+            if (equipweapons.type == WeapneType.Missile && equipweapons.curAmmo == 0)
+                return;
 
-            if (isFireReady && !isDodge)
+            if (isFireReady && !isDodge && !isSwap)
             {
                 equipweapons.Use();
-                anim.SetTrigger("doSwing");
+                
+                if(equipweapons.type == WeapneType.Melee)
+                    anim.SetTrigger("doSwing");
+                else if(equipweapons.type == WeapneType.Missile)
+                    anim.SetTrigger("doShot");
+                
                 fireDelay = 0;
             }
 
@@ -122,6 +137,7 @@ namespace Assets.Scripts.InputSystem
 
         public void Swap(InputAction.CallbackContext callback)
         {
+           
             idx += 1;
             if (idx > inx_weapons.Length)
                 idx = -1;
@@ -133,9 +149,47 @@ namespace Assets.Scripts.InputSystem
                         equipweapons.gameObject.SetActive(false);
                     equipweapons = weapons[idx].GetComponent<Weapon>();
                     equipweapons.gameObject.SetActive(true);
+                    
+                    anim.SetTrigger("doSwap");
+                    isSwap = true;
+                    Invoke("SwapOut",0.4f);
                 }
             }
         }
+        
+        void SwapOut()
+        {
+            isSwap = false;
+        }
+        
+        public void OnReload(InputAction.CallbackContext callback)
+        {
+            if (equipweapons == null)
+                return;
+        
+            if(equipweapons.type == WeapneType.Melee)
+                return;
+
+            if (_playerInfo.curAmmo == 0)
+                return;
+
+            if  (!isSwap && isFireReady)
+            {
+                anim.SetTrigger("doReload");
+                isReload = true;
+
+                Invoke("ReloadOut", 0.5f);
+            }
+        }
+
+        void ReloadOut()
+        {
+            int reAmmo = _playerInfo.curAmmo < equipweapons.maxAmmo ? _playerInfo.curAmmo : equipweapons.maxAmmo;
+            equipweapons.curAmmo = reAmmo;
+            _playerInfo.curAmmo -= reAmmo;
+            isReload = false;
+        }
+        
         public void OnDodge(InputAction.CallbackContext callback)
         {
             speed = 10.0f;
@@ -168,7 +222,7 @@ namespace Assets.Scripts.InputSystem
             }
 
         }
-        public void Interaction(InputAction.CallbackContext callback)
+        public void OnInteraction(InputAction.CallbackContext callback)
         {
             if (nearObj != null && inter_Active && !isDodge)
             {

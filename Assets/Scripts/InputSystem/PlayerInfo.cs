@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,13 +9,24 @@ public class PlayerInfo : MonoBehaviour
     public int currHealth;
     public HealthBar healthbar;
 
+    public int maxAmmo = 100;
+    public int curAmmo = 0;
+    
     void Start()
     {
         currHealth = maxHealth;
         healthbar.SetMaxHealth(maxHealth);
     }
 
-    
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "EnemyAttack")
+        {
+            
+        }
+    }
+
     public void TakeDamage(int damage)
     {
         print("Damaged  ");

@@ -75,20 +75,46 @@ public class Enemy : MonoBehaviour
         {
             Weapon weapon = other.GetComponent<Weapon>();
             curHealth -= weapon.damage;
-            StartCoroutine(OnDamage());
+            Vector3 reactVec = transform.position - other.transform.position;
+            
+            StartCoroutine(OnDamage(reactVec));
         }
+        else if (other.tag == "bullet")
+        {
+            Bullet bullet = other.GetComponent<Bullet>();
+            curHealth -= bullet.damage;
+            Vector3 reactVec = transform.position - other.transform.position;
+            Destroy(other.gameObject);
+            StartCoroutine(OnDamage(reactVec));
+        }
+
     }
 
 
-    IEnumerator OnDamage()
+    IEnumerator OnDamage(Vector3 reactVec)
     {
         mat.color = Color.red;
         yield return new WaitForSeconds(0.1f);
+
         if (curHealth > 0)
-            mat.color = Color.white;
-        if (curHealth <= 0)
         {
-            Destroy(gameObject,2.0f);
+            mat.color = Color.white;
+            reactVec = reactVec.normalized;
+            reactVec += Vector3.up;
+            rigid.AddForce(reactVec * 3,ForceMode.Impulse);
+        }
+        else
+        {
+            mat.color = Color.gray;
+            gameObject.layer = 9;
+         
+            anim.SetTrigger("doDie");
+
+            reactVec = reactVec.normalized;
+            reactVec += Vector3.up;
+            rigid.AddForce(reactVec * 5,ForceMode.Impulse);
+         
+            Destroy(gameObject,0.7f);
         }
     }
 
@@ -98,6 +124,9 @@ public class Enemy : MonoBehaviour
         {
             while (_enemyState == EnemyState.Idle)
             {
+                if (curHealth <= 0)
+                    _enemyState = EnemyState.Dead;
+                
                 if (_idelTimer > idleTime)
                 {
                     anim.SetBool("isWalk", true);
@@ -118,6 +147,9 @@ public class Enemy : MonoBehaviour
             }
             while (_enemyState == EnemyState.Search)
             {
+                if (curHealth <= 0)
+                    _enemyState = EnemyState.Dead;
+                
                 if (_searchTimer > searchTime)
                 {
                     anim.SetBool("isWalk", false);
@@ -145,6 +177,9 @@ public class Enemy : MonoBehaviour
             }
             while (_enemyState == EnemyState.Chase)
             {
+                if (curHealth <= 0)
+                    _enemyState = EnemyState.Dead;
+                
                 if(IsPlayerInSight())
                     _navMeshAgent.destination = _player.transform.position;
                 else
