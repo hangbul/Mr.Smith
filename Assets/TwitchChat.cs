@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 
 [RequireComponent(typeof(TwitchIRC))]
-public class TwitchChatExample : MonoBehaviour
+public class TwitchChat : MonoBehaviour
 {
     public GameObject chatBox;
     
@@ -41,7 +41,7 @@ public class TwitchChatExample : MonoBehaviour
         text.text = msgString;
         //text.color = Color.black;
         text.fontSize = 20;
-        text.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
+        text.font = Resources.GetBuiltinResource(typeof(Font), "DungGeunMo.ttf") as Font;
     }
 
     Color ColorFromUsername(string username)

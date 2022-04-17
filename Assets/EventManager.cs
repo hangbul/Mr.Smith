@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -8,13 +9,28 @@ public class EventManager : MonoBehaviour
     public GameObject MenuPanel;
     public GameObject MenuSet;
     public GameObject SettingMenu;
+    
+    public GameObject VoteView;
+    public GameObject VoteContent;
 
+    private int voteCount;
+
+    void Start()
+    {
+        voteCount = 0;
+    }
+    
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Q))
         {
             Time.timeScale = 0;
             MenuPanel.SetActive(true);
+        }
+
+        if (Time.frameCount % 600 == 0 && voteCount < 3)
+        {
+            CreateVote();
         }
         
     }
@@ -38,5 +54,10 @@ public class EventManager : MonoBehaviour
     {       
         Application.Quit();
     }
-    
+    void CreateVote()
+    {
+        GameObject go = Instantiate(VoteContent);
+        go.transform.SetParent(VoteView.transform);
+        go.transform.localScale = new Vector3(0.3f, 0.3f, 0);
+    }
 }
