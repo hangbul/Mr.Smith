@@ -38,6 +38,13 @@ public class PlayerInfo : MonoBehaviour
                     if (gold > maxGold)
                         gold = maxGold;
                     break;
+                case Item.Type.Ammo:
+                    curAmmo += item.value;
+                    if (curAmmo > maxAmmo)
+                        curAmmo = maxAmmo;
+                    break;
+                
+                    
             }
             Destroy(other.gameObject);
         }

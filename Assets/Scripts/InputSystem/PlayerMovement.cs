@@ -71,7 +71,7 @@ namespace Assets.Scripts.InputSystem
             if(!isDodge && keyInput)
                 _characterController.Move(forward * speed *Time.deltaTime);
             else if(isDodge)
-                _characterController.SimpleMove(dodgeVec * speed);
+                _characterController.Move(dodgeVec * speed * Time.deltaTime);
             if (mouseLDown)
             {
                 Ray ray = mainCam.ScreenPointToRay(MousePos);
@@ -121,7 +121,7 @@ namespace Assets.Scripts.InputSystem
             if (equipweapons.type == WeapneType.Missile && equipweapons.curAmmo == 0)
                 return;
 
-            if (isFireReady && !isDodge && !isSwap)
+            if (isFireReady && !isDodge && !isSwap && !isReload)
             {
                 equipweapons.Use();
                 
@@ -143,7 +143,7 @@ namespace Assets.Scripts.InputSystem
                 idx = -1;
             if (inx_weapons[idx])
             {
-                if (!isDodge)
+                if (!isDodge && !isReload)
                 {
                     if (equipweapons != null)
                         equipweapons.gameObject.SetActive(false);
@@ -173,7 +173,7 @@ namespace Assets.Scripts.InputSystem
             if (_playerInfo.curAmmo == 0)
                 return;
 
-            if  (!isSwap && isFireReady)
+            if  (!isSwap && isFireReady && !isDodge)
             {
                 anim.SetTrigger("doReload");
                 isReload = true;
