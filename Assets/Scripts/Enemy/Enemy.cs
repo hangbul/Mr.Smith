@@ -35,10 +35,13 @@ public class Enemy : MonoBehaviour
     public int curHealth;
     public int maxHealth;
 
+    public GameObject[] items;
+
     private Rigidbody rigid;
     private BoxCollider collider;
     private Material mat;
-
+    
+    
 
     private void Awake()
     {
@@ -200,12 +203,15 @@ public class Enemy : MonoBehaviour
             }
             while (_enemyState == EnemyState.Dead)
             {
+
+               
                 if(_deadAnimationTimer > deadAnimationTime)
                 {
                     Destroy(gameObject);
                 }
                 else
                 {
+                    StartCoroutine("dropItems");
                     _deadAnimationTimer += Time.deltaTime;
                     transform.localScale = new Vector3(1-_deadAnimationTimer, 1 - _deadAnimationTimer, 1 - _deadAnimationTimer);
                 }
@@ -214,6 +220,16 @@ public class Enemy : MonoBehaviour
         }
 
     }
+
+    IEnumerator dropItems()
+    {
+        yield return new WaitForSeconds(0.77f);
+        int randomitems = Random.Range(0, 3);
+        Instantiate(items[randomitems], transform.position+new Vector3(0,2,0), Quaternion.identity);
+    }
+   
+
+
 
     private bool IsPlayerInSight()
     {

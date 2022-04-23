@@ -11,6 +11,9 @@ public class PlayerInfo : MonoBehaviour
 
     public int maxAmmo = 100;
     public int curAmmo = 0;
+
+    public int gold;
+    public int maxGold;
     
     void Start()
     {
@@ -24,6 +27,19 @@ public class PlayerInfo : MonoBehaviour
         if (other.tag == "EnemyAttack")
         {
             
+        }
+        else if (other.tag == "Items")
+        {
+            Item item = other.GetComponent<Item>();
+            switch (item.type)
+            {
+                case Item.Type.Coin:
+                    gold += item.value;
+                    if (gold > maxGold)
+                        gold = maxGold;
+                    break;
+            }
+            Destroy(other.gameObject);
         }
     }
 
