@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 010d65085d2c33b40bc0324c1c29d176, type: 3}
+  m_Name: VoteTypeDatabase
+  m_EditorClassIdentifier: 
+  voteDatas:
+  - questSpriteimage: {fileID: 0}
+    votePrefab: {fileID: 2376976987447939220, guid: 5e500cb5382e31849943e5bebdb5d4b1,
+      type: 3}
+    voteName: nnn
+    voteDescription: two-choice
+    text1: Apple
+    text2: Banana
+    text3: 
+    ID: 0
+    lifeTime: 10
+  - questSpriteimage: {fileID: 0}
+    votePrefab: {fileID: 6604300095323499909, guid: 5920b39dd690b11479de6642c84e238e,
+      type: 3}
+    voteName: aaa
+    voteDescription: three-choice
+    text1: Dog
+    text2: Cat
+    text3: Bird
+    ID: 1
+    lifeTime: 20
+  - questSpriteimage: {fileID: 0}
+    votePrefab: {fileID: 2376976987447939220, guid: 5e500cb5382e31849943e5bebdb5d4b1,
+      type: 3}
+    voteName: ccc
+    voteDescription: two-choice
+    text1: Small
+    text2: Large
+    text3: 
+    ID: 2
+    lifeTime: 15

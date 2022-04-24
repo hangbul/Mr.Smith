@@ -69,7 +69,7 @@ namespace Assets.Scripts.InputSystem
             }
             forward = moveVec;
             if(!isDodge && keyInput)
-                _characterController.Move(forward * speed *Time.deltaTime);
+                _characterController.Move(forward * speed * Time.deltaTime);
             else if(isDodge)
                 _characterController.SimpleMove(dodgeVec * speed);
             if (mouseLDown)

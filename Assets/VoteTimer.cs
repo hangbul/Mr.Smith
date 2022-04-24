@@ -10,7 +10,7 @@ public class VoteTimer : MonoBehaviour
     public float LimitTime;
     public TMP_Text vote_T1, vote_T2, vote_T3;
     public int vote1, vote2, vote3;
-    
+    public VoteType votetype;
     
     void Update()
     {
@@ -27,10 +27,6 @@ public class VoteTimer : MonoBehaviour
         int msgIndex = msg.IndexOf("PRIVMSG #");
         string msgString = msg.Substring(msgIndex + IRC.channelName.Length + 11);
         
-        Debug.Log("ChatRecieved");
-        Debug.Log(msgString);
-        Debug.Log("vote1 : " + vote_T1.text + ",  vote2 : " + vote_T2.text);
-
         if (msgString == "!" + vote_T1.text)
         {
             vote1++;
@@ -39,12 +35,21 @@ public class VoteTimer : MonoBehaviour
         {
             vote2++;
         }
+
+        if (votetype == VoteType.Normal2)
+        {
+            if (msgString == "!" + vote_T3.text)
+            {
+                vote3++;
+            }
+        }
     }
    
     void Start()
     {
         vote1 = 0;
         vote2 = 0;
+        vote3 = 0;
         IRC = GameObject.Find("TwitchIRC").GetComponent<TwitchIRC>();
         IRC.messageRecievedEvent.AddListener(OnChatMsgRecieved);
     }
