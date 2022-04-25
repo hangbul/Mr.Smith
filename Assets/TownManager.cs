@@ -30,7 +30,6 @@ public class TownManager : MonoBehaviour
     private int resultSpeed;
     private int resultAttack;
     
-    public phploader phploader;
     private void Awake()
     {
         townPanel.SetActive(true);
@@ -43,27 +42,6 @@ public class TownManager : MonoBehaviour
 
     public void GoGameScene()
     {
-        //플레이어에 public 변수를 이용한 설정값추가 
-        for (int i = 0; i < 30; i++)
-        {
-            phploader.Refresh();
-            if (phploader.getSkill() == 0)
-            {
-                resultAttack += phploader.getSkillLv();
-            }
-            else if (phploader.getSkill() == 1)
-            {
-                resultSpeed += phploader.getSkillLv();
-            }
-            else if (phploader.getSkill() == 2)
-            {
-                resultHP += phploader.getSkillLv();
-            }
-            else
-            {
-                continue;
-            }
-        }
 
         resultAttack += playerAttackPoint;
         resultSpeed += playerSpeedPoint;
