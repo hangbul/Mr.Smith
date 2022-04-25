@@ -104,7 +104,7 @@ public class Enemy : MonoBehaviour
             mat.color = Color.white;
             reactVec = reactVec.normalized;
             reactVec += Vector3.up;
-            rigid.AddForce(reactVec * 3,ForceMode.Impulse);
+            rigid.AddForce(reactVec * 20,ForceMode.Impulse);
         }
         else
         {
@@ -115,7 +115,7 @@ public class Enemy : MonoBehaviour
 
             reactVec = reactVec.normalized;
             reactVec += Vector3.up;
-            rigid.AddForce(reactVec * 5,ForceMode.Impulse);
+            rigid.AddForce(reactVec * 20,ForceMode.Impulse);
          
             Destroy(gameObject,0.7f);
         }
