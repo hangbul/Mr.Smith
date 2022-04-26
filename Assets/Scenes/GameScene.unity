@@ -3966,8 +3966,29 @@ PrefabInstance:
       propertyPath: chatView
       value: 
       objectReference: {fileID: 950790731}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 4665460207441730550, guid: 31469050719818d42bea602b536c6aa7, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 31469050719818d42bea602b536c6aa7, type: 3}
+--- !u!1 &4665460209279366725 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4665460207441730548, guid: 31469050719818d42bea602b536c6aa7,
+    type: 3}
+  m_PrefabInstance: {fileID: 4665460209279366724}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &4665460209279366726
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4665460209279366725}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 86b195d2af837ef459a6a08622b385dc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  speed: 2
+  player: {fileID: 0}
 --- !u!1001 &8064264985354265823
 PrefabInstance:
   m_ObjectHideFlags: 0
