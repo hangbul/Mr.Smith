@@ -32,6 +32,8 @@ public class Enemy : MonoBehaviour
     private float _deadAnimationTimer;
     private int currentHitPoint;
 
+    private bool Damaged = false;
+
     public int curHealth;
     public int maxHealth;
 
@@ -76,17 +78,19 @@ public class Enemy : MonoBehaviour
     {
         if (other.tag == "MeleeWeapon")
         {
+            Damaged = true;
             Weapon weapon = other.GetComponent<Weapon>();
             curHealth -= weapon.damage;
-            Vector3 reactVec = transform.position - other.transform.position;
+            Vector3 reactVec = -transform.forward;
             
             StartCoroutine(OnDamage(reactVec));
         }
         else if (other.tag == "bullet")
         {
+            Damaged = true;
             Bullet bullet = other.GetComponent<Bullet>();
             curHealth -= bullet.damage;
-            Vector3 reactVec = transform.position - other.transform.position;
+            Vector3 reactVec = -transform.forward;
             Destroy(other.gameObject);
             StartCoroutine(OnDamage(reactVec));
         }
@@ -102,20 +106,16 @@ public class Enemy : MonoBehaviour
         if (curHealth > 0)
         {
             mat.color = Color.white;
-            reactVec = reactVec.normalized;
             reactVec += Vector3.up;
-            rigid.AddForce(reactVec * 20,ForceMode.Impulse);
+            rigid.AddForce(reactVec * 200,ForceMode.Impulse);
         }
         else
         {
             mat.color = Color.gray;
             gameObject.layer = 9;
-         
-            anim.SetTrigger("doDie");
 
-            reactVec = reactVec.normalized;
             reactVec += Vector3.up;
-            rigid.AddForce(reactVec * 20,ForceMode.Impulse);
+            rigid.AddForce(reactVec * 200,ForceMode.Impulse);
          
             Destroy(gameObject,0.7f);
         }
@@ -182,7 +182,13 @@ public class Enemy : MonoBehaviour
             {
                 if (curHealth <= 0)
                     _enemyState = EnemyState.Dead;
-                
+
+                if (Damaged)
+                {
+                    anim.SetBool("isWalk", false);
+                    _enemyState = EnemyState.Idle;
+                }
+
                 if(IsPlayerInSight())
                     _navMeshAgent.destination = _player.transform.position;
                 else
@@ -207,6 +213,8 @@ public class Enemy : MonoBehaviour
                
                 if(_deadAnimationTimer > deadAnimationTime)
                 {
+                    rigid.AddForce(-transform.forward * 200,ForceMode.Impulse);
+                    anim.SetTrigger("doDie");
                     Destroy(gameObject);
                 }
                 else
