@@ -36,8 +36,10 @@ public class Enemy : MonoBehaviour
 
     public int curHealth;
     public int maxHealth;
+    public int AttackPoint;
 
     public GameObject[] items;
+    public BoxCollider meleeArea;
 
     private Rigidbody rigid;
     private BoxCollider collider;
@@ -189,8 +191,18 @@ public class Enemy : MonoBehaviour
                     _enemyState = EnemyState.Idle;
                 }
 
-                if(IsPlayerInSight())
+                if (IsPlayerInSight())
+                {
                     _navMeshAgent.destination = _player.transform.position;
+                    float targetRadius = 1.5f;
+                    float targetRange = 3f;
+                    RaycastHit[] rayHit = Physics.SphereCastAll(transform.position, targetRadius, transform.forward, targetRange, LayerMask.GetMask("Player"));
+                    
+                    if (rayHit.Length > 0 && _enemyState != EnemyState.Attack)
+                    {
+                        _enemyState = EnemyState.Attack;
+                    }
+                }
                 else
                 {
                     //losetimer
@@ -204,8 +216,18 @@ public class Enemy : MonoBehaviour
                 yield return null;
             }
             while (_enemyState == EnemyState.Attack)
-            {
-                yield return null;
+            {  
+                anim.SetBool("isWalk", false);
+                anim.SetBool("isAttack",true);
+                yield return new WaitForSeconds(0.2f);
+                meleeArea.enabled = true;
+
+                yield return new WaitForSeconds(1f);
+                meleeArea.enabled = false;
+
+                yield return new WaitForSeconds(1f);
+                anim.SetBool("isAttack",false);
+                _enemyState = EnemyState.Idle;
             }
             while (_enemyState == EnemyState.Dead)
             {

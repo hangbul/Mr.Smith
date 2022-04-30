@@ -3,10 +3,13 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.SceneManagement;
+
+
 public class PlayerInfo : MonoBehaviour
 {
     public int maxHealth = 100;
-    public int currHealth;
+    public int curHealth;
     public HealthBar healthbar;
 
     public int maxAmmo = 100;
@@ -17,24 +20,34 @@ public class PlayerInfo : MonoBehaviour
     
     void Start()
     {
-        currHealth = maxHealth;
+        curHealth = maxHealth;
         healthbar.SetMaxHealth(maxHealth);
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "EnemyAttack")
+        if (other.tag == "Enemy")
         {
-            
+            Enemy enemy = other.GetComponent<Enemy>();
+            TakeDamage(enemy.AttackPoint);
         }
     }
 
     public void TakeDamage(int damage)
     {
         print("Damaged  ");
-        currHealth -= damage;
-        healthbar.SetHealth(currHealth);
+        curHealth -= damage;
+        healthbar.SetHealth(curHealth);
+        isPlayerDead();
     }
-    
+
+    public void isPlayerDead()
+    {
+        if (curHealth <= 0)
+        {
+            SceneManager.LoadScene("TownScene");
+        }
+    }
+
 }
