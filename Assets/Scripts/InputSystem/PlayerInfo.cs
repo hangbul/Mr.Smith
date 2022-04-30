@@ -28,26 +28,6 @@ public class PlayerInfo : MonoBehaviour
         {
             
         }
-        else if (other.tag == "Items")
-        {
-            Item item = other.GetComponent<Item>();
-            switch (item.type)
-            {
-                case Item.Type.Coin:
-                    gold += item.value;
-                    if (gold > maxGold)
-                        gold = maxGold;
-                    break;
-                case Item.Type.Ammo:
-                    curAmmo += item.value;
-                    if (curAmmo > maxAmmo)
-                        curAmmo = maxAmmo;
-                    break;
-                
-                    
-            }
-            Destroy(other.gameObject);
-        }
     }
 
     public void TakeDamage(int damage)
