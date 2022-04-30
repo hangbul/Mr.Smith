@@ -234,6 +234,11 @@ namespace Assets.Scripts.InputSystem
                     
                     Destroy(nearObj);
                 }
+                else if (nearObj.CompareTag("Chest"))
+                {
+                    Chest chest = nearObj.GetComponent<Chest>();
+                    chest.SetActive();
+                }
             }
 
         }
@@ -248,6 +253,11 @@ namespace Assets.Scripts.InputSystem
         void OnTriggerStay (Collider other)
         {
             if (other.CompareTag("Weapon"))
+            {
+                nearObj = other.gameObject;
+                inter_Active = true;
+            }
+            else if (other.CompareTag("Chest"))
             {
                 nearObj = other.gameObject;
                 inter_Active = true;
