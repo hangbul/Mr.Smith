@@ -11,6 +11,12 @@ public class Chest : MonoBehaviour
     public GameObject[] items;
     public bool isActive = false;
     private int itemCount = 0;
+    private SphereCollider collider;
+
+    private void Awake()
+    {
+        collider = GetComponent<SphereCollider>();
+    }
 
     private void FixedUpdate()
     {
@@ -29,6 +35,7 @@ public class Chest : MonoBehaviour
             if (itemCount > 5)
             {
                 isActive = false;
+                collider.isTrigger = false;
                 return;
             }
 
