@@ -1,19 +1,17 @@
 fileFormatVersion: 2
-guid: 5f3aea774cf0e484eb0ccae045500074
+guid: 6e433002a4812e149a2bc2cffa45724d
 ModelImporter:
   serializedVersion: 21100
-  internalIDToNameTable: []
-  externalObjects:
+  internalIDToNameTable:
   - first:
-      type: UnityEngine:Material
-      assembly: UnityEngine.CoreModule
-      name: Frt_Map_Cliff_03
-    second: {fileID: 2100000, guid: f99cac042679daa40adbfbcda6681711, type: 2}
+      74: 1827226128182048838
+    second: Take 001
+  externalObjects: {}
   materials:
     materialImportMode: 1
     materialName: 0
-    materialSearch: 0
-    materialLocation: 1
+    materialSearch: 1
+    materialLocation: 0
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
