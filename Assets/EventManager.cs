@@ -13,12 +13,19 @@ public class EventManager : MonoBehaviour
 
     public GameObject VoteView;
     public VoteTypeDataBase VoteContents;
-
+    
     public int voteCount;
 
+    public GameObject SpawnPoint;
+    public GameObject GameObjects;
+    
+    private GameObject player;
     void Start()
     {
         voteCount = 0;
+        player = GameObject.Find("Player");
+        player.transform.SetParent(GameObjects.transform);
+        player.transform.position = SpawnPoint.transform.position;
     }
 
     void Update()

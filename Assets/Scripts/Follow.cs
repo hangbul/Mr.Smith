@@ -14,6 +14,7 @@ public class Follow : MonoBehaviour
     void Awake()
     {
         camTransform = GetComponent<Transform>();
+        target = GameObject.Find("Player").transform;
     }
     
     void LateUpdate()
