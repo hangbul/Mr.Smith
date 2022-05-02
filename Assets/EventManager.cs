@@ -65,7 +65,6 @@ public class EventManager : MonoBehaviour
 
     public void CreateVote()
     {
-        VoteView.SetActive(true);
 
         int rand = Random.Range(0, VoteContents.voteDatas.Count);
         GameObject go = Instantiate(VoteContents.voteDatas[rand].votePrefab);
