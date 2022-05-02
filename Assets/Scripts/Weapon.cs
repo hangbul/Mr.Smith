@@ -7,6 +7,7 @@ public class Weapon : MonoBehaviour
 {
     
     public WeapneType type;
+    public PlayerInfo playerInfo;
     public int idx = 0;
     public int damage;
     public float rate;
@@ -19,8 +20,10 @@ public class Weapon : MonoBehaviour
     public int maxAmmo;
     public int curAmmo;
     
+
     public void Use()
     {
+        damage = playerInfo.AttackPoint;
         if (type == WeapneType.Melee)
         {
             StopCoroutine("Swing");

@@ -5,6 +5,7 @@ using UnityEngine;
 
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.InputSystem;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -20,8 +21,7 @@ public class TownManager : MonoBehaviour
     public TextMeshProUGUI playerHealthPointText;
     public TextMeshProUGUI playerSpeedPointText;
     public TextMeshProUGUI playerAttackPointText;
-
-    public int playerStatusPoint;
+    
     public int playerHealthPoint;
     public int playerSpeedPoint;
     public int playerAttackPoint;
@@ -29,11 +29,17 @@ public class TownManager : MonoBehaviour
     private int resultHP;
     private int resultSpeed;
     private int resultAttack;
+    private int totalStatusPoint;
+
+    public GameObject player;
+    public PlayerInfo playerinfo;
+    public PlayerMovement playerMovement;
     
     private void Awake()
     {
         townPanel.SetActive(true);
         statusPanel.SetActive(false);
+        totalStatusPoint = playerinfo.playerStatusPoint;
     }
 
     void Start()
@@ -49,6 +55,8 @@ public class TownManager : MonoBehaviour
         Debug.Log("result Attack :" + resultAttack);
         Debug.Log("result Speed : " + resultSpeed);
         Debug.Log("result Health : " + resultHP);
+        
+        DontDestroyOnLoad(player);
         SceneManager.LoadScene("GameScene"); 
     }
 
@@ -60,30 +68,33 @@ public class TownManager : MonoBehaviour
 
     public void increaseHealth()
     {
-        if (playerStatusPoint == 0)
+        if (totalStatusPoint == 0)
             return;
         {
             playerHealthPoint++;
-            playerStatusPoint--;
+            playerinfo.maxHealth += 50;
+            totalStatusPoint--;
         }
     }
 
     public void increaseSpeed()
     {
-        if (playerStatusPoint == 0)
+        if (totalStatusPoint == 0)
             return;
         {
             playerSpeedPoint++;
-            playerStatusPoint--;
+            playerMovement.speed += 0.1f;
+            totalStatusPoint--;
         }
     }
     public void increaseAttack()
     {
-        if (playerStatusPoint == 0)
+        if (totalStatusPoint == 0)
             return;
         {
             playerAttackPoint++;
-            playerStatusPoint--;
+            playerinfo.AttackPoint += 3;
+            totalStatusPoint--;
         }
     }
 
@@ -98,6 +109,6 @@ public class TownManager : MonoBehaviour
         playerAttackPointText.text = playerAttackPoint.ToString();
         playerHealthPointText.text = playerHealthPoint.ToString();
         playerSpeedPointText.text = playerSpeedPoint.ToString();
-        playerStatPointText.text = "POINT : " + playerStatusPoint.ToString();
+        playerStatPointText.text = "POINT : " + totalStatusPoint.ToString();
     }
 }

@@ -41,7 +41,7 @@ namespace Assets.Scripts.InputSystem
         private bool inter_Active = false;
         
         private int weaponSlot =0;
-        private float speed = 5.0f;
+        public float speed = 5.0f;
         private float rotationSpeed = 15.0f;
         private float ATKDelay;
         private Animator anim;

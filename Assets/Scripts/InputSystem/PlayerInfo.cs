@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 public class PlayerInfo : MonoBehaviour
 {
-    public int maxHealth = 100;
+    public int maxHealth;
     public int curHealth;
     public HealthBar healthbar;
 
@@ -18,8 +18,12 @@ public class PlayerInfo : MonoBehaviour
     public int gold;
     public int maxGold;
 
+    public int AttackPoint = 10;
+
     private SkinnedMeshRenderer _meshRenderer;
     private bool isDamage = false;
+
+    public int playerStatusPoint = 10;
     void Start()
     {
         curHealth = maxHealth;
