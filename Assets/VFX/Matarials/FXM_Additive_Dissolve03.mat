@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FXM_Additive_Dissolve03
+  m_Shader: {fileID: 4800000, guid: e2e76604ccdec3b499d05d39e64b5f37, type: 3}
+  m_ShaderKeywords: _USE_CUSTOM_ON
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _Dissolve_Texture:
+        m_Texture: {fileID: 2800000, guid: c10244bcb5987bd41b64e7758c3af36f, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _Main_Texture:
+        m_Texture: {fileID: 2800000, guid: e0f10fbd2810ead4ea9cf3d55c587639, type: 3}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _tex4coord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _Dissolve: 0.204
+    - _Main_Ins: 1.54
+    - _Main_Pow: 1
+    - _Opacity: 2.71
+    - _Use_Custom: 1
+    - __dirty: 0
+    m_Colors:
+    - _Tint_Color: {r: 0.20529696, g: 0.78078145, b: 1.0121617, a: 1}
