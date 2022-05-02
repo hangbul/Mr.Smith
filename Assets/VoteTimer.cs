@@ -18,6 +18,7 @@ public class VoteTimer : MonoBehaviour
         text_timer.text = "시간 : " + Mathf.Round(LimitTime);
         if (LimitTime <= 0)
         {
+            //투표 종료시 들어갈 타입별 이벤트 
             Destroy(gameObject);
         }
     }

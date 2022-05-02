@@ -14,7 +14,7 @@ public class EventManager : MonoBehaviour
     public GameObject VoteView;
     public VoteTypeDataBase VoteContents;
 
-    private int voteCount;
+    public int voteCount;
 
     void Start()
     {
@@ -28,7 +28,6 @@ public class EventManager : MonoBehaviour
             Time.timeScale = 0;
             MenuPanel.SetActive(true);
         }
-
 
     
     /*
@@ -65,7 +64,8 @@ public class EventManager : MonoBehaviour
 
     public void CreateVote()
     {
-
+        
+        
         int rand = Random.Range(0, VoteContents.voteDatas.Count);
         GameObject go = Instantiate(VoteContents.voteDatas[rand].votePrefab);
         VoteType type = go.GetComponent<VoteTimer>().votetype;
