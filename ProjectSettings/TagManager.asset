@@ -13,6 +13,9 @@ TagManager:
   - Enemy
   - Weapon
   - Goal
+  - bullet
+  - PostProcess
+  - Items
   layers:
   - Default
   - TransparentFX
@@ -22,10 +25,10 @@ TagManager:
   - UI
   - Weapon
   - Goal
-  - 
-  - 
-  - 
-  - 
+  - Enemy
+  - EnemyDead
+  - bullet
+  - Post Processing
   - 
   - 
   - 

@@ -380,7 +380,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 5a885bb4a3c4afc4bb22038c13057e8e, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 90c976fecba96454dbc018c8e2147d80, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1371,13 +1371,13 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 852520550}
   m_TextComponent: {fileID: 154106094}
   m_Placeholder: {fileID: 519815304}
-  m_ContentType: 5
+  m_ContentType: 0
   m_InputType: 0
   m_AsteriskChar: 42
-  m_KeyboardType: 6
+  m_KeyboardType: 0
   m_LineType: 0
   m_HideMobileInput: 0
-  m_CharacterValidation: 4
+  m_CharacterValidation: 0
   m_CharacterLimit: 0
   m_OnEndEdit:
     m_PersistentCalls:

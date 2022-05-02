@@ -4,16 +4,13 @@ using System.Collections.Generic;
 
 public class TwitchIRC : MonoBehaviour
 {
-    public string oauth;
-    public string nickName;
     public string channelName;
-    private string server = "irc.twitch.tv";
-    private int port = 6667;
-    private GameObject _introManager;
-    //event(buffer).
     public class MsgEvent : UnityEngine.Events.UnityEvent<string> { }
     public MsgEvent messageRecievedEvent = new MsgEvent();
 
+    private string server = "irc.twitch.tv";
+    private string oauth = "oauth:0hbmyni5a8uzwzpnq5klqk6v8y429h";
+    private int port = 6667;
     private string buffer = string.Empty;
     private bool stopThreads = false;
     private Queue<string> commandQueue = new Queue<string>();
@@ -21,26 +18,23 @@ public class TwitchIRC : MonoBehaviour
     private System.Threading.Thread inProc, outProc;
     private void StartIRC()
     {
-        System.Net.Sockets.TcpClient sock = new System.Net.Sockets.TcpClient();
-        sock.Connect(server, port);
-        if (!sock.Connected)
+        System.Net.Sockets.TcpClient client = new System.Net.Sockets.TcpClient();
+        client.Connect(server, port);
+        if (!client.Connected)
         {
             Debug.Log("Failed to connect!");
             return;
         }
-        var networkStream = sock.GetStream();
+        var networkStream = client.GetStream();
         var input = new System.IO.StreamReader(networkStream);
         var output = new System.IO.StreamWriter(networkStream);
 
-        //Send PASS & NICK.
         output.WriteLine("PASS " + oauth);
-        output.WriteLine("NICK " + nickName.ToLower());
+        output.WriteLine("NICK " + "temp");
         output.Flush();
 
-        //output proc
         outProc = new System.Threading.Thread(() => IRCOutputProcedure(output));
         outProc.Start();
-        //input proc
         inProc = new System.Threading.Thread(() => IRCInputProcedure(input, networkStream));
         inProc.Start();
     }
@@ -83,12 +77,9 @@ public class TwitchIRC : MonoBehaviour
                 {
                     if (stopWatch.ElapsedMilliseconds > 1750)
                     {
-                        //send msg.
                         output.WriteLine(commandQueue.Peek());
                         output.Flush();
-                        //remove msg from queue.
                         commandQueue.Dequeue();
-                        //restart stopwatch.
                         stopWatch.Reset();
                         stopWatch.Start();
                     }
@@ -104,19 +95,11 @@ public class TwitchIRC : MonoBehaviour
             commandQueue.Enqueue(cmd);
         }
     }
-    public void SendMsg(string msg)
-    {
-        lock (commandQueue)
-        {
-            commandQueue.Enqueue("PRIVMSG #" + channelName + " :" + msg);
-        }
-    }
-
-    //MonoBehaviour Events.
     void Start()
     {
-        _introManager = GameObject.Find("IntroManager");
-        channelName = _introManager.GetComponent<IntroManager>().channelName;
+        GameObject _introManager = GameObject.Find("IntroManager");
+        if(_introManager != null)
+            channelName = _introManager.GetComponent<IntroManager>().channelName;
     }
     void OnEnable()
     {

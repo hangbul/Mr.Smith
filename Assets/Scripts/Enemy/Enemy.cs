@@ -1,8 +1,11 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using Assets.Scripts.InputSystem;
 using UnityEngine;
 using UnityEngine.AI;
+using Random = UnityEngine.Random;
 
 public class Enemy : MonoBehaviour
 {
@@ -29,6 +32,29 @@ public class Enemy : MonoBehaviour
     private float _deadAnimationTimer;
     private int currentHitPoint;
 
+    private bool Damaged = false;
+
+    public int curHealth;
+    public int maxHealth;
+
+    public GameObject[] items;
+
+    private Rigidbody rigid;
+    private BoxCollider collider;
+    private Material mat;
+    
+    
+
+    private void Awake()
+    {
+        maxHealth = 30;
+        curHealth = maxHealth;
+
+        rigid = GetComponent<Rigidbody>();
+        collider = GetComponent<BoxCollider>();
+        mat = GetComponentInChildren<MeshRenderer>().material;
+    }
+
     void Start()
     {
         _enemyState = EnemyState.Idle;
@@ -48,9 +74,51 @@ public class Enemy : MonoBehaviour
         
     }
 
-    private void OntriggerEnter(Collider other)
+    private void OnTriggerEnter(Collider other)
     {
-        //hit
+        if (other.tag == "MeleeWeapon")
+        {
+            Damaged = true;
+            Weapon weapon = other.GetComponent<Weapon>();
+            curHealth -= weapon.damage;
+            Vector3 reactVec = -transform.forward;
+            
+            StartCoroutine(OnDamage(reactVec));
+        }
+        else if (other.tag == "bullet")
+        {
+            Damaged = true;
+            Bullet bullet = other.GetComponent<Bullet>();
+            curHealth -= bullet.damage;
+            Vector3 reactVec = -transform.forward;
+            Destroy(other.gameObject);
+            StartCoroutine(OnDamage(reactVec));
+        }
+
+    }
+
+
+    IEnumerator OnDamage(Vector3 reactVec)
+    {
+        mat.color = Color.red;
+        yield return new WaitForSeconds(0.1f);
+
+        if (curHealth > 0)
+        {
+            mat.color = Color.white;
+            reactVec += Vector3.up;
+            rigid.AddForce(reactVec * 200,ForceMode.Impulse);
+        }
+        else
+        {
+            mat.color = Color.gray;
+            gameObject.layer = 9;
+
+            reactVec += Vector3.up;
+            rigid.AddForce(reactVec * 200,ForceMode.Impulse);
+         
+            Destroy(gameObject,0.7f);
+        }
     }
 
     IEnumerator EnenmyStateMachine()
@@ -59,6 +127,9 @@ public class Enemy : MonoBehaviour
         {
             while (_enemyState == EnemyState.Idle)
             {
+                if (curHealth <= 0)
+                    _enemyState = EnemyState.Dead;
+                
                 if (_idelTimer > idleTime)
                 {
                     anim.SetBool("isWalk", true);
@@ -79,6 +150,9 @@ public class Enemy : MonoBehaviour
             }
             while (_enemyState == EnemyState.Search)
             {
+                if (curHealth <= 0)
+                    _enemyState = EnemyState.Dead;
+                
                 if (_searchTimer > searchTime)
                 {
                     anim.SetBool("isWalk", false);
@@ -106,6 +180,15 @@ public class Enemy : MonoBehaviour
             }
             while (_enemyState == EnemyState.Chase)
             {
+                if (curHealth <= 0)
+                    _enemyState = EnemyState.Dead;
+
+                if (Damaged)
+                {
+                    anim.SetBool("isWalk", false);
+                    _enemyState = EnemyState.Idle;
+                }
+
                 if(IsPlayerInSight())
                     _navMeshAgent.destination = _player.transform.position;
                 else
@@ -126,12 +209,17 @@ public class Enemy : MonoBehaviour
             }
             while (_enemyState == EnemyState.Dead)
             {
+
+               
                 if(_deadAnimationTimer > deadAnimationTime)
                 {
+                    rigid.AddForce(-transform.forward * 200,ForceMode.Impulse);
+                    anim.SetTrigger("doDie");
                     Destroy(gameObject);
                 }
                 else
                 {
+                    StartCoroutine("dropItems");
                     _deadAnimationTimer += Time.deltaTime;
                     transform.localScale = new Vector3(1-_deadAnimationTimer, 1 - _deadAnimationTimer, 1 - _deadAnimationTimer);
                 }
@@ -140,6 +228,16 @@ public class Enemy : MonoBehaviour
         }
 
     }
+
+    IEnumerator dropItems()
+    {
+        yield return new WaitForSeconds(0.77f);
+        int randomitems = Random.Range(0, 3);
+        Instantiate(items[randomitems], transform.position+new Vector3(0,2,0), Quaternion.identity);
+    }
+   
+
+
 
     private bool IsPlayerInSight()
     {
