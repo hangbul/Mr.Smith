@@ -29,10 +29,14 @@ public class EventManager : MonoBehaviour
             MenuPanel.SetActive(true);
         }
 
-        if (Time.frameCount % 540 == 0 && voteCount < 3)
-        {
-            CreateVote();
-        }
+
+    
+    /*
+    if (Time.frameCount % 540 == 0 && voteCount < 3)
+    {
+        CreateVote();
+    }
+     */
 
     }
 
@@ -59,8 +63,10 @@ public class EventManager : MonoBehaviour
         Application.Quit();
     }
 
-    void CreateVote()
+    public void CreateVote()
     {
+        VoteView.SetActive(true);
+
         int rand = Random.Range(0, VoteContents.voteDatas.Count);
         GameObject go = Instantiate(VoteContents.voteDatas[rand].votePrefab);
         VoteType type = go.GetComponent<VoteTimer>().votetype;

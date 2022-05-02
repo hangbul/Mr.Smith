@@ -234,6 +234,30 @@ namespace Assets.Scripts.InputSystem
                     
                     Destroy(nearObj);
                 }
+                else if (nearObj.CompareTag("Chest"))
+                {
+                    Chest chest = nearObj.GetComponent<Chest>();
+                    chest.SetActive();
+                }
+                else if (nearObj.CompareTag("Items"))
+                {
+                    Item item = nearObj.GetComponent<Item>();
+                    PlayerInfo player = GetComponent<PlayerInfo>();
+                    switch (item.type)
+                    {
+                        case Item.Type.Coin:
+                            player.gold += item.value;
+                            if (player.gold > player.maxGold)
+                                player.gold = player.maxGold;
+                            break;
+                        case Item.Type.Ammo:
+                            player.curAmmo += item.value;
+                            if (player.curAmmo > player.maxAmmo)
+                                player.curAmmo = player.maxAmmo;
+                            break;
+                    }
+                    Destroy(nearObj.gameObject);
+                }
             }
 
         }
@@ -248,6 +272,16 @@ namespace Assets.Scripts.InputSystem
         void OnTriggerStay (Collider other)
         {
             if (other.CompareTag("Weapon"))
+            {
+                nearObj = other.gameObject;
+                inter_Active = true;
+            }
+            else if (other.CompareTag("Chest"))
+            {
+                nearObj = other.gameObject;
+                inter_Active = true;
+            }
+            else if (other.CompareTag("Items"))
             {
                 nearObj = other.gameObject;
                 inter_Active = true;

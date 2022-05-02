@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemySpawn : MonoBehaviour
+public class SpawnOBJ : MonoBehaviour
 {
     private RoomTemplates _roomTemplates;
-    public GameObject EnenmyObj;
+    public GameObject TargetObj;
     
     // Start is called before the first frame update
     void Start()
@@ -17,7 +17,7 @@ public class EnemySpawn : MonoBehaviour
     {
         if (_roomTemplates.spawnedBoss)
         {
-            GameObject enemy = Instantiate(EnenmyObj, new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z), Quaternion.identity);
+            GameObject enemy = Instantiate(TargetObj, new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z), Quaternion.identity);
             Destroy(this);
         }
     }
