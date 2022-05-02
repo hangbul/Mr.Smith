@@ -56,15 +56,7 @@ public class PlayerInfo : MonoBehaviour
        isDamage = false;
    }
 
-    public void TakeDamage(int damage)
-    {
-        print("Damaged  ");
-       
-        healthbar.SetHealth(curHealth);
-        isPlayerDead();
-    }
-
-    public void isPlayerDead()
+   public void isPlayerDead()
     {
         if (curHealth <= 0)
         {
