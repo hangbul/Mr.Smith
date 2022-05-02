@@ -36,7 +36,6 @@ public class Enemy : MonoBehaviour
 
     public int curHealth;
     public int maxHealth;
-    public int AttackPoint;
 
     public GameObject[] items;
     public BoxCollider meleeArea;

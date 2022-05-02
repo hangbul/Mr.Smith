@@ -17,6 +17,7 @@ TagManager:
   - PostProcess
   - Items
   - Chest
+  - EnemyBullet
   layers:
   - Default
   - TransparentFX
@@ -31,7 +32,7 @@ TagManager:
   - bullet
   - Post Processing
   - Player
-  - 
+  - EnemyBullet
   - 
   - 
   - 

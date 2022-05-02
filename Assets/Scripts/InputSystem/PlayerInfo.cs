@@ -17,27 +17,45 @@ public class PlayerInfo : MonoBehaviour
 
     public int gold;
     public int maxGold;
-    
+
+    private SkinnedMeshRenderer _meshRenderer;
+    private bool isDamage = false;
     void Start()
     {
         curHealth = maxHealth;
         healthbar.SetMaxHealth(maxHealth);
+        _meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
     }
 
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.tag == "Enemy")
+        if (other.tag == "EnemyBullet")
         {
-            Enemy enemy = other.GetComponent<Enemy>();
-            TakeDamage(enemy.AttackPoint);
+            Bullet enemyBullet = other.GetComponent<Bullet>();
+            curHealth -= enemyBullet.damage;
+
+            StartCoroutine(OnDamage());
         }
     }
+
+   IEnumerator OnDamage()
+   {
+       isDamage = true;
+       _meshRenderer.material.color = Color.red;
+       
+       healthbar.SetHealth(curHealth);
+       isPlayerDead();
+
+       yield return new WaitForSeconds(1f);
+       _meshRenderer.material.color = Color.white;
+       isDamage = false;
+   }
 
     public void TakeDamage(int damage)
     {
         print("Damaged  ");
-        curHealth -= damage;
+       
         healthbar.SetHealth(curHealth);
         isPlayerDead();
     }
