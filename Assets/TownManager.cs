@@ -100,7 +100,6 @@ public class TownManager : MonoBehaviour
 
     public void intoDungeonClick()
     {
-        townPanel.SetActive(false);
         statusPanel.SetActive(true);
     }
 
