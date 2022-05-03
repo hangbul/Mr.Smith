@@ -255,14 +255,10 @@ namespace Assets.Scripts.InputSystem
                             if (player.curAmmo > player.maxAmmo)
                                 player.curAmmo = player.maxAmmo;
                             break;
+                        case Item.Type.Key:
+                            player.hasKey = true;
+                            break;
                     }
-                    Destroy(nearObj.gameObject);
-                }
-                else if (nearObj.CompareTag("Key"))
-                {
-                    Item item = nearObj.GetComponent<Item>();
-                    PlayerInfo player = GetComponent<PlayerInfo>();
-                    player.hasKey = true;
                     Destroy(nearObj.gameObject);
                 }
                 else if (nearObj.CompareTag("Door"))
@@ -273,7 +269,6 @@ namespace Assets.Scripts.InputSystem
                         Door door = nearObj.GetComponent<Door>();
                         door.OpenDoor();
                     }
-                    Destroy(nearObj.gameObject);
                 }
             }
 
@@ -299,6 +294,11 @@ namespace Assets.Scripts.InputSystem
                 inter_Active = true;
             }
             else if (other.CompareTag("Items"))
+            {
+                nearObj = other.gameObject;
+                inter_Active = true;
+            }
+            else if (other.CompareTag("Door"))
             {
                 nearObj = other.gameObject;
                 inter_Active = true;
