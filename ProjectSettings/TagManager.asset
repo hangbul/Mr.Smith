@@ -18,6 +18,8 @@ TagManager:
   - Items
   - Chest
   - EnemyBullet
+  - Key
+  - Door
   layers:
   - Default
   - TransparentFX

@@ -50,7 +50,7 @@ namespace Assets.Scripts.InputSystem
         private float posY;
 
         private PlayerInfo _playerInfo;
-        
+
         private void Awake()
         {
             moveVec = Vector3.zero;
@@ -255,6 +255,23 @@ namespace Assets.Scripts.InputSystem
                             if (player.curAmmo > player.maxAmmo)
                                 player.curAmmo = player.maxAmmo;
                             break;
+                    }
+                    Destroy(nearObj.gameObject);
+                }
+                else if (nearObj.CompareTag("Key"))
+                {
+                    Item item = nearObj.GetComponent<Item>();
+                    PlayerInfo player = GetComponent<PlayerInfo>();
+                    player.hasKey = true;
+                    Destroy(nearObj.gameObject);
+                }
+                else if (nearObj.CompareTag("Door"))
+                {
+                    PlayerInfo player = GetComponent<PlayerInfo>();
+                    if (player.hasKey)
+                    {
+                        Door door = nearObj.GetComponent<Door>();
+                        door.OpenDoor();
                     }
                     Destroy(nearObj.gameObject);
                 }

@@ -17,6 +17,7 @@ public class PlayerInfo : MonoBehaviour
 
     public int gold;
     public int maxGold;
+    public bool hasKey;
 
     public int AttackPoint = 10;
 
@@ -26,6 +27,7 @@ public class PlayerInfo : MonoBehaviour
     public int playerStatusPoint = 10;
     void Start()
     {
+        hasKey = false;
         curHealth = maxHealth;
         _meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
     }
