@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.InputSystem;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -24,6 +25,9 @@ public class EventManager : MonoBehaviour
     {
         voteCount = 0;
         player = GameObject.Find("Player");
+        player.GetComponent<PlayerInfo>().healthbar = GameObject.Find("Health Bar").GetComponent<HealthBar>();
+        player.GetComponent<PlayerInfo>().SetUpMaxHealth();
+        player.GetComponent<PlayerMovement>().mainCam = Camera.main;
         player.transform.SetParent(GameObjects.transform);
         player.transform.position = SpawnPoint.transform.position;
     }

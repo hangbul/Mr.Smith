@@ -46,8 +46,8 @@ public class TwitchAuctionChat : MonoBehaviour
         float posX = Random.Range(minX, maxX);
         float posY = Random.Range(minY, maxY);
         
-        go.transform.localPosition = new Vector3(posX, posY, 0); 
-        
+        go.transform.localPosition = new Vector3(posX, posY, 0);
+        go.transform.localScale = new Vector3(1, 1, 1);
         messages.AddLast(go);
         layout.minWidth = 30f;
         layout.minHeight = 20f;

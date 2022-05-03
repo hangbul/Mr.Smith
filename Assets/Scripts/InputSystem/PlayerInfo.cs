@@ -27,10 +27,13 @@ public class PlayerInfo : MonoBehaviour
     void Start()
     {
         curHealth = maxHealth;
-        healthbar.SetMaxHealth(maxHealth);
         _meshRenderer = GetComponentInChildren<SkinnedMeshRenderer>();
     }
 
+    public void SetUpMaxHealth()
+    {
+        healthbar.SetMaxHealth(maxHealth);
+    }
 
     private void OnTriggerEnter(Collider other)
     {

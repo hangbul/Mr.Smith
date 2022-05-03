@@ -10,7 +10,7 @@ namespace Assets.Scripts.InputSystem
     public class PlayerMovement : MonoBehaviour
     {
         
-        [SerializeField] Camera mainCam;
+        [SerializeField] public Camera mainCam;
         [SerializeField] GameObject weapon;
 
         public GameObject[] weapons;

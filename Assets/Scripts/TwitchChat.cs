@@ -51,7 +51,7 @@ public class TwitchChat : MonoBehaviour
     }
     void Start()
     {
-        phploader php = this.GetComponent<phploader>();
+        //phploader php = this.GetComponent<phploader>();
         //twitchID = php.twitchID;
         chatBox.SetActive(false);
         IRC = this.GetComponent<TwitchIRC>();

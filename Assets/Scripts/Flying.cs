@@ -11,6 +11,7 @@ public class Flying : MonoBehaviour
     
     void Start()
     {
+        player = GameObject.Find("Player");
         transform.position = player.transform.position;
         PositionChange();
     }
