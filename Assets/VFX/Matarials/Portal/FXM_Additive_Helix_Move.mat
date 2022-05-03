@@ -1,0 +1,43 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!21 &2100000
+Material:
+  serializedVersion: 6
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: FXM_Additive_Helix_Move
+  m_Shader: {fileID: 4800000, guid: bd02a0e711cca6249b42472a2ec5f594, type: 3}
+  m_ShaderKeywords: _CUSTOM_ON_ON _KEYWORD0_ON
+  m_LightmapFlags: 0
+  m_EnableInstancingVariants: 0
+  m_DoubleSidedGI: 0
+  m_CustomRenderQueue: -1
+  stringTagMap: {}
+  disabledShaderPasses: []
+  m_SavedProperties:
+    serializedVersion: 3
+    m_TexEnvs:
+    - _FXT_Helix_Arrow:
+        m_Texture: {fileID: 2800000, guid: 38454b5285704764cbf393d08b99df4f, type: 3}
+        m_Scale: {x: -1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _tex4coord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    - _texcoord:
+        m_Texture: {fileID: 0}
+        m_Scale: {x: 1, y: 1}
+        m_Offset: {x: 0, y: 0}
+    m_Floats:
+    - _Arrow_Ins: 2.25
+    - _Arrow_Pow: 1.31
+    - _Custom_ON: 1
+    - _Custom_On: 1
+    - _Helix_Move: 1.14
+    - _Keyword0: 1
+    - __dirty: 0
+    m_Colors:
+    - _Tint_Color: {r: 1.6627451, g: 1.3333334, b: 0.41568628, a: 0}

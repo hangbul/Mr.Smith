@@ -1,0 +1,10 @@
+fileFormatVersion: 2
+guid: bd02a0e711cca6249b42472a2ec5f594
+ShaderImporter:
+  externalObjects: {}
+  defaultTextures:
+  - _FXT_Helix_Arrow: {fileID: 2800000, guid: 38454b5285704764cbf393d08b99df4f, type: 3}
+  nonModifiableTextures: []
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 
