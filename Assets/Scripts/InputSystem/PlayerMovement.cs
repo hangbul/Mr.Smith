@@ -10,7 +10,7 @@ namespace Assets.Scripts.InputSystem
     public class PlayerMovement : MonoBehaviour
     {
         
-        [SerializeField] Camera mainCam;
+        [SerializeField] public Camera mainCam;
         [SerializeField] GameObject weapon;
 
         public GameObject[] weapons;
@@ -50,7 +50,7 @@ namespace Assets.Scripts.InputSystem
         private float posY;
 
         private PlayerInfo _playerInfo;
-        
+
         private void Awake()
         {
             moveVec = Vector3.zero;
@@ -255,8 +255,20 @@ namespace Assets.Scripts.InputSystem
                             if (player.curAmmo > player.maxAmmo)
                                 player.curAmmo = player.maxAmmo;
                             break;
+                        case Item.Type.Key:
+                            player.hasKey = true;
+                            break;
                     }
                     Destroy(nearObj.gameObject);
+                }
+                else if (nearObj.CompareTag("Door"))
+                {
+                    PlayerInfo player = GetComponent<PlayerInfo>();
+                    if (player.hasKey)
+                    {
+                        Door door = nearObj.GetComponent<Door>();
+                        door.OpenDoor();
+                    }
                 }
             }
 
@@ -282,6 +294,11 @@ namespace Assets.Scripts.InputSystem
                 inter_Active = true;
             }
             else if (other.CompareTag("Items"))
+            {
+                nearObj = other.gameObject;
+                inter_Active = true;
+            }
+            else if (other.CompareTag("Door"))
             {
                 nearObj = other.gameObject;
                 inter_Active = true;
