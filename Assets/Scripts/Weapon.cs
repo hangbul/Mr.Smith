@@ -2,8 +2,6 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Playables;
-using UnityEngine.Timeline;
 
 public class Weapon : MonoBehaviour
 {
@@ -15,8 +13,7 @@ public class Weapon : MonoBehaviour
     public float rate;
     public BoxCollider meleeArea;
     //public TrailRenderer traileEffect;
-    public PlayableDirector playableDirector;
-    public TimelineAsset Sword_Timeline;
+
     public GameObject bullet;
     public Transform bulletPos;
 
@@ -52,8 +49,6 @@ public class Weapon : MonoBehaviour
 
         yield return new WaitForSeconds(0.3f);
         //traileEffect.enabled = false;
-        
-        playableDirector.Play(Sword_Timeline);
         
     }
 
