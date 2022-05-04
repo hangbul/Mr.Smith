@@ -10,7 +10,7 @@ public class Chest : MonoBehaviour
  
     public GameObject[] items;
     public bool isActive = false;
-    private int itemCount = 0;
+    public int itemCount = 0;
     private SphereCollider collider;
 
     private void Awake()
@@ -30,20 +30,21 @@ public class Chest : MonoBehaviour
     
     private void dropItems()
     {
-        if (isActive && itemCount<5)
+        if (itemCount > 5)
         {
-            if (itemCount > 5)
-            {
-                isActive = false;
-                collider.isTrigger = false;
-                return;
-            }
-
+            Destroy(this.gameObject,3f);
+            return;
+        }
+        
+        if (isActive && itemCount<=5)
+        {
             new WaitForSeconds(0.3f);
             int randomItems = Random.Range(0, 4);
             Instantiate(items[randomItems], transform.position + new Vector3(0, 2, 0), Quaternion.identity);
             itemCount++;
         }
     }
+
+  
     
 }
