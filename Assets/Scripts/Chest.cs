@@ -44,7 +44,4 @@ public class Chest : MonoBehaviour
             itemCount++;
         }
     }
-
-  
-    
 }

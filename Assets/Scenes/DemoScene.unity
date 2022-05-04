@@ -2004,8 +2004,8 @@ MonoBehaviour:
   - {fileID: 2072265368}
   - {fileID: 1133267371}
   waitTime: 3
-  spawnedBoss: 0
-  boss: {fileID: 1898445321837384, guid: 09e14c596e782a742829f1166838514d, type: 3}
+  spawnedBoss: 1
+  boss: {fileID: 0}
 --- !u!4 &1119980088
 Transform:
   m_ObjectHideFlags: 0
@@ -2675,8 +2675,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 4796163783569389831, guid: be768f452a571ab40b6fe31f6aefaafa,
         type: 3}
+      propertyPath: m_UseGravity
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4796163783569389831, guid: be768f452a571ab40b6fe31f6aefaafa,
+        type: 3}
       propertyPath: m_Constraints
       value: 116
+      objectReference: {fileID: 0}
+    - target: {fileID: 4796163783569389831, guid: be768f452a571ab40b6fe31f6aefaafa,
+        type: 3}
+      propertyPath: m_IsKinematic
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8054296359287255298, guid: be768f452a571ab40b6fe31f6aefaafa,
         type: 3}
@@ -2691,7 +2701,7 @@ PrefabInstance:
     - target: {fileID: 8054296359287255298, guid: be768f452a571ab40b6fe31f6aefaafa,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: 1.300003
+      value: 1.55
       objectReference: {fileID: 0}
     - target: {fileID: 8054296359287255298, guid: be768f452a571ab40b6fe31f6aefaafa,
         type: 3}
