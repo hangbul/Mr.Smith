@@ -3093,6 +3093,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2369245278072330954, guid: b06e878908dac2d499ebc4b5ca51e0f1,
         type: 3}
+      propertyPath: curAmmo
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 2369245278072330954, guid: b06e878908dac2d499ebc4b5ca51e0f1,
+        type: 3}
       propertyPath: maxGold
       value: 9999
       objectReference: {fileID: 0}
@@ -3175,6 +3180,16 @@ PrefabInstance:
         type: 3}
       propertyPath: damage
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7874855662994104602, guid: b06e878908dac2d499ebc4b5ca51e0f1,
+        type: 3}
+      propertyPath: curAmmo
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 7874855662994104602, guid: b06e878908dac2d499ebc4b5ca51e0f1,
+        type: 3}
+      propertyPath: maxAmmo
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 7874855662994104602, guid: b06e878908dac2d499ebc4b5ca51e0f1,
         type: 3}

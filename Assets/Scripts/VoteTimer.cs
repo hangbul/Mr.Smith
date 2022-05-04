@@ -21,32 +21,7 @@ public class VoteTimer : MonoBehaviour
         if (LimitTime <= 0)
         {
             //투표 종료시 들어갈 타입별 이벤트 
-            if (votetype == VoteType.Normal)
-            {
-                if (vote1 > vote2)
-                {
-                    for (int i = 0; i < roomList.rooms.Count; i++)
-                    {
-                        GameObject SpawnPoint = roomList.rooms[i].transform.Find("EenmySpawnPoint").gameObject;
-                        SpawnPoint.GetComponent<SpawnOBJ>().Spawn();
-                    }
-                }
-                
-            }
-            else if (votetype == VoteType.Normal2)
-            {
-                if (vote1 > vote2)
-                {
-                    for (int i = 0; i < roomList.rooms.Count; i++)
-                    {
-                        GameObject SpawnPoint = roomList.rooms[i].transform.Find("EenmySpawnPoint").gameObject;
-                        SpawnPoint.GetComponent<SpawnOBJ>().Spawn();
-                    }
-                }
-                
-            }
-
-            Destroy(gameObject);
+            Destroy(this);
         }
     }
 
