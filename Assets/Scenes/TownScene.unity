@@ -3076,6 +3076,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 631580346347928147, guid: b06e878908dac2d499ebc4b5ca51e0f1,
+        type: 3}
+      propertyPath: m_TagString
+      value: MeleeWeapon
+      objectReference: {fileID: 0}
     - target: {fileID: 631580346347928151, guid: b06e878908dac2d499ebc4b5ca51e0f1,
         type: 3}
       propertyPath: playerInfo
@@ -3165,6 +3170,11 @@ PrefabInstance:
         type: 3}
       propertyPath: idx
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 7874855662994104602, guid: b06e878908dac2d499ebc4b5ca51e0f1,
+        type: 3}
+      propertyPath: damage
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 7874855662994104602, guid: b06e878908dac2d499ebc4b5ca51e0f1,
         type: 3}
