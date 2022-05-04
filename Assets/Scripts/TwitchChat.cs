@@ -6,7 +6,7 @@ using System.Collections.Generic;
 public class TwitchChat : MonoBehaviour
 {
     public GameObject chatBox;
-    
+    public Font font;
     private TwitchIRC IRC;
     private GameObject go;
     private UnityEngine.UI.Text text;
@@ -41,7 +41,7 @@ public class TwitchChat : MonoBehaviour
         text.text = msgString;
         //text.color = Color.black;
         text.fontSize = 20;
-        text.font = Resources.GetBuiltinResource(typeof(Font), "DungGeunMo.ttf") as Font;
+        text.font = font;
     }
 
     Color ColorFromUsername(string username)

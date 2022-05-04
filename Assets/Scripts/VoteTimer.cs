@@ -11,7 +11,9 @@ public class VoteTimer : MonoBehaviour
     public TMP_Text vote_T1, vote_T2, vote_T3;
     public int vote1, vote2, vote3;
     public VoteType votetype;
-    
+    public RoomTemplates roomList;
+
+
     void Update()
     {
         LimitTime -= Time.deltaTime;
@@ -19,7 +21,7 @@ public class VoteTimer : MonoBehaviour
         if (LimitTime <= 0)
         {
             //투표 종료시 들어갈 타입별 이벤트 
-            Destroy(gameObject);
+            Destroy(this);
         }
     }
 
@@ -46,12 +48,13 @@ public class VoteTimer : MonoBehaviour
         }
     }
    
-    void Start()
+    void Awake()
     {
         vote1 = 0;
         vote2 = 0;
         vote3 = 0;
         IRC = GameObject.Find("TwitchIRC").GetComponent<TwitchIRC>();
+        roomList = GameObject.Find("Room Templates").GetComponent<RoomTemplates>();
         IRC.messageRecievedEvent.AddListener(OnChatMsgRecieved);
     }
 
