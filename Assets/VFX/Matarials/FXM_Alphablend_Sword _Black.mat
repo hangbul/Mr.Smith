@@ -51,14 +51,15 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
     - _Diss_UPanner: 0
     - _Diss_VPanner: 0
     - _Dissolve: 1
     - _Emi_Ins: 1
     - _Emi_Offset: -0.215
-    - _Main_Ins: 2.23
-    - _Main_Pow: 2.45
+    - _Main_Ins: 2.15
+    - _Main_Pow: 2.28
     - _Main_UPanner: 0.19
     - _Main_VPanner: 0.06
     - _Noise_UPanner: 0.11
@@ -71,3 +72,4 @@ Material:
     m_Colors:
     - _Emi_Color: {r: 0, g: 0, b: 0, a: 0}
     - _Tint_Color: {r: 0, g: 0, b: 0, a: 0}
+  m_BuildTextureStacks: []
