@@ -6,12 +6,13 @@ using TMPro;
 public class VoteTimer : MonoBehaviour
 {
     private TwitchIRC IRC;
+    private EventManager _eventManager;
     public TMP_Text text_timer;
     public float LimitTime;
     public TMP_Text vote_T1, vote_T2, vote_T3;
     public int vote1, vote2, vote3;
     public VoteType votetype;
-    public RoomTemplates roomList;
+    
 
 
     void Update()
@@ -20,8 +21,9 @@ public class VoteTimer : MonoBehaviour
         text_timer.text = "시간 : " + Mathf.Round(LimitTime);
         if (LimitTime <= 0)
         {
+            _eventManager.Spawn();
             //투표 종료시 들어갈 타입별 이벤트 
-            Destroy(this);
+            Destroy(this.gameObject);
         }
     }
 
@@ -50,11 +52,11 @@ public class VoteTimer : MonoBehaviour
    
     void Awake()
     {
+        _eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
         vote1 = 0;
         vote2 = 0;
         vote3 = 0;
         IRC = GameObject.Find("TwitchIRC").GetComponent<TwitchIRC>();
-        roomList = GameObject.Find("Room Templates").GetComponent<RoomTemplates>();
         IRC.messageRecievedEvent.AddListener(OnChatMsgRecieved);
     }
 
