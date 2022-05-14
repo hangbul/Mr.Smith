@@ -40,6 +40,9 @@ public class Enemy_Rt : MonoBehaviour
 
     public GameObject[] items;
     public BoxCollider meleeArea;
+    
+    public GameObject bullet;
+    public Transform bulletPos;
 
     private Rigidbody rigid;
     private BoxCollider collider;
@@ -153,7 +156,12 @@ public class Enemy_Rt : MonoBehaviour
             while (_enemyState == EnemyState.Attack)
             {  
                 anim.SetTrigger("isAttack");
-                yield return new WaitForSeconds(1.2f);
+                yield return new WaitForSeconds(1f);
+                
+                GameObject instantBullet = Instantiate(bullet, bulletPos.position, bulletPos.rotation);
+                Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
+                bulletRigid.velocity = bulletPos.forward * 20;
+                
                 _enemyState = EnemyState.Idle;
 
             }
