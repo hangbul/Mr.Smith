@@ -26,13 +26,11 @@ namespace Assets.Scripts.InputSystem
         private CharacterController _characterController;
         private PlayerInfo P_info;
         private Vector2 _playerInput;
-        private Vector2 MousePos;
         
         private Vector3 moveVec;
         private Vector3 dodgeVec;
         private Vector3 forward;
 
-        private bool mouseLDown;
         private bool isDodge = false;
         private bool isSwap = false;
         private bool isReload =false;
@@ -56,45 +54,32 @@ namespace Assets.Scripts.InputSystem
             moveVec = Vector3.zero;
             anim = GetComponentInChildren<Animator>();
             _characterController = GetComponent<CharacterController>();
-            mouseLDown = false;
             _playerInfo = GetComponent<PlayerInfo>();
         }
 
         void Update()
         {
-            
+
             if (keyInput)
             {
                 moveVec = new Vector3(_playerInput.x, 0, _playerInput.y);
             }
+
             forward = moveVec;
-            if(!isDodge && keyInput)
+            if (!isDodge && keyInput)
                 _characterController.Move(forward * speed * Time.deltaTime);
-            else if(isDodge)
+            else if (isDodge)
                 _characterController.Move(dodgeVec * speed * Time.deltaTime);
-            if (mouseLDown)
+
+            var from = transform.rotation;
+            var to = Quaternion.LookRotation(forward);
+            if (!isDodge && keyInput)
+                transform.rotation = Quaternion.Lerp(from, to, Time.deltaTime * rotationSpeed);
+            else if (isDodge)
             {
-                Ray ray = mainCam.ScreenPointToRay(MousePos);
-                RaycastHit hit;
-                if(Physics.Raycast(ray, out hit, 15))
-                {
-                    Vector3 next = hit.point - transform.position;
-                    var from = transform.rotation;
-                    var to =  Quaternion.LookRotation(new Vector3(next.x, 0, next.z));
-                    transform.rotation = Quaternion.Lerp(from,to, Time.deltaTime * rotationSpeed);
-                }
+                transform.rotation = Quaternion.LookRotation(dodgeVec);
             }
-            else
-            {
-                var from = transform.rotation;
-                var to = Quaternion.LookRotation(forward);
-                if(!isDodge && keyInput)
-                    transform.rotation = Quaternion.Lerp(from,to, Time.deltaTime * rotationSpeed);
-                else if(isDodge)
-                {
-                    transform.rotation = Quaternion.LookRotation(dodgeVec);
-                }
-            }
+
         }
 
         public void OnMove(InputAction.CallbackContext callback)
@@ -202,25 +187,6 @@ namespace Assets.Scripts.InputSystem
         {
             speed = 5.0f;
             isDodge = false;
-        }
-        public void GetMousePosition(InputAction.CallbackContext callback)
-        {
-            MousePos = callback.ReadValue<Vector2>();
-        }
-
-        public void OnAim(InputAction.CallbackContext callback)
-        {
-            switch (callback.phase)
-            {
-                case InputActionPhase.Started:
-                    mouseLDown = true;
-                    break;
-                case InputActionPhase.Canceled:
-                    mouseLDown = false;
-                    break;
-                
-            }
-
         }
         public void OnInteraction(InputAction.CallbackContext callback)
         {
