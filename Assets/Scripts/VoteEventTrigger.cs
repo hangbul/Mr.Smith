@@ -22,7 +22,7 @@ public class VoteEventTrigger : MonoBehaviour
             }
             else if (EM.voteCount == 0)
             {
-                canvas.transform.GetChild(3).gameObject.SetActive(true);
+                canvas.transform.GetChild(3).gameObject.SetActive(false);
             }
 
             EM.CreateVote();

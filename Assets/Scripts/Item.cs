@@ -11,6 +11,7 @@ public class Item : MonoBehaviour
         Weapon,
         Ammo,
         Key,
+        Relic
     };
 
     private float rotateSpeed = 40.0f;
