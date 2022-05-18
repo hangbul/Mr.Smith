@@ -101,7 +101,17 @@ public class Enemy : MonoBehaviour
 
     IEnumerator OnDamage(Vector3 reactVec)
     {
-        mat.color = Color.red;
+        Weapon weapon = GetComponent<Weapon>();
+        
+        if(weapon.playerElement == PlayerElement.None)
+            mat.color = Color.red;
+        else if(weapon.playerElement == PlayerElement.Fire)
+            mat.color = Color.yellow;
+        else if(weapon.playerElement == PlayerElement.Ice)
+            mat.color = Color.blue;
+        else if(weapon.playerElement == PlayerElement.Lightning)
+            mat.color = Color.cyan;
+        
         yield return new WaitForSeconds(0.1f);
 
         if (curHealth > 0)
