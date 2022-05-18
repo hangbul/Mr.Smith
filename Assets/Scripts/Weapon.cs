@@ -19,16 +19,19 @@ public class Weapon : MonoBehaviour
 
     public int maxAmmo;
     public int curAmmo;
-    
+
+    public PlayerElement playerElement;
 
     public void Use()
     {
         damage = playerInfo.AttackPoint;
+        playerElement = GetComponent<PlayerInfo>().playerElement;
         if (type == WeapneType.Melee)
         {
             StopCoroutine("Swing");
             StartCoroutine("Swing");
-        }else if (type == WeapneType.Missile)
+        }
+        else if (type == WeapneType.Missile)
         {
             if (curAmmo > 0)
             {

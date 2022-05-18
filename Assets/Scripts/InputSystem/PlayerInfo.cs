@@ -21,6 +21,8 @@ public class PlayerInfo : MonoBehaviour
 
     public int AttackPoint = 10;
 
+    public PlayerElement playerElement = PlayerElement.None;
+    
     private SkinnedMeshRenderer _meshRenderer;
     private bool isDamage = false;
 
