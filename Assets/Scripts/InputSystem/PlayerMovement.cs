@@ -9,14 +9,14 @@ namespace Assets.Scripts.InputSystem
 {
     public class PlayerMovement : MonoBehaviour
     {
-        
+
         [SerializeField] public Camera mainCam;
         [SerializeField] GameObject weapon;
 
         public GameObject[] weapons;
         public Weapon equipweapons;
-        
-        
+
+
         public bool[] inx_weapons;
         int idx = -1;
 
@@ -26,19 +26,19 @@ namespace Assets.Scripts.InputSystem
         private CharacterController _characterController;
         private PlayerInfo P_info;
         private Vector2 _playerInput;
-        
+
         private Vector3 moveVec;
         private Vector3 dodgeVec;
         private Vector3 forward;
 
         private bool isDodge = false;
         private bool isSwap = false;
-        private bool isReload =false;
-        
+        private bool isReload = false;
+
         private bool isATKReady;
         private bool inter_Active = false;
-        
-        private int weaponSlot =0;
+
+        private int weaponSlot = 0;
         public float speed = 5.0f;
         private float rotationSpeed = 15.0f;
         private float ATKDelay;
@@ -102,19 +102,19 @@ namespace Assets.Scripts.InputSystem
                 return;
             fireDelay += Time.deltaTime;
             isFireReady = equipweapons.rate < fireDelay;
-            
+
             if (equipweapons.type == WeapneType.Missile && equipweapons.curAmmo == 0)
                 return;
 
             if (isFireReady && !isDodge && !isSwap && !isReload)
             {
                 equipweapons.Use();
-                
-                if(equipweapons.type == WeapneType.Melee)
+
+                if (equipweapons.type == WeapneType.Melee)
                     anim.SetTrigger("doSwing");
-                else if(equipweapons.type == WeapneType.Missile)
+                else if (equipweapons.type == WeapneType.Missile)
                     anim.SetTrigger("doShot");
-                
+
                 fireDelay = 0;
             }
 
@@ -122,7 +122,7 @@ namespace Assets.Scripts.InputSystem
 
         public void Swap(InputAction.CallbackContext callback)
         {
-           
+
             idx += 1;
             if (idx > inx_weapons.Length)
                 idx = -1;
@@ -134,31 +134,31 @@ namespace Assets.Scripts.InputSystem
                         equipweapons.gameObject.SetActive(false);
                     equipweapons = weapons[idx].GetComponent<Weapon>();
                     equipweapons.gameObject.SetActive(true);
-                    
+
                     anim.SetTrigger("doSwap");
                     isSwap = true;
-                    Invoke("SwapOut",0.4f);
+                    Invoke("SwapOut", 0.4f);
                 }
             }
         }
-        
+
         void SwapOut()
         {
             isSwap = false;
         }
-        
+
         public void OnReload(InputAction.CallbackContext callback)
         {
             if (equipweapons == null)
                 return;
-        
-            if(equipweapons.type == WeapneType.Melee)
+
+            if (equipweapons.type == WeapneType.Melee)
                 return;
 
             if (_playerInfo.curAmmo == 0)
                 return;
 
-            if  (!isSwap && isFireReady && !isDodge)
+            if (!isSwap && isFireReady && !isDodge)
             {
                 anim.SetTrigger("doReload");
                 isReload = true;
@@ -174,7 +174,7 @@ namespace Assets.Scripts.InputSystem
             _playerInfo.curAmmo -= reAmmo;
             isReload = false;
         }
-        
+
         public void OnDodge(InputAction.CallbackContext callback)
         {
             speed = 10.0f;
@@ -183,6 +183,7 @@ namespace Assets.Scripts.InputSystem
             dodgeVec = moveVec;
             Invoke("DodgeOut", 0.5f);
         }
+
         public void DodgeOut()
         {
             speed = 5.0f;
@@ -190,7 +191,7 @@ namespace Assets.Scripts.InputSystem
         }
         public void OnInteraction(InputAction.CallbackContext callback)
         {
-            if (nearObj != null && inter_Active && !isDodge)
+            if (callback.performed && nearObj != null && inter_Active && !isDodge)
             {
                 if (nearObj.CompareTag("Weapon"))
                 {
@@ -224,6 +225,18 @@ namespace Assets.Scripts.InputSystem
                         case Item.Type.Key:
                             player.hasKey = true;
                             break;
+                        case Item.Type.Relic:
+                            EventManager EM = GameObject.Find("EventManager").GetComponent<EventManager>();
+                            GameObject canvas = GameObject.Find("Canvas");
+
+                            if (EM.voteCount == 0)
+                            {
+                                canvas.transform.GetChild(3).gameObject.SetActive(true);
+                            }
+                            new WaitForSeconds(1.0f);
+
+                            EM.CreateVote();
+                            break;
                     }
                     Destroy(nearObj.gameObject);
                 }
@@ -235,21 +248,6 @@ namespace Assets.Scripts.InputSystem
                         Door door = nearObj.GetComponent<Door>();
                         door.OpenDoor();
                     }
-                }
-                else if (nearObj.CompareTag("Relic"))
-                {
-                    EventManager EM = GameObject.Find("EventManager").GetComponent<EventManager>();
-                    if (EM.voteCount != 0)
-                    {
-                        //canvas.transform.GetChild(3).gameObject.SetActive(true);
-                    }
-                    else if (EM.voteCount == 0)
-                    {
-                        //canvas.transform.GetChild(3).gameObject.SetActive(false);
-                    }
-
-                    EM.CreateVote();
-                    Destroy(this);
                 }
             }
 

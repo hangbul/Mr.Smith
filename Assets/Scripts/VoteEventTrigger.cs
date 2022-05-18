@@ -16,14 +16,12 @@ public class VoteEventTrigger : MonoBehaviour
     { 
         if (other.transform.tag == "Player")
         {
-            if (EM.voteCount != 0)
+            
+            if (EM.voteCount == 0)
             {
                 canvas.transform.GetChild(3).gameObject.SetActive(true);
             }
-            else if (EM.voteCount == 0)
-            {
-                canvas.transform.GetChild(3).gameObject.SetActive(false);
-            }
+            
 
             EM.CreateVote();
             Destroy(this);

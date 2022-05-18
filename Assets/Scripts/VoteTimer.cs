@@ -23,6 +23,11 @@ public class VoteTimer : MonoBehaviour
         {
             _eventManager.Spawn();
             //투표 종료시 들어갈 타입별 이벤트 
+            if (_eventManager.voteCount == 0)
+            {
+                GameObject canvas = GameObject.Find("Canvas");
+                canvas.transform.GetChild(3).gameObject.SetActive(false);
+            }
             Destroy(this.gameObject);
         }
     }
