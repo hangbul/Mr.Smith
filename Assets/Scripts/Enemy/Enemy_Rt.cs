@@ -44,7 +44,6 @@ public class Enemy_Rt : MonoBehaviour
     public GameObject bullet;
     public Transform bulletPos;
 
-    private Rigidbody rigid;
     private BoxCollider collider;
     private Material mat;
 
@@ -55,7 +54,6 @@ public class Enemy_Rt : MonoBehaviour
         maxHealth = 30;
         curHealth = maxHealth;
 
-        rigid = GetComponent<Rigidbody>();
         collider = GetComponent<BoxCollider>();
         //mat = GetComponentInChildren<MeshRenderer>().material;
     }
@@ -110,15 +108,15 @@ public class Enemy_Rt : MonoBehaviour
 
     IEnumerator OnDamage(Vector3 reactVec)
     {
-        Weapon weapon = GetComponent<Weapon>();
+        PlayerInfo player = GetComponent<PlayerInfo>();
         
-        if(weapon.playerElement == PlayerElement.None)
+        if(player.playerElement == PlayerElement.None)
             mat.color = Color.red;
-        else if(weapon.playerElement == PlayerElement.Fire)
+        else if(player.playerElement == PlayerElement.Fire)
             mat.color = Color.yellow;
-        else if(weapon.playerElement == PlayerElement.Ice)
+        else if(player.playerElement == PlayerElement.Ice)
             mat.color = Color.blue;
-        else if(weapon.playerElement == PlayerElement.Lightning)
+        else if(player.playerElement == PlayerElement.Lightning)
             mat.color = Color.cyan;
         
         yield return new WaitForSeconds(0.1f);
@@ -126,17 +124,12 @@ public class Enemy_Rt : MonoBehaviour
         if (curHealth > 0)
         {
             mat.color = Color.white;
-            reactVec += Vector3.up;
-            rigid.AddForce(reactVec * 200,ForceMode.Impulse);
         }
         else
         {
             mat.color = Color.gray;
             gameObject.layer = 9;
-
-            reactVec += Vector3.up;
-            rigid.AddForce(reactVec * 200,ForceMode.Impulse);
-         
+            
             Destroy(gameObject,0.7f);
         }
     }
@@ -179,7 +172,7 @@ public class Enemy_Rt : MonoBehaviour
             {
                 if(_deadAnimationTimer > deadAnimationTime)
                 {
-                    rigid.AddForce(-transform.forward * 200,ForceMode.Impulse);
+                   
                     anim.SetTrigger("doDie");
                     Destroy(gameObject);
                 }

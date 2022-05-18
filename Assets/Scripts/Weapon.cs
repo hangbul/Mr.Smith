@@ -19,13 +19,12 @@ public class Weapon : MonoBehaviour
 
     public int maxAmmo;
     public int curAmmo;
-
-    public PlayerElement playerElement;
+    
 
     public void Use()
     {
         damage = playerInfo.AttackPoint;
-        playerElement = GetComponent<PlayerInfo>().playerElement;
+        
         if (type == WeapneType.Melee)
         {
             StopCoroutine("Swing");
