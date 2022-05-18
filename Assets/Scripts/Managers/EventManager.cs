@@ -19,8 +19,9 @@ public class EventManager : MonoBehaviour
 
     public GameObject SpawnPoint;
     public GameObject GameObjects;
-    
     private GameObject player;
+    public RoomTemplates roomList;
+
     void Start()
     {
         voteCount = 0;
@@ -88,5 +89,16 @@ public class EventManager : MonoBehaviour
 
         go.transform.SetParent(VoteView.transform);
         go.transform.localScale = new Vector3(0.6f, 0.6f, 0);
+    }
+    public void Spawn()
+    {
+        foreach (var room in roomList.rooms)
+        {
+            if (room.transform.GetChild(0).tag == "SpawnOBJPoint")
+            {
+                room.transform.GetChild(0).GetComponent<SpawnOBJ>().Spawn();
+            }
+        }
+        
     }
 }

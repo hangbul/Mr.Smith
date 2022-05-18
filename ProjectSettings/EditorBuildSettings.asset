@@ -15,6 +15,9 @@ EditorBuildSettings:
     path: Assets/Scenes/AuctionScene.unity
     guid: 757727509cc47014a90579796a18b41d
   - enabled: 1
+    path: Assets/Scenes/VoteScene.unity
+    guid: ed54297928335084793746ee81d26cbb
+  - enabled: 1
     path: Assets/Scenes/DemoScene.unity
     guid: c5a5534b9f6ae3946bdb1196b8709ace
   - enabled: 1
