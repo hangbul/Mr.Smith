@@ -11,6 +11,7 @@ public class Chest : MonoBehaviour
     public GameObject[] items;
     public bool isActive = false;
     public int itemCount = 0;
+    public int maxCount = 6;
     private SphereCollider collider;
 
     private void Awake()
@@ -30,13 +31,13 @@ public class Chest : MonoBehaviour
     
     private void dropItems()
     {
-        if (itemCount > 5)
+        if (itemCount > maxCount)
         {
             Destroy(this.gameObject,3f);
             return;
         }
         
-        if (isActive && itemCount<=5)
+        if (isActive && itemCount<=maxCount)
         {
             new WaitForSeconds(0.3f);
             int randomItems = Random.Range(0, 4);
