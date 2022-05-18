@@ -58,7 +58,8 @@ public class TownManager : MonoBehaviour
         
         DontDestroyOnLoad(player);
         //SceneManager.LoadScene("GameScene"); 
-        SceneManager.LoadScene("DemoScene"); 
+        //SceneManager.LoadScene("DemoScene"); 
+        SceneManager.LoadScene("VoteScene"); 
     }
 
 
