@@ -3091,6 +3091,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: Player
       objectReference: {fileID: 0}
+    - target: {fileID: 2369245278072330953, guid: b06e878908dac2d499ebc4b5ca51e0f1,
+        type: 3}
+      propertyPath: m_Constraints
+      value: 84
+      objectReference: {fileID: 0}
     - target: {fileID: 2369245278072330954, guid: b06e878908dac2d499ebc4b5ca51e0f1,
         type: 3}
       propertyPath: curAmmo
@@ -3156,6 +3161,11 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2369245278072330957, guid: b06e878908dac2d499ebc4b5ca51e0f1,
+        type: 3}
+      propertyPath: m_StepOffset
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2369245278072330958, guid: b06e878908dac2d499ebc4b5ca51e0f1,
         type: 3}
       propertyPath: weapons.Array.data[0]
@@ -3166,10 +3176,20 @@ PrefabInstance:
       propertyPath: weapons.Array.data[1]
       value: 
       objectReference: {fileID: 1961300843}
+    - target: {fileID: 2369245278072330959, guid: b06e878908dac2d499ebc4b5ca51e0f1,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[2].m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2369245278072330959, guid: b06e878908dac2d499ebc4b5ca51e0f1,
+        type: 3}
+      propertyPath: m_ActionEvents.Array.data[3].m_PersistentCalls.m_Calls.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 4523592298384563066, guid: b06e878908dac2d499ebc4b5ca51e0f1,
         type: 3}
       propertyPath: m_RootOrder
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7874855662994104602, guid: b06e878908dac2d499ebc4b5ca51e0f1,
         type: 3}

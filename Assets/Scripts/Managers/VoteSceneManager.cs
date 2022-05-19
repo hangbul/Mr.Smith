@@ -44,8 +44,9 @@ public class VoteSceneManager : MonoBehaviour
         {
             case 0:
             case 2:
-                SceneManager.LoadScene("DemoScene");
-                //SceneManager.LoadScene("GameScene");
+//                SceneManager.LoadScene("DemoScene");
+                SceneManager.LoadScene("GameScene");
+
                 break;
             case 1:
             case 3:
@@ -53,7 +54,8 @@ public class VoteSceneManager : MonoBehaviour
                 SceneManager.LoadScene("OneRoomScene");
                 break;
             default:
-                SceneManager.LoadScene("DemoScene");
+                SceneManager.LoadScene("GameScene");
+                //SceneManager.LoadScene("DemoScene");
                 break;
         }
     }
