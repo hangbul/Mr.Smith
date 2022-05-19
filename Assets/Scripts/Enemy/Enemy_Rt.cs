@@ -189,9 +189,9 @@ public class Enemy_Rt : MonoBehaviour
     }
 
     IEnumerator dropItems()
-    {
-        yield return new WaitForSeconds(0.77f);
+    { 
         int randomitems = Random.Range(0, 3);
+        yield return new WaitForSeconds(1.99f);
         Instantiate(items[randomitems], transform.position+new Vector3(0,2,0), Quaternion.identity);
     }
    
