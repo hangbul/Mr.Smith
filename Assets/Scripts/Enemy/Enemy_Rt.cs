@@ -8,6 +8,7 @@ using UnityEngine.AI;
 using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
 
+[Serializable]
 public class Enemy_Rt : MonoBehaviour
 {
     [SerializeField] private EnenyStateUI stateTextPrefab;

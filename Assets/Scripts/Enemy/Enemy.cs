@@ -6,6 +6,7 @@ using Assets.Scripts.InputSystem;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
+[Serializable]
 
 public class Enemy : MonoBehaviour
 {

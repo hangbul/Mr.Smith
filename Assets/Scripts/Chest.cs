@@ -40,7 +40,7 @@ public class Chest : MonoBehaviour
         if (isActive && itemCount<=maxCount)
         {
             new WaitForSeconds(0.3f);
-            int randomItems = Random.Range(0, 4);
+            int randomItems = Random.Range(0, maxCount);
             Instantiate(items[randomItems], transform.position + new Vector3(0, 2, 0), Quaternion.identity);
             itemCount++;
         }

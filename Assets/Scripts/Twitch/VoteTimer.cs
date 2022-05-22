@@ -1,12 +1,15 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
+[Serializable]
 public class VoteTimer : MonoBehaviour
 {
     private TwitchIRC IRC;
     private EventManager _eventManager;
+    
     public TMP_Text text_timer;
     public float LimitTime;
     public TMP_Text vote_T1, vote_T2, vote_T3;
