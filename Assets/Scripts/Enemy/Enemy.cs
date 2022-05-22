@@ -100,7 +100,7 @@ public class Enemy : MonoBehaviour
 
     IEnumerator OnDamage(Vector3 reactVec)
     {
-        PlayerInfo player = GetComponent<PlayerInfo>();
+        PlayerInfo player = GameObject.FindWithTag("Player").GetComponent<PlayerInfo>();
         
         if(player.playerElement == PlayerElement.None)
             mat.color = Color.red;
@@ -257,8 +257,8 @@ public class Enemy : MonoBehaviour
 
     IEnumerator dropItems()
     {
-        yield return new WaitForSeconds(0.77f);
         int randomitems = Random.Range(0, 3);
+        yield return new WaitForSeconds(1.99f);
         Instantiate(items[randomitems], transform.position+new Vector3(0,2,0), Quaternion.identity);
     }
    

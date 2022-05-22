@@ -9,7 +9,7 @@ public class Bullet : MonoBehaviour
 
     private void Awake()
     {
-        damage = GetComponent<PlayerInfo>().AttackPoint;
+        damage = GameObject.FindWithTag("Player").GetComponent<PlayerInfo>().AttackPoint;
     }
 
     private void OnCollisionEnter(Collision collision)

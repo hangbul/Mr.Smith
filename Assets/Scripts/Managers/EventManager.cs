@@ -62,6 +62,7 @@ public class EventManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F2))
         {
+            // Follow Offst Y축 수정 = 기존 15------------------------
             GameObject camera = Camera.main.gameObject;
             if (!debug_TopCam)
             {
@@ -75,6 +76,7 @@ public class EventManager : MonoBehaviour
                 camera.GetComponent<Follow>().height = 8;
                 debug_TopCam = false;
             }
+            //-------------------------
         }
         if (Input.GetKeyDown(KeyCode.F3))
         {
