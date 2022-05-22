@@ -108,7 +108,7 @@ public class Enemy_Rt : MonoBehaviour
 
     IEnumerator OnDamage(Vector3 reactVec)
     {
-        PlayerInfo player = GetComponent<PlayerInfo>();
+        PlayerInfo player = GameObject.FindWithTag("Player").GetComponent<PlayerInfo>();
         
         if(player.playerElement == PlayerElement.None)
             mat.color = Color.red;
