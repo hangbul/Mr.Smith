@@ -20,7 +20,7 @@ public class VoteSceneManager : MonoBehaviour
     
     private List<int> settingStagePoints;
 
-    private float LimitTimer = 30;
+    private float LimitTimer = 5;
     
     public GameObject player;
     
@@ -40,10 +40,24 @@ public class VoteSceneManager : MonoBehaviour
     {
         //DontDestroyOnLoad(player);
         int idx = settingStagePoints.IndexOf(settingStagePoints.Max());
-        if(idx > 0)
-            SceneManager.LoadScene("DemoScene"); 
-        else
-            SceneManager.LoadScene("GameScene");
+        switch (idx)
+        {
+            case 0:
+            case 2:
+//                SceneManager.LoadScene("DemoScene");
+                SceneManager.LoadScene("GameScene");
+
+                break;
+            case 1:
+            case 3:
+            case 4:
+                SceneManager.LoadScene("OneRoomScene");
+                break;
+            default:
+                SceneManager.LoadScene("GameScene");
+                //SceneManager.LoadScene("DemoScene");
+                break;
+        }
     }
 
     public void GoAutionScene()

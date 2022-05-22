@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -5,6 +6,11 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public int damage;
+
+    private void Awake()
+    {
+        damage = GameObject.FindWithTag("Player").GetComponent<PlayerInfo>().AttackPoint;
+    }
 
     private void OnCollisionEnter(Collision collision)
     {

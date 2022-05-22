@@ -40,7 +40,6 @@ public class Enemy : MonoBehaviour
     public GameObject[] items;
     public BoxCollider meleeArea;
 
-    private Rigidbody rigid;
     private BoxCollider collider;
     private Material mat;
     
@@ -51,7 +50,6 @@ public class Enemy : MonoBehaviour
         maxHealth = 30;
         curHealth = maxHealth;
 
-        rigid = GetComponent<Rigidbody>();
         collider = GetComponent<BoxCollider>();
         mat = GetComponentInChildren<MeshRenderer>().material;
     }
@@ -101,23 +99,29 @@ public class Enemy : MonoBehaviour
 
     IEnumerator OnDamage(Vector3 reactVec)
     {
-        mat.color = Color.red;
+        PlayerInfo player = GameObject.FindWithTag("Player").GetComponent<PlayerInfo>();
+        
+        if(player.playerElement == PlayerElement.None)
+            mat.color = Color.red;
+        else if(player.playerElement == PlayerElement.Fire)
+            mat.color = Color.yellow;
+        else if(player.playerElement == PlayerElement.Ice)
+            mat.color = Color.blue;
+        else if(player.playerElement == PlayerElement.Lightning)
+            mat.color = Color.cyan;
+
+        
         yield return new WaitForSeconds(0.1f);
 
         if (curHealth > 0)
         {
             mat.color = Color.white;
-            reactVec += Vector3.up;
-            rigid.AddForce(reactVec * 200,ForceMode.Impulse);
         }
         else
         {
             mat.color = Color.gray;
             gameObject.layer = 9;
 
-            reactVec += Vector3.up;
-            rigid.AddForce(reactVec * 200,ForceMode.Impulse);
-         
             Destroy(gameObject,0.7f);
         }
     }
@@ -234,7 +238,7 @@ public class Enemy : MonoBehaviour
                
                 if(_deadAnimationTimer > deadAnimationTime)
                 {
-                    rigid.AddForce(-transform.forward * 200,ForceMode.Impulse);
+                  
                     anim.SetTrigger("doDie");
                     Destroy(gameObject);
                 }
@@ -252,8 +256,8 @@ public class Enemy : MonoBehaviour
 
     IEnumerator dropItems()
     {
-        yield return new WaitForSeconds(0.77f);
         int randomitems = Random.Range(0, 3);
+        yield return new WaitForSeconds(1.99f);
         Instantiate(items[randomitems], transform.position+new Vector3(0,2,0), Quaternion.identity);
     }
    

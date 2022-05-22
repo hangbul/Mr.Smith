@@ -21,9 +21,13 @@ public class PlayerInfo : MonoBehaviour
 
     public int AttackPoint = 10;
 
+    public PlayerElement playerElement = PlayerElement.None;
+    
     private SkinnedMeshRenderer _meshRenderer;
     private bool isDamage = false;
 
+    public bool debug_godMode = false;
+    
     public int playerStatusPoint = 10;
     void Start()
     {
@@ -48,20 +52,23 @@ public class PlayerInfo : MonoBehaviour
         }
     }
 
-   IEnumerator OnDamage()
-   {
-       isDamage = true;
-       _meshRenderer.material.color = Color.red;
-       
-       healthbar.SetHealth(curHealth);
-       isPlayerDead();
+    IEnumerator OnDamage()
+    {
+        if (!debug_godMode)
+        {
+            isDamage = true;
+            _meshRenderer.material.color = Color.red;
 
-       yield return new WaitForSeconds(1f);
-       _meshRenderer.material.color = Color.white;
-       isDamage = false;
-   }
+            healthbar.SetHealth(curHealth);
+            isPlayerDead();
 
-   public void isPlayerDead()
+            yield return new WaitForSeconds(1f);
+            _meshRenderer.material.color = Color.white;
+            isDamage = false;
+        }
+    }
+
+    public void isPlayerDead()
     {
         if (curHealth <= 0)
         {

@@ -19,9 +19,14 @@ public class EventManager : MonoBehaviour
 
     public GameObject SpawnPoint;
     public GameObject GameObjects;
-    private GameObject player;
+    public GameObject player;
     public RoomTemplates roomList;
 
+    private bool debug_TopCam = false;
+    private bool debug_godMode = false;
+
+    private static GameObject instance;
+    
     void Start()
     {
         voteCount = 0;
@@ -41,13 +46,52 @@ public class EventManager : MonoBehaviour
             MenuPanel.SetActive(true);
         }
 
-    
-    /*
-    if (Time.frameCount % 540 == 0 && voteCount < 3)
-    {
-        CreateVote();
-    }
-     */
+        //Debug
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            if (!debug_godMode)
+            {
+                player.GetComponent<PlayerInfo>().debug_godMode = true;
+            }
+            else
+            {
+                player.GetComponent<PlayerInfo>().debug_godMode = false;
+            }
+            debug_godMode = !debug_godMode;
+        }
+
+        if (Input.GetKeyDown(KeyCode.F2))
+        {
+            // GameObject camera = Camera.main.gameObject;
+            // if (!debug_TopCam)
+            // {
+            //     camera.GetComponent<Follow>().dist = 100;
+            //     camera.GetComponent<Follow>().height = 100;
+            //     debug_TopCam = true;
+            // }
+            // else
+            // {
+            //     camera.GetComponent<Follow>().dist = 10;
+            //     camera.GetComponent<Follow>().height = 8;
+            //     debug_TopCam = false;
+            // }
+        }
+        if (Input.GetKeyDown(KeyCode.F3))
+        {
+            //수정 필요
+            SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        }
+        if (Input.GetKeyDown(KeyCode.F4))
+        {
+            //수정 필요
+            SceneManager.LoadScene("TownScene");
+        }
+        /*
+        if (Time.frameCount % 540 == 0 && voteCount < 3)
+        {
+            CreateVote();
+        }
+         */
 
     }
 

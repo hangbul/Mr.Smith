@@ -24,11 +24,13 @@ public class Weapon : MonoBehaviour
     public void Use()
     {
         damage = playerInfo.AttackPoint;
+        
         if (type == WeapneType.Melee)
         {
             StopCoroutine("Swing");
             StartCoroutine("Swing");
-        }else if (type == WeapneType.Missile)
+        }
+        else if (type == WeapneType.Missile)
         {
             if (curAmmo > 0)
             {
