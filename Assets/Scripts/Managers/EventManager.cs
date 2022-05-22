@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using Assets.Scripts.InputSystem;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 using Random = UnityEngine.Random;
@@ -16,11 +17,13 @@ public class EventManager : MonoBehaviour
     public VoteTypeDataBase VoteContents;
     
     public int voteCount;
+    public CinemachineVirtualCamera CVcam;
 
     public GameObject SpawnPoint;
     public GameObject GameObjects;
     public GameObject player;
     public RoomTemplates roomList;
+    public CinemachineVirtualCamera virCam = null;
 
     private bool debug_TopCam = false;
     private bool debug_godMode = false;
@@ -47,7 +50,7 @@ public class EventManager : MonoBehaviour
         }
 
         //Debug
-        if (Input.GetKeyDown(KeyCode.F1))
+        else if (Input.GetKeyDown(KeyCode.F1))
         {
             if (!debug_godMode)
             {
@@ -59,42 +62,35 @@ public class EventManager : MonoBehaviour
             }
             debug_godMode = !debug_godMode;
         }
-
-        if (Input.GetKeyDown(KeyCode.F2))
+        else if (Input.GetKeyDown(KeyCode.F2))
         {
-            // GameObject camera = Camera.main.gameObject;
-            // if (!debug_TopCam)
-            // {
-            //     camera.GetComponent<Follow>().dist = 100;
-            //     camera.GetComponent<Follow>().height = 100;
-            //     debug_TopCam = true;
-            // }
-            // else
-            // {
-            //     camera.GetComponent<Follow>().dist = 10;
-            //     camera.GetComponent<Follow>().height = 8;
-            //     debug_TopCam = false;
-            // }
+            OnChangePriorty();
         }
-        if (Input.GetKeyDown(KeyCode.F3))
+        else if (Input.GetKeyDown(KeyCode.F3))
         {
             //수정 필요
             SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
         }
-        if (Input.GetKeyDown(KeyCode.F4))
+        else if (Input.GetKeyDown(KeyCode.F4))
         {
             //수정 필요
             SceneManager.LoadScene("TownScene");
         }
-        /*
-        if (Time.frameCount % 540 == 0 && voteCount < 3)
-        {
-            CreateVote();
-        }
-         */
 
     }
 
+    public void OnChangePriorty()
+    {
+        if (virCam.Priority == 9)
+        {
+            virCam.Priority = 11;
+        }
+
+        else
+        {
+            virCam.Priority = 9;
+        }
+    }
     public void ResumeGame()
     {
         Time.timeScale = 1;

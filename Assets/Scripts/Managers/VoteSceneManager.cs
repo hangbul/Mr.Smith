@@ -2,13 +2,9 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
-using System.Collections;
-using System.Collections.Generic;
 using System.Linq;
 using Assets.Scripts.InputSystem;
 using TMPro;
-using UnityEngine;
 using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
@@ -44,8 +40,8 @@ public class VoteSceneManager : MonoBehaviour
         {
             case 0:
             case 2:
-//                SceneManager.LoadScene("DemoScene");
-                SceneManager.LoadScene("GameScene");
+                SceneManager.LoadScene("DemoScene");
+//                SceneManager.LoadScene("GameScene");
 
                 break;
             case 1:
