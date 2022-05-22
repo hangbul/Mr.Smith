@@ -62,19 +62,19 @@ public class EventManager : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.F2))
         {
-            GameObject camera = Camera.main.gameObject;
-            if (!debug_TopCam)
-            {
-                camera.GetComponent<Follow>().dist = 100;
-                camera.GetComponent<Follow>().height = 100;
-                debug_TopCam = true;
-            }
-            else
-            {
-                camera.GetComponent<Follow>().dist = 10;
-                camera.GetComponent<Follow>().height = 8;
-                debug_TopCam = false;
-            }
+            // GameObject camera = Camera.main.gameObject;
+            // if (!debug_TopCam)
+            // {
+            //     camera.GetComponent<Follow>().dist = 100;
+            //     camera.GetComponent<Follow>().height = 100;
+            //     debug_TopCam = true;
+            // }
+            // else
+            // {
+            //     camera.GetComponent<Follow>().dist = 10;
+            //     camera.GetComponent<Follow>().height = 8;
+            //     debug_TopCam = false;
+            // }
         }
         if (Input.GetKeyDown(KeyCode.F3))
         {
