@@ -17,7 +17,6 @@ public class EventManager : MonoBehaviour
     public VoteTypeDataBase VoteContents;
     
     public int voteCount;
-    public CinemachineVirtualCamera CVcam;
 
     public GameObject SpawnPoint;
     public GameObject GameObjects;
@@ -118,23 +117,34 @@ public class EventManager : MonoBehaviour
     {
         int rand = Random.Range(0, VoteContents.voteDatas.Count);
         GameObject go = Instantiate(VoteContents.voteDatas[rand].votePrefab);
-        VoteType type = go.GetComponent<VoteTimer>().votetype;
+        go.GetComponent<VoteTimer>().votetype = VoteContents.voteDatas[rand].voteType;
         go.GetComponent<VoteTimer>().vote_T1.text = VoteContents.voteDatas[rand].text1;
         go.GetComponent<VoteTimer>().vote_T2.text = VoteContents.voteDatas[rand].text2;
-        if(type == VoteType.Normal2)
+        if(go.GetComponent<VoteTimer>().votetype  == VoteType.Weather)
             go.GetComponent<VoteTimer>().vote_T3.text = VoteContents.voteDatas[rand].text3;
         go.GetComponent<VoteTimer>().LimitTime = VoteContents.voteDatas[rand].lifeTime;
 
         go.transform.SetParent(VoteView.transform);
         go.transform.localScale = new Vector3(0.6f, 0.6f, 0);
     }
-    public void Spawn()
+    public void Spawn_Rt()
     {
         foreach (var room in roomList.rooms)
         {
             if (room.transform.GetChild(0).tag == "SpawnOBJPoint")
             {
-                room.transform.GetChild(0).GetComponent<SpawnOBJ>().Spawn();
+                room.transform.GetChild(0).GetComponent<SpawnOBJ>().Spawn_Rt();
+            }
+        }
+        
+    }
+    public void Spawn_Mv()
+    {
+        foreach (var room in roomList.rooms)
+        {
+            if (room.transform.GetChild(0).tag == "SpawnOBJPoint")
+            {
+                room.transform.GetChild(0).GetComponent<SpawnOBJ>().Spawn_Mv();
             }
         }
         

@@ -1,5 +1,6 @@
 public enum VoteType
 {
-    Normal, 
-    Normal2
+    Spawn, 
+    Weather,
+    Normal
 }

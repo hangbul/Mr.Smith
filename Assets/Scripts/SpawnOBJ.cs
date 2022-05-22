@@ -5,14 +5,19 @@ using UnityEngine;
 public class SpawnOBJ : MonoBehaviour
 {
     private RoomTemplates _roomTemplates;
-    public GameObject TargetObj;
+    public List<GameObject> TargetObj;
     
     // Start is called before the first frame update
    
 
-    public void Spawn()
+    public void Spawn_Mv()
     {
-        GameObject enemy = Instantiate(TargetObj, new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z), Quaternion.identity);
+        GameObject enemy = Instantiate(TargetObj[0], new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z), Quaternion.identity);
+        Destroy(this);
+    }
+    public void Spawn_Rt()
+    {
+        GameObject enemy = Instantiate(TargetObj[1], new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z), Quaternion.identity);
         Destroy(this);
     }
 }

@@ -16,30 +16,33 @@ MonoBehaviour:
   - questSpriteimage: {fileID: 0}
     votePrefab: {fileID: 2376976987447939220, guid: 5e500cb5382e31849943e5bebdb5d4b1,
       type: 3}
-    voteName: nnn
+    voteName: "\uBAAC\uC2A4\uD130 \uC2A4\uD3F0"
+    voteType: 0
     voteDescription: two-choice
-    text1: Apple
-    text2: Banana
+    text1: "\uC774\uB3D9\uD615"
+    text2: "\uACE0\uC815\uD615"
     text3: 
     ID: 0
     lifeTime: 10
   - questSpriteimage: {fileID: 0}
     votePrefab: {fileID: 6604300095323499909, guid: 5920b39dd690b11479de6642c84e238e,
       type: 3}
-    voteName: aaa
+    voteName: "\uB0A0\uC528 \uBCC0\uD654"
+    voteType: 1
     voteDescription: three-choice
-    text1: Dog
-    text2: Cat
-    text3: Bird
+    text1: "\uB9D1\uC74C"
+    text2: "\uBE44"
+    text3: "\uB208"
     ID: 1
     lifeTime: 20
   - questSpriteimage: {fileID: 0}
     votePrefab: {fileID: 2376976987447939220, guid: 5e500cb5382e31849943e5bebdb5d4b1,
       type: 3}
-    voteName: ccc
+    voteName: "\uBBF8\uC815"
+    voteType: 2
     voteDescription: two-choice
-    text1: Small
-    text2: Large
+    text1: "\uC801\uAC8C"
+    text2: "\uB9CE\uC774"
     text3: 
     ID: 2
     lifeTime: 15

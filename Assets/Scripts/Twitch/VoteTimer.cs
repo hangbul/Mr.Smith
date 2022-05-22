@@ -24,8 +24,14 @@ public class VoteTimer : MonoBehaviour
         text_timer.text = "시간 : " + Mathf.Round(LimitTime);
         if (LimitTime <= 0)
         {
-            _eventManager.Spawn();
             //투표 종료시 들어갈 타입별 이벤트 
+            if (votetype == VoteType.Spawn)
+            {
+                if(vote1 > vote2)
+                    _eventManager.Spawn_Mv();
+                else
+                    _eventManager.Spawn_Rt();
+            }
             if (_eventManager.voteCount == 0)
             {
                 GameObject canvas = GameObject.Find("Canvas");
@@ -49,7 +55,7 @@ public class VoteTimer : MonoBehaviour
             vote2++;
         }
 
-        if (votetype == VoteType.Normal2)
+        if (votetype == VoteType.Weather)
         {
             if (msgString == "!" + vote_T3.text)
             {
