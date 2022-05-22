@@ -6,7 +6,6 @@ using UnityEngine;
 public class Follow : MonoBehaviour
 {
     private CinemachineVirtualCamera cam;
-   
     void Awake()
     {
         cam = GetComponent<CinemachineVirtualCamera>();
@@ -14,4 +13,5 @@ public class Follow : MonoBehaviour
         cam.Follow = playerTransform;
         cam.LookAt = playerTransform;
     }
+    
 }

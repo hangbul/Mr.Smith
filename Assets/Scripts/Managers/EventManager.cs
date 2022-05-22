@@ -81,14 +81,14 @@ public class EventManager : MonoBehaviour
 
     public void OnChangePriorty()
     {
-        if (virCam.Priority == 9)
+        if (virCam.Priority == 8)
         {
-            virCam.Priority = 11;
+            virCam.Priority = 13;
         }
 
         else
         {
-            virCam.Priority = 9;
+            virCam.Priority = 8;
         }
     }
     public void ResumeGame()
@@ -116,8 +116,6 @@ public class EventManager : MonoBehaviour
 
     public void CreateVote()
     {
-        
-        
         int rand = Random.Range(0, VoteContents.voteDatas.Count);
         GameObject go = Instantiate(VoteContents.voteDatas[rand].votePrefab);
         VoteType type = go.GetComponent<VoteTimer>().votetype;
