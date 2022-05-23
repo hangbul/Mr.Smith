@@ -11,18 +11,18 @@ public class MCMvcam : MonoBehaviour
     void Awake()
     {
         cam = GetComponent<CinemachineVirtualCamera>();
-        Transform target = GameObject.FindWithTag("Player").transform;
-        dir = target.position - transform.position;
 
     }
     void Update()
     {
+        Transform target = GameObject.FindWithTag("Player").transform;
+        dir = target.position - transform.position + new Vector3(0,0.7f,0);
         Debug.DrawRay(transform.position, dir.normalized * 50, Color.red);
         if (Physics.Raycast(transform.position, dir.normalized, out hit))
         {
             Debug.Log(hit.collider.tag);
             
-            if(hit.collider.tag == "Player")
+            if(hit.collider.tag != "Rooms" && hit.collider.tag != "Centry Room")
             {
                 if (cam.Priority == 7)
                     cam.Priority = 10;
