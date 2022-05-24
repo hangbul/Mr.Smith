@@ -7,7 +7,7 @@ using RenderSettings = UnityEngine.RenderSettings;
 public class DAYnNIGHT : MonoBehaviour
 {
     [SerializeField] public float sPerTime;
-    private bool inNight = false;
+    public bool inNight = false;
     
     [SerializeField] private float nightFogDensity;
     private float dayFogDensity;

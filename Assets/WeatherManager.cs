@@ -102,6 +102,7 @@ public class WeatherManager : MonoBehaviour
         if (currWeather != weather.isSunny)
         {
             DnN.sPerTime = 200.0f;
+            
             changeTime = 10.0f;
             _emissionModule.enabled = false;
             _emissionModule.rate = 0;
@@ -114,7 +115,10 @@ public class WeatherManager : MonoBehaviour
         if (currWeather == weather.isSunny)
         {
             changeTime = 10.0f;
-            DnN.sPerTime = 100.0f;
+            if (!DnN.inNight)
+            {
+                DnN.sPerTime = 100.0f;
+            }
             DnN.maxlight = 10.0f;
         }
 
