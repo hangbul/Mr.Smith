@@ -23,12 +23,25 @@ public class EventManager : MonoBehaviour
     public GameObject player;
     public RoomTemplates roomList;
     public CinemachineVirtualCamera virCam = null;
-    public bool isNight = false;
+    
+    public bool isNight = false;    //밤낮여부
+    public enum varWeather
+    {
+        isRaining,
+        isSnowing,
+        isSunny
+    }
+    private varWeather currWeather = varWeather.isSunny;
+
+    public GameObject weather;
     public DAYnNIGHT DnN;
     private bool debug_TopCam = false;
     private bool debug_godMode = false;
+    private int debug_count = 0;
     private static GameObject instance;
-    
+
+    public WeatherManager WM;
+
     void Start()
     {
         voteCount = 0;
@@ -83,6 +96,17 @@ public class EventManager : MonoBehaviour
             else
                 DnN.sPerTime = 5;
         }
+        else if (Input.GetKeyDown(KeyCode.F6))
+        {
+            debug_count++;
+            if (debug_count > 3)
+                debug_count = 0;
+            ChageWeather(debug_count);
+     
+        }
+
+
+        
     }
 
     public void OnChangePriorty()
@@ -160,6 +184,34 @@ public class EventManager : MonoBehaviour
                 room.transform.GetChild(0).GetComponent<SpawnOBJ>().Spawn_Mv();
             }
         }
-        
+    }
+
+    public void ChageWeather(int idx)
+    {
+        switch (idx)
+        {
+            case 0:
+                if (currWeather != varWeather.isSunny)
+                {
+                    WM.wNowClaer();
+                    currWeather = varWeather.isSunny;
+                }
+                break;
+            case 1:
+                if (currWeather != varWeather.isRaining)
+                {
+                    WM.wRainingNow();
+                    currWeather = varWeather.isRaining;
+                }
+                break;
+            case 2:
+            default:
+                if (currWeather != varWeather.isSnowing)
+                {
+                    WM.wSnowingNow();
+                    currWeather = varWeather.isSnowing;
+                }
+                break;
+        }
     }
 }

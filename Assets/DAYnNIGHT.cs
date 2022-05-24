@@ -13,11 +13,11 @@ public class DAYnNIGHT : MonoBehaviour
     private float dayFogDensity;
 
     [SerializeField] private float fogDensityScale;
-    private float maxFogDensity = 0.05f;
+    public float maxFogDensity = 0.05f;
     public float currentFogDensity;
 
     [SerializeField] private float lightIntensityScale;
-    [SerializeField] private float maxlight;
+    [SerializeField] public float maxlight;
     public Light fairy;
     private EventManager _eventManager;
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 using TMPro;
 
@@ -13,10 +14,8 @@ public class VoteTimer : MonoBehaviour
     public TMP_Text text_timer;
     public float LimitTime;
     public TMP_Text vote_T1, vote_T2, vote_T3;
-    public int vote1, vote2, vote3;
+    public List<int> votes;
     public VoteType votetype;
-    
-
 
     void Update()
     {
@@ -27,10 +26,15 @@ public class VoteTimer : MonoBehaviour
             //투표 종료시 들어갈 타입별 이벤트 
             if (votetype == VoteType.Spawn)
             {
-                if(vote1 > vote2)
+                if(votes[0] > votes[1])
                     _eventManager.Spawn_Mv();
                 else
                     _eventManager.Spawn_Rt();
+            }
+            else if (votetype == VoteType.Weather)
+            {
+                int idx = votes.IndexOf(votes.Max());
+                _eventManager.ChageWeather(idx);
             }
             if (_eventManager.voteCount == 1)
             {
@@ -53,28 +57,26 @@ public class VoteTimer : MonoBehaviour
         
         if (msgString == "!" + vote_T1.text)
         {
-            vote1++;
+            votes[0]++;
         }
         if (msgString == "!" + vote_T2.text)
         {
-            vote2++;
+            votes[1]++;
         }
 
         if (votetype == VoteType.Weather)
         {
             if (msgString == "!" + vote_T3.text)
             {
-                vote3++;
+                votes[2]++;
             }
         }
     }
    
     void Awake()
     {
+        votes = new List<int>{0,0,0};
         _eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
-        vote1 = 0;
-        vote2 = 0;
-        vote3 = 0;
         IRC = GameObject.Find("TwitchIRC").GetComponent<TwitchIRC>();
         IRC.messageRecievedEvent.AddListener(OnChatMsgRecieved);
     }
