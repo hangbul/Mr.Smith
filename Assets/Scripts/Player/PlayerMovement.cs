@@ -98,26 +98,28 @@ namespace Assets.Scripts.InputSystem
 
         public void OnAttack(InputAction.CallbackContext callback)
         {
-            if (equipweapons == null)
-                return;
-            fireDelay += Time.deltaTime;
-            isFireReady = equipweapons.rate < fireDelay;
-
-            if (equipweapons.type == WeapneType.Missile && equipweapons.curAmmo == 0)
-                return;
-
-            if (isFireReady && !isDodge && !isSwap && !isReload)
+            if (callback.performed)
             {
-                equipweapons.Use();
+                if (equipweapons == null)
+                    return;
+                fireDelay += Time.deltaTime;
+                isFireReady = equipweapons.rate < fireDelay;
 
-                if (equipweapons.type == WeapneType.Melee)
-                    anim.SetTrigger("doSwing");
-                else if (equipweapons.type == WeapneType.Missile)
-                    anim.SetTrigger("doShot");
+                if (equipweapons.type == WeapneType.Missile && equipweapons.curAmmo == 0)
+                    return;
 
-                fireDelay = 0;
+                if (isFireReady && !isDodge && !isSwap && !isReload)
+                {
+                    equipweapons.Use();
+
+                    if (equipweapons.type == WeapneType.Melee)
+                        anim.SetTrigger("doSwing");
+                    else if (equipweapons.type == WeapneType.Missile)
+                        anim.SetTrigger("doShot");
+
+                    fireDelay = 0;
+                }
             }
-
         }
 
         public void Swap(InputAction.CallbackContext callback)
