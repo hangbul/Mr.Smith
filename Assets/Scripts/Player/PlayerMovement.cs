@@ -43,6 +43,7 @@ namespace Assets.Scripts.InputSystem
         private float rotationSpeed = 15.0f;
         private float ATKDelay;
         private Animator anim;
+        
 
         private GameObject nearObj;
         private float posY;
