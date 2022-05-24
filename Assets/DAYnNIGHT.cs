@@ -13,7 +13,8 @@ public class DAYnNIGHT : MonoBehaviour
     private float dayFogDensity;
 
     [SerializeField] private float fogDensityScale;
-    private float currentFogDensity;
+    private float maxFogDensity = 0.05f;
+    public float currentFogDensity;
 
     [SerializeField] private float lightIntensityScale;
     public Light fairy;
@@ -34,7 +35,7 @@ public class DAYnNIGHT : MonoBehaviour
 
         if (inNight)
         {
-            if (currentFogDensity <= nightFogDensity)
+            if (currentFogDensity <= nightFogDensity && currentFogDensity <= maxFogDensity)
             {
                 currentFogDensity += 0.1f * fogDensityScale * Time.deltaTime;
                 RenderSettings.fogDensity = currentFogDensity;
