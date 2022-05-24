@@ -75,5 +75,18 @@ public class VoteSceneManager : MonoBehaviour
         {
             GoGameScene();
         }
+        if (Input.GetKeyDown(KeyCode.F1))
+        {
+            SceneManager.LoadScene("DemoScene");
+        }
+        else if (Input.GetKeyDown(KeyCode.F2))
+        {
+            SceneManager.LoadScene("OneRoomScene");
+        }
+        
+        else if (Input.GetKeyDown(KeyCode.F3))
+        {
+            SceneManager.LoadScene("GameScene");
+        }
     }
 }
