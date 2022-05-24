@@ -6,7 +6,7 @@ using RenderSettings = UnityEngine.RenderSettings;
 
 public class DAYnNIGHT : MonoBehaviour
 {
-    [SerializeField] private float sPerTime;
+    [SerializeField] public float sPerTime;
     private bool inNight = false;
     
     [SerializeField] private float nightFogDensity;
@@ -17,22 +17,30 @@ public class DAYnNIGHT : MonoBehaviour
     public float currentFogDensity;
 
     [SerializeField] private float lightIntensityScale;
-    private float maxlight = 0.05f;
+    [SerializeField] private float maxlight;
     public Light fairy;
+    private EventManager _eventManager;
+
     void Start()
     {
+        _eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
         dayFogDensity = RenderSettings.fogDensity;
     }
 
     void Update()
     {
-        // 계속 태양을 X 축 중심으로 회전. 현실시간 1초에  0.1f * secondPerRealTimeSecond 각도만큼 회전
         transform.Rotate(Vector3.right, 0.1f * sPerTime * Time.deltaTime);
 
         if (transform.eulerAngles.x >= 170) // x 축 회전값 170 이상이면 밤
+        {
             inNight = true;
-        else if (transform.eulerAngles.x <= 10)  // x 축 회전값 10 이하면 낮
+            _eventManager.isNight = inNight;
+        }
+        else if (transform.eulerAngles.x <= 10) // x 축 회전값 10 이하면 낮
+        {
             inNight = false;
+            _eventManager.isNight = inNight;
+        }
 
         if (inNight)
         {
@@ -41,7 +49,7 @@ public class DAYnNIGHT : MonoBehaviour
                 currentFogDensity += 0.1f * fogDensityScale * Time.deltaTime;
                 RenderSettings.fogDensity = currentFogDensity;
             }
-            if(fairy.intensity <= maxlight && currentFogDensity >= 0.03)
+            if(fairy.intensity <= maxlight)
                 fairy.intensity += 0.1f * lightIntensityScale * Time.deltaTime;
         }
         else
@@ -51,9 +59,9 @@ public class DAYnNIGHT : MonoBehaviour
                 currentFogDensity -= 0.1f * fogDensityScale * Time.deltaTime;
                 RenderSettings.fogDensity = currentFogDensity;
             }
-            if(fairy.intensity >= 1)
+            if(fairy.intensity >= 0)
                 fairy.intensity -= 0.1f * lightIntensityScale * Time.deltaTime;
         }
     }
-
+    
 }

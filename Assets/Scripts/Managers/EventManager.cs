@@ -23,15 +23,16 @@ public class EventManager : MonoBehaviour
     public GameObject player;
     public RoomTemplates roomList;
     public CinemachineVirtualCamera virCam = null;
-
+    public bool isNight = false;
+    public DAYnNIGHT DnN;
     private bool debug_TopCam = false;
     private bool debug_godMode = false;
-
     private static GameObject instance;
     
     void Start()
     {
         voteCount = 0;
+        
         player = GameObject.Find("Player");
         player.GetComponent<PlayerInfo>().healthbar = GameObject.Find("Health Bar").GetComponent<HealthBar>();
         player.GetComponent<PlayerInfo>().SetUpMaxHealth();
@@ -75,7 +76,13 @@ public class EventManager : MonoBehaviour
             //수정 필요
             SceneManager.LoadScene("TownScene");
         }
-
+        else if (Input.GetKeyDown(KeyCode.F5))
+        {
+            if(DnN.sPerTime == 5)
+                DnN.sPerTime = 50;
+            else
+                DnN.sPerTime = 5;
+        }
     }
 
     public void OnChangePriorty()
@@ -115,6 +122,7 @@ public class EventManager : MonoBehaviour
 
     public void CreateVote()
     {
+        voteCount++;
         int rand = Random.Range(0, VoteContents.voteDatas.Count);
         GameObject go = Instantiate(VoteContents.voteDatas[rand].votePrefab);
         go.GetComponent<VoteTimer>().votetype = VoteContents.voteDatas[rand].voteType;
@@ -126,6 +134,11 @@ public class EventManager : MonoBehaviour
 
         go.transform.SetParent(VoteView.transform);
         go.transform.localScale = new Vector3(0.6f, 0.6f, 0);
+    }
+
+    public void CountDown()
+    {
+        voteCount--;
     }
     public void Spawn_Rt()
     {

@@ -32,10 +32,15 @@ public class VoteTimer : MonoBehaviour
                 else
                     _eventManager.Spawn_Rt();
             }
-            if (_eventManager.voteCount == 0)
+            if (_eventManager.voteCount == 1)
             {
                 GameObject canvas = GameObject.Find("Canvas");
                 canvas.transform.GetChild(3).gameObject.SetActive(false);
+                _eventManager.CountDown();
+            }
+            else
+            {
+                _eventManager.CountDown();
             }
             Destroy(this.gameObject);
         }

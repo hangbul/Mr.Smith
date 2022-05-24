@@ -13,11 +13,9 @@ public class SpawnOBJ : MonoBehaviour
     public void Spawn_Mv()
     {
         GameObject enemy = Instantiate(TargetObj[0], new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z), Quaternion.identity);
-        Destroy(this);
     }
     public void Spawn_Rt()
     {
-        GameObject enemy = Instantiate(TargetObj[1], new Vector3(transform.position.x, transform.position.y + 1.5f, transform.position.z), Quaternion.identity);
-        Destroy(this);
+        GameObject enemy = Instantiate(TargetObj[1], new Vector3(transform.position.x, transform.position.y, transform.position.z), Quaternion.identity);
     }
 }
