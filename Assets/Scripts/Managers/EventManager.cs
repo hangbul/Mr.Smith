@@ -33,19 +33,20 @@ public class EventManager : MonoBehaviour
     }
     private varWeather currWeather = varWeather.isSunny;
 
-    public GameObject weather;
     public DAYnNIGHT DnN;
     private bool debug_TopCam = false;
     private bool debug_godMode = false;
     private int debug_count = 0;
     private static GameObject instance;
-
+    private GameObject canvas;
     public WeatherManager WM;
 
+    private GameObject[] spawnPoints;
     void Start()
     {
+        spawnPoints = GameObject.FindGameObjectsWithTag("SpawnOBJPoint");
         voteCount = 0;
-        
+        canvas = GameObject.Find("Canvas");
         player = GameObject.Find("Player");
         player.GetComponent<PlayerInfo>().healthbar = GameObject.Find("Health Bar").GetComponent<HealthBar>();
         player.GetComponent<PlayerInfo>().SetUpMaxHealth();
@@ -104,7 +105,10 @@ public class EventManager : MonoBehaviour
             ChageWeather(debug_count);
      
         }
-
+        else if (Input.GetKeyDown(KeyCode.F7))
+        {
+            CreateVote();
+        }
 
         
     }
@@ -146,6 +150,12 @@ public class EventManager : MonoBehaviour
 
     public void CreateVote()
     {
+
+        if (voteCount == 0)
+        {
+            canvas.transform.GetChild(3).gameObject.SetActive(true);
+        }
+        
         voteCount++;
         int rand = Random.Range(0, VoteContents.voteDatas.Count);
         GameObject go = Instantiate(VoteContents.voteDatas[rand].votePrefab);
@@ -163,26 +173,22 @@ public class EventManager : MonoBehaviour
     public void CountDown()
     {
         voteCount--;
+        if(voteCount <= 0)
+            canvas.transform.GetChild(3).gameObject.SetActive(false);
     }
     public void Spawn_Rt()
     {
-        foreach (var room in roomList.rooms)
+        foreach (var point in spawnPoints)
         {
-            if (room.transform.GetChild(0).tag == "SpawnOBJPoint")
-            {
-                room.transform.GetChild(0).GetComponent<SpawnOBJ>().Spawn_Rt();
-            }
+                point.GetComponent<SpawnOBJ>().Spawn_Rt();
         }
         
     }
     public void Spawn_Mv()
     {
-        foreach (var room in roomList.rooms)
+        foreach (var point in spawnPoints)
         {
-            if (room.transform.GetChild(0).tag == "SpawnOBJPoint")
-            {
-                room.transform.GetChild(0).GetComponent<SpawnOBJ>().Spawn_Mv();
-            }
+            point.GetComponent<SpawnOBJ>().Spawn_Mv();
         }
     }
 

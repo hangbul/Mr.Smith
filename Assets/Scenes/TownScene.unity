@@ -3164,7 +3164,7 @@ PrefabInstance:
     - target: {fileID: 2369245278072330957, guid: b06e878908dac2d499ebc4b5ca51e0f1,
         type: 3}
       propertyPath: m_StepOffset
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 2369245278072330958, guid: b06e878908dac2d499ebc4b5ca51e0f1,
         type: 3}

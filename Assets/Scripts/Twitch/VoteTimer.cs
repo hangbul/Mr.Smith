@@ -36,16 +36,9 @@ public class VoteTimer : MonoBehaviour
                 int idx = votes.IndexOf(votes.Max());
                 _eventManager.ChageWeather(idx);
             }
-            if (_eventManager.voteCount == 1)
-            {
-                GameObject canvas = GameObject.Find("Canvas");
-                canvas.transform.GetChild(3).gameObject.SetActive(false);
-                _eventManager.CountDown();
-            }
-            else
-            {
-                _eventManager.CountDown();
-            }
+            
+            _eventManager.CountDown();
+            
             Destroy(this.gameObject);
         }
     }

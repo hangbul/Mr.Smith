@@ -49,18 +49,21 @@ namespace Assets.Scripts.InputSystem
         private float posY;
 
         private PlayerInfo _playerInfo;
-
+        private Rigidbody _rigidbody;
         private void Awake()
         {
             moveVec = Vector3.zero;
             anim = GetComponentInChildren<Animator>();
             _characterController = GetComponent<CharacterController>();
             _playerInfo = GetComponent<PlayerInfo>();
+            _rigidbody = GetComponent<Rigidbody>();
         }
 
         void Update()
         {
-
+            _rigidbody.velocity = Vector3.zero;
+            _rigidbody.angularVelocity=Vector3.zero;    
+            
             if (keyInput)
             {
                 moveVec = new Vector3(_playerInput.x, 0, _playerInput.y);
@@ -230,12 +233,7 @@ namespace Assets.Scripts.InputSystem
                             break;
                         case Item.Type.Relic:
                             EventManager EM = GameObject.Find("EventManager").GetComponent<EventManager>();
-                            GameObject canvas = GameObject.Find("Canvas");
-
-                            if (EM.voteCount == 0)
-                            {
-                                canvas.transform.GetChild(3).gameObject.SetActive(true);
-                            }
+                            
                             new WaitForSeconds(1.0f);
 
                             EM.CreateVote();

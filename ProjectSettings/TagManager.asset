@@ -18,7 +18,6 @@ TagManager:
   - Items
   - Chest
   - EnemyBullet
-  - Key
   - Door
   - SpawnOBJPoint
   layers:
@@ -36,7 +35,7 @@ TagManager:
   - Post Processing
   - Player
   - EnemyBullet
-  - 
+  - Item
   - 
   - 
   - 
