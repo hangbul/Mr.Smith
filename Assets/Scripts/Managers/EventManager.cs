@@ -41,7 +41,7 @@ public class EventManager : MonoBehaviour
     private GameObject canvas;
     public WeatherManager WM;
 
-    private GameObject[] spawnPoints;
+    public GameObject[] spawnPoints;
     void Start()
     {
         spawnPoints = GameObject.FindGameObjectsWithTag("SpawnOBJPoint");
