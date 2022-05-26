@@ -321,17 +321,17 @@ PrefabInstance:
     - target: {fileID: 7571189727655066952, guid: 2b51011254c5d3a45b64659d27ee78f8,
         type: 3}
       propertyPath: m_LocalPosition.x
-      value: -481.74902
+      value: -477.2
       objectReference: {fileID: 0}
     - target: {fileID: 7571189727655066952, guid: 2b51011254c5d3a45b64659d27ee78f8,
         type: 3}
       propertyPath: m_LocalPosition.y
-      value: -87.5677
+      value: -87.57
       objectReference: {fileID: 0}
     - target: {fileID: 7571189727655066952, guid: 2b51011254c5d3a45b64659d27ee78f8,
         type: 3}
       propertyPath: m_LocalPosition.z
-      value: 97.1416
+      value: 93.18
       objectReference: {fileID: 0}
     - target: {fileID: 7571189727655066952, guid: 2b51011254c5d3a45b64659d27ee78f8,
         type: 3}
@@ -2317,6 +2317,7 @@ MonoBehaviour:
   isNight: 0
   DnN: {fileID: 1986059331}
   WM: {fileID: 1671760787}
+  spawnPoints: []
 --- !u!4 &1063301017
 Transform:
   m_ObjectHideFlags: 0
@@ -2542,7 +2543,7 @@ MonoBehaviour:
   - {fileID: 1133267371}
   - {fileID: 2068694724}
   waitTime: 3
-  spawnedBoss: 1
+  spawnedBoss: 0
   boss: {fileID: 0}
 --- !u!4 &1119980088
 Transform:

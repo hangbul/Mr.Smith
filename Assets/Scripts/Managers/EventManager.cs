@@ -44,7 +44,6 @@ public class EventManager : MonoBehaviour
     public GameObject[] spawnPoints;
     void Start()
     {
-        spawnPoints = GameObject.FindGameObjectsWithTag("SpawnOBJPoint");
         voteCount = 0;
         canvas = GameObject.Find("Canvas");
         player = GameObject.Find("Player");
@@ -219,5 +218,10 @@ public class EventManager : MonoBehaviour
                 }
                 break;
         }
+    }
+
+    public void GetSpawnPoint()
+    {
+        spawnPoints = GameObject.FindGameObjectsWithTag("SpawnOBJPoint");
     }
 }

@@ -2,9 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public class RoomTemplates : MonoBehaviour {
-
+public class RoomTemplates : MonoBehaviour
+{
 	
+	[SerializeField] private float waitTime;
+
 	public GameObject[] bottomRooms;
 	public GameObject[] topRooms;
 	public GameObject[] leftRooms;
@@ -14,10 +16,11 @@ public class RoomTemplates : MonoBehaviour {
 
 	public List<GameObject> rooms;
 
-	public float waitTime;
 	public bool spawnedBoss;
 	
 	public GameObject boss;
+
+
 	void Update(){
 
 		if (waitTime <= 0 && spawnedBoss == false)
@@ -31,6 +34,6 @@ public class RoomTemplates : MonoBehaviour {
 			waitTime -= Time.deltaTime;
 		}
 
-		
+
 	}
 }
