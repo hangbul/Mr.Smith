@@ -32,8 +32,8 @@ public class Boss : MonoBehaviour
 
     private bool Damaged = false;
 
-    public int curHealth;
-    public int maxHealth;
+    public float curHealth;
+    public float maxHealth;
 
     public GameObject[] items;
     public BoxCollider meleeArea;
