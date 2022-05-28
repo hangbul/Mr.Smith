@@ -224,4 +224,9 @@ public class EventManager : MonoBehaviour
     {
         spawnPoints = GameObject.FindGameObjectsWithTag("SpawnOBJPoint");
     }
+
+    public varWeather CurWeatherReturn()
+    {
+        return currWeather;
+    }
 }

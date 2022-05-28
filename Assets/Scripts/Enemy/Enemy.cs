@@ -35,14 +35,16 @@ public class Enemy : MonoBehaviour
 
     private bool Damaged = false;
 
-    public int curHealth;
-    public int maxHealth;
+    public float curHealth;
+    public float maxHealth;
 
     public GameObject[] items;
     public BoxCollider meleeArea;
 
     private BoxCollider collider;
     private Material mat;
+
+    private EventManager _eventManager;
     
     
 
@@ -53,6 +55,7 @@ public class Enemy : MonoBehaviour
 
         collider = GetComponent<BoxCollider>();
         mat = GetComponentInChildren<MeshRenderer>().material;
+        _eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
     }
 
     void Start()
@@ -69,7 +72,7 @@ public class Enemy : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void LateUpdate()
     {
         
     }
@@ -80,9 +83,62 @@ public class Enemy : MonoBehaviour
         {
             Damaged = true;
             Weapon weapon = other.GetComponent<Weapon>();
-            curHealth -= weapon.damage;
-            Vector3 reactVec = -transform.forward;
             
+            if (_eventManager.CurWeatherReturn() == EventManager.varWeather.isSunny)
+            {
+                switch (_player.GetComponent<PlayerInfo>().playerElement)
+                {
+                    case PlayerElement.None :
+                        curHealth -= weapon.damage;
+                        break;
+                    case PlayerElement.Fire:
+                        curHealth -= weapon.damage * 0.8f;
+                        break;
+                    case PlayerElement.Ice:
+                        curHealth -= weapon.damage * 1.4f;
+                        break;
+                    case PlayerElement.Lightning:
+                        curHealth -= weapon.damage * 1.2f;
+                        break;
+                }
+            }else if (_eventManager.CurWeatherReturn() == EventManager.varWeather.isRaining)
+            {
+                switch (_player.GetComponent<PlayerInfo>().playerElement)
+                {
+                    case PlayerElement.None :
+                        curHealth -= weapon.damage;
+                        break;
+                    case PlayerElement.Fire:
+                        curHealth -= weapon.damage * 0.5f;
+                        break;
+                    case PlayerElement.Ice:
+                        curHealth -= weapon.damage * 1.2f;
+                        break;
+                    case PlayerElement.Lightning:
+                        curHealth -= weapon.damage * 1.6f;
+                        break;
+                }
+            }
+            else if (_eventManager.CurWeatherReturn() == EventManager.varWeather.isSnowing)
+            {
+                switch (_player.GetComponent<PlayerInfo>().playerElement)
+                {
+                    case PlayerElement.None :
+                        curHealth -= weapon.damage;
+                        break;
+                    case PlayerElement.Fire:
+                        curHealth -= weapon.damage * 1.5f;
+                        break;
+                    case PlayerElement.Ice:
+                        curHealth -= weapon.damage * 1.2f;
+                        break;
+                    case PlayerElement.Lightning:
+                        curHealth -= weapon.damage * 1.2f;
+                        break;
+                }
+            }
+
+            Vector3 reactVec = -transform.forward;
             StartCoroutine(OnDamage(reactVec));
         }
         else if (other.tag == "bullet")
