@@ -41,7 +41,7 @@ public class Chest : MonoBehaviour
         {
             new WaitForSeconds(0.3f);
             int randomItems = Random.Range(0, maxCount);
-            Instantiate(items[randomItems], transform.position + new Vector3(0, 2, 0), Quaternion.identity);
+            Instantiate(items[randomItems], transform.position + new Vector3(0, 0.7f, 0), Quaternion.identity);
             itemCount++;
         }
     }

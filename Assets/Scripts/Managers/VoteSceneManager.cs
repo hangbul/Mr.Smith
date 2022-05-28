@@ -77,16 +77,28 @@ public class VoteSceneManager : MonoBehaviour
         }
         if (Input.GetKeyDown(KeyCode.F1))
         {
-            SceneManager.LoadScene("DemoScene");
+            //사냥
+            SceneManager.LoadScene("GameScene");
         }
         else if (Input.GetKeyDown(KeyCode.F2))
         {
-            SceneManager.LoadScene("OneRoomScene");
+            //격파
+            SceneManager.LoadScene("DefenceRoom");
         }
-        
         else if (Input.GetKeyDown(KeyCode.F3))
         {
-            SceneManager.LoadScene("GameScene");
+            //수집(데모)
+            SceneManager.LoadScene("DemoScene");
+        }
+        else if (Input.GetKeyDown(KeyCode.F4))
+        {
+            //생존
+            SceneManager.LoadScene("DefenceRoom");
+        }
+        else if (Input.GetKeyDown(KeyCode.F5))
+        {
+            //방어
+            SceneManager.LoadScene("DefenceRoom");
         }
     }
 }

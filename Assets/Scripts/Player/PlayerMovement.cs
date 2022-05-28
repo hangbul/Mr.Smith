@@ -83,7 +83,8 @@ namespace Assets.Scripts.InputSystem
             {
                 transform.rotation = Quaternion.LookRotation(dodgeVec);
             }
-
+            
+            _characterController.Move(new Vector3(0,-9.8f * Time.deltaTime,0));
         }
 
         public void OnMove(InputAction.CallbackContext callback)
