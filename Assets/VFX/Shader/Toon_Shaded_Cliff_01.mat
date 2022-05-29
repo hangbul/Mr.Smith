@@ -20,7 +20,7 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _Albedo:
-        m_Texture: {fileID: 2800000, guid: df19d2592f08c214b8c9834b8feaf508, type: 3}
+        m_Texture: {fileID: 2800000, guid: dfb7d2277bc71ec41870b4f94fe40aba, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - _Toon_Ramp:
@@ -33,8 +33,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _Distance: 3
-    - _OutLineWidth: 0.0008
+    - _Distance: 2
+    - _OutLineWidth: 0.0002
     - __dirty: 0
     m_Colors:
     - _ASEOutlineColor: {r: 0, g: 0, b: 0, a: 0}
