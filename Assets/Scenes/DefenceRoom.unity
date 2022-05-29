@@ -642,6 +642,7 @@ MonoBehaviour:
   - {fileID: 582941363}
   maxFXP_EmissionRate: 100
   emissionScale: 10
+  currWeather: 2
   changeTime: 0
 --- !u!4 &269125806
 Transform:
