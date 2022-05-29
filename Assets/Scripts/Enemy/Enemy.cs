@@ -6,6 +6,7 @@ using Assets.Scripts.InputSystem;
 using UnityEngine;
 using UnityEngine.AI;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
 [Serializable]
 
 public class Enemy : MonoBehaviour
@@ -20,6 +21,12 @@ public class Enemy : MonoBehaviour
     [SerializeField] private float sightLength = 10f;
     [SerializeField] private int maxhitPoint = 2;
 
+    public Slider m_Slider;                        
+    public Image m_FillImage;                      
+    public Color m_FullHealthColor = Color.green;  
+    public Color m_ZeroHealthColor = Color.red;  
+
+    
     public EnemyState EnemyState => _enemyState;
     private EnemyState _enemyState;
     private Vector3 currentRandomPos;
@@ -56,6 +63,12 @@ public class Enemy : MonoBehaviour
         collider = GetComponent<BoxCollider>();
         mat = GetComponentInChildren<MeshRenderer>().material;
         _eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
+    }
+
+    private void SetHealthUI()
+    {
+        m_Slider.value = curHealth;
+        m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, curHealth / maxHealth);
     }
 
     void Start()
@@ -137,7 +150,7 @@ public class Enemy : MonoBehaviour
                         break;
                 }
             }
-
+            SetHealthUI();
             Vector3 reactVec = -transform.forward;
             StartCoroutine(OnDamage(reactVec));
         }

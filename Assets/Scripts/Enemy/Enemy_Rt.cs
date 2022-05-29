@@ -5,8 +5,9 @@ using System.Security.Cryptography;
 using Assets.Scripts.InputSystem;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
+
 
 [Serializable]
 public class Enemy_Rt : MonoBehaviour
@@ -52,6 +53,12 @@ public class Enemy_Rt : MonoBehaviour
     
     private EventManager _eventManager;
     
+    public Slider m_Slider;                        
+    public Image m_FillImage;                      
+    public Color m_FullHealthColor = Color.green;  
+    public Color m_ZeroHealthColor = Color.red;  
+
+    
 
     private void Awake()
     {
@@ -63,6 +70,13 @@ public class Enemy_Rt : MonoBehaviour
         
         _eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
     }
+    
+    private void SetHealthUI()
+    {
+        m_Slider.value = curHealth;
+        m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, curHealth / maxHealth);
+    }
+
 
     void Start()
     {
@@ -151,20 +165,21 @@ public class Enemy_Rt : MonoBehaviour
                         break;
                 }
             }
-
-            else if (other.tag == "bullet")
-            {
-                Damaged = true;
-                Bullet bullet = other.GetComponent<Bullet>();
-                curHealth -= bullet.damage;
-                Vector3 reactVec = -transform.forward;
-                Destroy(other.gameObject);
-                StartCoroutine(OnDamage(reactVec));
-            }
+            SetHealthUI();
+            StartCoroutine(OnDamage());
+        }
+        else if (other.tag == "bullet")
+        {
+            Damaged = true;
+            Bullet bullet = other.GetComponent<Bullet>();
+            curHealth -= bullet.damage;
+            Vector3 reactVec = -transform.forward;
+            Destroy(other.gameObject);
+            StartCoroutine(OnDamage());
         }
     }
 
-    IEnumerator OnDamage(Vector3 reactVec)
+    IEnumerator OnDamage()
     {
         PlayerInfo player = GameObject.FindWithTag("Player").GetComponent<PlayerInfo>();
         
