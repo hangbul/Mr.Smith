@@ -12,6 +12,7 @@ public class RoomSpawner : MonoBehaviour
 	// 4 --> need right door
 
 	private GameObject _gameObject;
+	private GameObject GameObjectList;
 	private RoomTemplates templates;
 	private int rand;
 	public bool spawned = false;
@@ -22,6 +23,7 @@ public class RoomSpawner : MonoBehaviour
 	void Start(){
 		Destroy(gameObject, waitTime);
 		templates = GameObject.FindGameObjectWithTag("Rooms").GetComponent<RoomTemplates>();
+		GameObjectList = GameObject.Find("GameObjects");
 		Invoke("Spawn", 0.5f);
 	}
 
@@ -30,16 +32,20 @@ public class RoomSpawner : MonoBehaviour
 		if(spawned == false){
 			if(openingDirection == 1){
 				rand = Random.Range(0, templates.bottomRooms.Length);
-				Instantiate(templates.bottomRooms[rand], transform.position, templates.bottomRooms[rand].transform.rotation);
+				GameObject go = Instantiate(templates.bottomRooms[rand], transform.position, templates.bottomRooms[rand].transform.rotation);
+				go.transform.SetParent(GameObjectList.transform);
 			} else if(openingDirection == 2){
 				rand = Random.Range(0, templates.topRooms.Length);
-				Instantiate(templates.topRooms[rand], transform.position, templates.topRooms[rand].transform.rotation);
+				GameObject go = Instantiate(templates.topRooms[rand], transform.position, templates.topRooms[rand].transform.rotation);
+				go.transform.SetParent(GameObjectList.transform);
 			} else if(openingDirection == 3){
 				rand = Random.Range(0, templates.leftRooms.Length);
-				Instantiate(templates.leftRooms[rand], transform.position, templates.leftRooms[rand].transform.rotation);
+				GameObject go = Instantiate(templates.leftRooms[rand], transform.position, templates.leftRooms[rand].transform.rotation);
+				go.transform.SetParent(GameObjectList.transform);
 			} else if(openingDirection == 4){
 				rand = Random.Range(0, templates.rightRooms.Length);
-				Instantiate(templates.rightRooms[rand], transform.position, templates.rightRooms[rand].transform.rotation);
+				GameObject go = Instantiate(templates.rightRooms[rand], transform.position, templates.rightRooms[rand].transform.rotation);
+				go.transform.SetParent(GameObjectList.transform);
 			}
 			spawned = true;
 		}

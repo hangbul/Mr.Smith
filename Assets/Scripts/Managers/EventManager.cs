@@ -23,15 +23,29 @@ public class EventManager : MonoBehaviour
     public GameObject player;
     public RoomTemplates roomList;
     public CinemachineVirtualCamera virCam = null;
+    
+    public bool isNight = false;    //밤낮여부
+    public enum varWeather
+    {
+        isRaining,
+        isSnowing,
+        isSunny
+    }
+    private varWeather currWeather = varWeather.isSunny;
 
+    public DAYnNIGHT DnN;
     private bool debug_TopCam = false;
     private bool debug_godMode = false;
-
+    private int debug_count = 0;
     private static GameObject instance;
-    
+    private GameObject canvas;
+    public WeatherManager WM;
+
+    public GameObject[] spawnPoints;
     void Start()
     {
         voteCount = 0;
+        canvas = GameObject.Find("Canvas");
         player = GameObject.Find("Player");
         player.GetComponent<PlayerInfo>().healthbar = GameObject.Find("Health Bar").GetComponent<HealthBar>();
         player.GetComponent<PlayerInfo>().SetUpMaxHealth();
@@ -75,7 +89,27 @@ public class EventManager : MonoBehaviour
             //수정 필요
             SceneManager.LoadScene("TownScene");
         }
+        else if (Input.GetKeyDown(KeyCode.F5))
+        {
+            if(DnN.sPerTime == 5)
+                DnN.sPerTime = 50;
+            else
+                DnN.sPerTime = 5;
+        }
+        else if (Input.GetKeyDown(KeyCode.F6))
+        {
+            debug_count++;
+            if (debug_count > 3)
+                debug_count = 0;
+            ChageWeather(debug_count);
+     
+        }
+        else if (Input.GetKeyDown(KeyCode.F7))
+        {
+            CreateVote();
+        }
 
+        
     }
 
     public void OnChangePriorty()
@@ -115,6 +149,13 @@ public class EventManager : MonoBehaviour
 
     public void CreateVote()
     {
+
+        if (voteCount == 0)
+        {
+            canvas.transform.GetChild(3).gameObject.SetActive(true);
+        }
+        
+        voteCount++;
         int rand = Random.Range(0, VoteContents.voteDatas.Count);
         GameObject go = Instantiate(VoteContents.voteDatas[rand].votePrefab);
         go.GetComponent<VoteTimer>().votetype = VoteContents.voteDatas[rand].voteType;
@@ -127,26 +168,65 @@ public class EventManager : MonoBehaviour
         go.transform.SetParent(VoteView.transform);
         go.transform.localScale = new Vector3(0.6f, 0.6f, 0);
     }
+
+    public void CountDown()
+    {
+        voteCount--;
+        if(voteCount <= 0)
+            canvas.transform.GetChild(3).gameObject.SetActive(false);
+    }
     public void Spawn_Rt()
     {
-        foreach (var room in roomList.rooms)
+        foreach (var point in spawnPoints)
         {
-            if (room.transform.GetChild(0).tag == "SpawnOBJPoint")
-            {
-                room.transform.GetChild(0).GetComponent<SpawnOBJ>().Spawn_Rt();
-            }
+                point.GetComponent<SpawnOBJ>().Spawn_Rt();
         }
         
     }
     public void Spawn_Mv()
     {
-        foreach (var room in roomList.rooms)
+        foreach (var point in spawnPoints)
         {
-            if (room.transform.GetChild(0).tag == "SpawnOBJPoint")
-            {
-                room.transform.GetChild(0).GetComponent<SpawnOBJ>().Spawn_Mv();
-            }
+            point.GetComponent<SpawnOBJ>().Spawn_Mv();
         }
-        
+    }
+
+    public void ChageWeather(int idx)
+    {
+        switch (idx)
+        {
+            case 0:
+                if (currWeather != varWeather.isSunny)
+                {
+                    WM.wNowClaer();
+                    currWeather = varWeather.isSunny;
+                }
+                break;
+            case 1:
+                if (currWeather != varWeather.isRaining)
+                {
+                    WM.wRainingNow();
+                    currWeather = varWeather.isRaining;
+                }
+                break;
+            case 2:
+            default:
+                if (currWeather != varWeather.isSnowing)
+                {
+                    WM.wSnowingNow();
+                    currWeather = varWeather.isSnowing;
+                }
+                break;
+        }
+    }
+
+    public void GetSpawnPoint()
+    {
+        spawnPoints = GameObject.FindGameObjectsWithTag("SpawnOBJPoint");
+    }
+
+    public varWeather CurWeatherReturn()
+    {
+        return currWeather;
     }
 }

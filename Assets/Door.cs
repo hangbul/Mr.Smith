@@ -8,7 +8,6 @@ public class Door : MonoBehaviour
 {
     public GameObject dor;
     public float speed;
-
     private void Awake()
     {
         speed = 0f;
@@ -18,9 +17,13 @@ public class Door : MonoBehaviour
     {
         dor.transform.position = new Vector3(dor.transform.position.x, dor.transform.position.y - speed,
             dor.transform.position.z);
-        
-        if (dor.transform.position.y < -30f)
+
+        if (dor.transform.position.y < -10f)
+        {
+            BoxCollider door = dor.GetComponent<BoxCollider>();
+            door.enabled = false;
             speed = 0f;
+        }
     }
 
     public void OpenDoor()

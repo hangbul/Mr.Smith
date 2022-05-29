@@ -1,0 +1,48 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 010d65085d2c33b40bc0324c1c29d176, type: 3}
+  m_Name: VoteTypeDatabase 1
+  m_EditorClassIdentifier: 
+  voteDatas:
+  - questSpriteimage: {fileID: 0}
+    votePrefab: {fileID: 2376976987447939220, guid: 5e500cb5382e31849943e5bebdb5d4b1,
+      type: 3}
+    voteName: "\uBAAC\uC2A4\uD130 \uC2A4\uD3F0"
+    voteType: 0
+    voteDescription: two-choice
+    text1: "\uC774\uB3D9\uD615"
+    text2: "\uACE0\uC815\uD615"
+    text3: 
+    ID: 0
+    lifeTime: 10
+  - questSpriteimage: {fileID: 0}
+    votePrefab: {fileID: 6604300095323499909, guid: 5920b39dd690b11479de6642c84e238e,
+      type: 3}
+    voteName: "\uB0A0\uC528 \uBCC0\uD654"
+    voteType: 1
+    voteDescription: three-choice
+    text1: "\uB9D1\uC74C"
+    text2: "\uBE44"
+    text3: "\uB208"
+    ID: 1
+    lifeTime: 20
+  - questSpriteimage: {fileID: 0}
+    votePrefab: {fileID: 2376976987447939220, guid: 5e500cb5382e31849943e5bebdb5d4b1,
+      type: 3}
+    voteName: "\uBBF8\uC815"
+    voteType: 2
+    voteDescription: two-choice
+    text1: "\uC801\uAC8C"
+    text2: "\uB9CE\uC774"
+    text3: 
+    ID: 2
+    lifeTime: 15

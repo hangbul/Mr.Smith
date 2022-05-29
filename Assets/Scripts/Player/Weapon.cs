@@ -9,22 +9,50 @@ public class Weapon : MonoBehaviour
     public WeapneType type;
     public PlayerInfo playerInfo;
     public int idx = 0;
-    public int damage;
+    public float damage;
     public float rate;
     public BoxCollider meleeArea;
-    //public TrailRenderer traileEffect;
+    public ParticleSystem effect;
 
     public GameObject bullet;
     public Transform bulletPos;
 
     public int maxAmmo;
     public int curAmmo;
-    
+
+    private MeshRenderer _meshRenderer;
+    public Material defaultMat;
+    public Material fireMat;
+    public Material iceMat;
+    public Material lightMat;
+    private void Awake()
+    {
+        _meshRenderer = GetComponentInChildren<MeshRenderer>();
+    }
+
+    private void LateUpdate()
+    {
+        if(playerInfo.playerElement == PlayerElement.None)
+            _meshRenderer.material = defaultMat;
+        else if (playerInfo.playerElement == PlayerElement.Fire)
+            _meshRenderer.material = fireMat;
+        else if (playerInfo.playerElement == PlayerElement.Ice)
+            _meshRenderer.material = iceMat;
+        else if (playerInfo.playerElement == PlayerElement.Lightning)
+            _meshRenderer.material = lightMat;
+        
+        if(playerInfo.playerElement == PlayerElement.None)
+            damage = 10;
+        else if (playerInfo.playerElement == PlayerElement.Fire)
+            damage = 15;
+        else if (playerInfo.playerElement == PlayerElement.Ice)
+            damage = 12;
+        else if (playerInfo.playerElement == PlayerElement.Lightning)
+            damage = 13;
+    }
 
     public void Use()
     {
-        damage = playerInfo.AttackPoint;
-        
         if (type == WeapneType.Melee)
         {
             StopCoroutine("Swing");
@@ -44,10 +72,11 @@ public class Weapon : MonoBehaviour
     {
         yield return new WaitForSeconds(0.1f);
         meleeArea.enabled = true;
+        effect.Play();
         //traileEffect.enabled = true;
 
         yield return new WaitForSeconds(0.3f);
-        meleeArea.enabled = false;
+        effect.Stop();
 
         yield return new WaitForSeconds(0.3f);
         //traileEffect.enabled = false;

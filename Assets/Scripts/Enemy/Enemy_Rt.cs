@@ -5,8 +5,9 @@ using System.Security.Cryptography;
 using Assets.Scripts.InputSystem;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UIElements;
 using Random = UnityEngine.Random;
+using UnityEngine.UI;
+
 
 [Serializable]
 public class Enemy_Rt : MonoBehaviour
@@ -36,8 +37,8 @@ public class Enemy_Rt : MonoBehaviour
     private bool Damaged = false;
     private bool AimingPlayer = false;
 
-    public int curHealth;
-    public int maxHealth;
+    public float curHealth;
+    public float maxHealth;
 
     public GameObject[] items;
     public BoxCollider meleeArea;
@@ -49,6 +50,15 @@ public class Enemy_Rt : MonoBehaviour
     private Material mat;
 
     private float distance;
+    
+    private EventManager _eventManager;
+    
+    public Slider m_Slider;                        
+    public Image m_FillImage;                      
+    public Color m_FullHealthColor = Color.green;  
+    public Color m_ZeroHealthColor = Color.red;  
+
+    
 
     private void Awake()
     {
@@ -57,7 +67,16 @@ public class Enemy_Rt : MonoBehaviour
 
         collider = GetComponent<BoxCollider>();
         //mat = GetComponentInChildren<MeshRenderer>().material;
+        
+        _eventManager = GameObject.Find("EventManager").GetComponent<EventManager>();
     }
+    
+    private void SetHealthUI()
+    {
+        m_Slider.value = curHealth;
+        m_FillImage.color = Color.Lerp(m_ZeroHealthColor, m_FullHealthColor, curHealth / maxHealth);
+    }
+
 
     void Start()
     {
@@ -91,10 +110,63 @@ public class Enemy_Rt : MonoBehaviour
         {
             Damaged = true;
             Weapon weapon = other.GetComponent<Weapon>();
-            curHealth -= weapon.damage;
-            Vector3 reactVec = -transform.forward;
-            
-            StartCoroutine(OnDamage(reactVec));
+
+            if (_eventManager.CurWeatherReturn() == EventManager.varWeather.isSunny)
+            {
+                switch (_player.GetComponent<PlayerInfo>().playerElement)
+                {
+                    case PlayerElement.None:
+                        curHealth -= weapon.damage;
+                        break;
+                    case PlayerElement.Fire:
+                        curHealth -= weapon.damage * 0.8f;
+                        break;
+                    case PlayerElement.Ice:
+                        curHealth -= weapon.damage * 1.4f;
+                        break;
+                    case PlayerElement.Lightning:
+                        curHealth -= weapon.damage * 1.2f;
+                        break;
+                }
+            }
+            else if (_eventManager.CurWeatherReturn() == EventManager.varWeather.isRaining)
+            {
+                switch (_player.GetComponent<PlayerInfo>().playerElement)
+                {
+                    case PlayerElement.None:
+                        curHealth -= weapon.damage;
+                        break;
+                    case PlayerElement.Fire:
+                        curHealth -= weapon.damage * 0.5f;
+                        break;
+                    case PlayerElement.Ice:
+                        curHealth -= weapon.damage * 1.2f;
+                        break;
+                    case PlayerElement.Lightning:
+                        curHealth -= weapon.damage * 1.6f;
+                        break;
+                }
+            }
+            else if (_eventManager.CurWeatherReturn() == EventManager.varWeather.isSnowing)
+            {
+                switch (_player.GetComponent<PlayerInfo>().playerElement)
+                {
+                    case PlayerElement.None:
+                        curHealth -= weapon.damage;
+                        break;
+                    case PlayerElement.Fire:
+                        curHealth -= weapon.damage * 1.5f;
+                        break;
+                    case PlayerElement.Ice:
+                        curHealth -= weapon.damage * 1.2f;
+                        break;
+                    case PlayerElement.Lightning:
+                        curHealth -= weapon.damage * 1.2f;
+                        break;
+                }
+            }
+            SetHealthUI();
+            StartCoroutine(OnDamage());
         }
         else if (other.tag == "bullet")
         {
@@ -103,11 +175,11 @@ public class Enemy_Rt : MonoBehaviour
             curHealth -= bullet.damage;
             Vector3 reactVec = -transform.forward;
             Destroy(other.gameObject);
-            StartCoroutine(OnDamage(reactVec));
+            StartCoroutine(OnDamage());
         }
     }
 
-    IEnumerator OnDamage(Vector3 reactVec)
+    IEnumerator OnDamage()
     {
         PlayerInfo player = GameObject.FindWithTag("Player").GetComponent<PlayerInfo>();
         
@@ -157,23 +229,25 @@ public class Enemy_Rt : MonoBehaviour
 
                 yield return null;
             }
+
             while (_enemyState == EnemyState.Attack)
-            {  
+            {
                 anim.SetTrigger("isAttack");
                 yield return new WaitForSeconds(1f);
-                
+
                 GameObject instantBullet = Instantiate(bullet, bulletPos.position, bulletPos.rotation);
                 Rigidbody bulletRigid = instantBullet.GetComponent<Rigidbody>();
                 bulletRigid.velocity = bulletPos.forward * 20;
-                
+
                 _enemyState = EnemyState.Idle;
 
             }
+
             while (_enemyState == EnemyState.Dead)
             {
-                if(_deadAnimationTimer > deadAnimationTime)
+                if (_deadAnimationTimer > deadAnimationTime)
                 {
-                   
+
                     anim.SetTrigger("doDie");
                     Destroy(gameObject);
                 }
@@ -181,13 +255,15 @@ public class Enemy_Rt : MonoBehaviour
                 {
                     StartCoroutine("dropItems");
                     _deadAnimationTimer += Time.deltaTime;
-                    transform.localScale = new Vector3(1-_deadAnimationTimer, 1 - _deadAnimationTimer, 1 - _deadAnimationTimer);
+                    transform.localScale = new Vector3(1 - _deadAnimationTimer, 1 - _deadAnimationTimer,
+                        1 - _deadAnimationTimer);
                 }
+
                 yield return null;
             }
         }
-
     }
+
 
     IEnumerator dropItems()
     { 

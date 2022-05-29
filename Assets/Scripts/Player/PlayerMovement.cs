@@ -43,23 +43,27 @@ namespace Assets.Scripts.InputSystem
         private float rotationSpeed = 15.0f;
         private float ATKDelay;
         private Animator anim;
+        
 
         private GameObject nearObj;
         private float posY;
 
         private PlayerInfo _playerInfo;
-
+        private Rigidbody _rigidbody;
         private void Awake()
         {
             moveVec = Vector3.zero;
             anim = GetComponentInChildren<Animator>();
             _characterController = GetComponent<CharacterController>();
             _playerInfo = GetComponent<PlayerInfo>();
+            _rigidbody = GetComponent<Rigidbody>();
         }
 
         void Update()
         {
-
+            _rigidbody.velocity = Vector3.zero;
+            _rigidbody.angularVelocity=Vector3.zero;    
+            
             if (keyInput)
             {
                 moveVec = new Vector3(_playerInput.x, 0, _playerInput.y);
@@ -79,7 +83,8 @@ namespace Assets.Scripts.InputSystem
             {
                 transform.rotation = Quaternion.LookRotation(dodgeVec);
             }
-
+            
+            _characterController.Move(new Vector3(0,-9.8f * Time.deltaTime,0));
         }
 
         public void OnMove(InputAction.CallbackContext callback)
@@ -98,26 +103,28 @@ namespace Assets.Scripts.InputSystem
 
         public void OnAttack(InputAction.CallbackContext callback)
         {
-            if (equipweapons == null)
-                return;
-            fireDelay += Time.deltaTime;
-            isFireReady = equipweapons.rate < fireDelay;
-
-            if (equipweapons.type == WeapneType.Missile && equipweapons.curAmmo == 0)
-                return;
-
-            if (isFireReady && !isDodge && !isSwap && !isReload)
+            if (callback.performed)
             {
-                equipweapons.Use();
+                if (equipweapons == null)
+                    return;
+                fireDelay += Time.deltaTime;
+                isFireReady = equipweapons.rate < fireDelay;
 
-                if (equipweapons.type == WeapneType.Melee)
-                    anim.SetTrigger("doSwing");
-                else if (equipweapons.type == WeapneType.Missile)
-                    anim.SetTrigger("doShot");
+                if (equipweapons.type == WeapneType.Missile && equipweapons.curAmmo == 0)
+                    return;
 
-                fireDelay = 0;
+                if (isFireReady && !isDodge && !isSwap && !isReload)
+                {
+                    equipweapons.Use();
+
+                    if (equipweapons.type == WeapneType.Melee)
+                        anim.SetTrigger("doSwing");
+                    else if (equipweapons.type == WeapneType.Missile)
+                        anim.SetTrigger("doShot");
+
+                    fireDelay = 0;
+                }
             }
-
         }
 
         public void Swap(InputAction.CallbackContext callback)
@@ -227,12 +234,7 @@ namespace Assets.Scripts.InputSystem
                             break;
                         case Item.Type.Relic:
                             EventManager EM = GameObject.Find("EventManager").GetComponent<EventManager>();
-                            GameObject canvas = GameObject.Find("Canvas");
-
-                            if (EM.voteCount == 0)
-                            {
-                                canvas.transform.GetChild(3).gameObject.SetActive(true);
-                            }
+                            
                             new WaitForSeconds(1.0f);
 
                             EM.CreateVote();

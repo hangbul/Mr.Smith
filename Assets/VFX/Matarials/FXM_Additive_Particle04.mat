@@ -31,11 +31,14 @@ Material:
         m_Texture: {fileID: 0}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
+    m_Ints: []
     m_Floats:
+    - _Fade_Distance: 0
     - _Keyword0: 0
     - _Main_Ins: 1
     - _Main_Pow: 1
     - _Use_Custom: 0
-    - __dirty: 0
+    - __dirty: 1
     m_Colors:
     - _Tint_Color: {r: 1.882353, g: 4.54902, b: 5.992157, a: 1}
+  m_BuildTextureStacks: []
