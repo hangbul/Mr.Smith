@@ -7,13 +7,23 @@ using UnityEngine;
 public class Bullet : MonoBehaviour
 {
     public int damage;
+    private Collider _collider;
+    private GameObject player;
+    public enum bulletType
+    {
+        arrow,
+        seed
+    }
 
+    [SerializeField]public bulletType _type;
     private void Awake()
     {
-        if(this.tag == "E_bullet")
-            damage = 10;
+        _collider = GetComponentInChildren<Collider>();
+        player = GameObject.FindWithTag("Player");
+        if(_type == bulletType.seed)
+            damage = 5;
         else
-            damage = GameObject.FindWithTag("Player").GetComponent<PlayerInfo>().AttackPoint;
+            damage = player.GetComponent<PlayerInfo>().AttackPoint;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -23,7 +33,7 @@ public class Bullet : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (this.tag == "E_bullet")
+        if (_type == bulletType.seed)
         {
             if (collision.gameObject.tag == "Player")
             {

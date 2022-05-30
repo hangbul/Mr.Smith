@@ -264,6 +264,7 @@ namespace Assets.Scripts.InputSystem
                 SceneManager.LoadScene("TownScene");
 
             }
+            
         }
         void OnTriggerStay (Collider other)
         {
