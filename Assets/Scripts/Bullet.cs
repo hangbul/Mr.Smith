@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Assets.Scripts.InputSystem;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -9,7 +10,10 @@ public class Bullet : MonoBehaviour
 
     private void Awake()
     {
-        damage = GameObject.FindWithTag("Player").GetComponent<PlayerInfo>().AttackPoint;
+        if(this.tag == "E_bullet")
+            damage = 10;
+        else
+            damage = GameObject.FindWithTag("Player").GetComponent<PlayerInfo>().AttackPoint;
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -17,6 +21,14 @@ public class Bullet : MonoBehaviour
         if (collision.gameObject.tag == "Centry Room" || collision.gameObject.tag == "Rooms")
         {
             Destroy(gameObject);
+        }
+
+        if (this.tag == "E_bullet")
+        {
+            if (collision.gameObject.tag == "Player")
+            {
+                Destroy(gameObject);
+            }
         }
     }
 }

@@ -184,11 +184,14 @@ namespace Assets.Scripts.InputSystem
 
         public void OnDodge(InputAction.CallbackContext callback)
         {
-            speed = 10.0f;
-            anim.SetTrigger("doDodge");
-            isDodge = true;
-            dodgeVec = moveVec;
-            Invoke("DodgeOut", 0.5f);
+            if (callback.performed)
+            {
+                speed = 10.0f;
+                anim.SetTrigger("doDodge");
+                isDodge = true;
+                dodgeVec = moveVec;
+                Invoke("DodgeOut", 0.5f);
+            }
         }
 
         public void DodgeOut()
