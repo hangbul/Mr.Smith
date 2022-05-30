@@ -35,14 +35,3 @@ MonoBehaviour:
     text3: "\uB208"
     ID: 1
     lifeTime: 20
-  - questSpriteimage: {fileID: 0}
-    votePrefab: {fileID: 2376976987447939220, guid: 5e500cb5382e31849943e5bebdb5d4b1,
-      type: 3}
-    voteName: "\uBBF8\uC815"
-    voteType: 2
-    voteDescription: two-choice
-    text1: "\uC801\uAC8C"
-    text2: "\uB9CE\uC774"
-    text3: 
-    ID: 2
-    lifeTime: 15
