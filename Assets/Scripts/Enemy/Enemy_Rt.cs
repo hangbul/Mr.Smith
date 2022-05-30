@@ -49,7 +49,7 @@ public class Enemy_Rt : MonoBehaviour
     private BoxCollider collider;
     private Material mat;
 
-    private float distance;
+    public float distance;
     
     private EventManager _eventManager;
     
@@ -96,9 +96,9 @@ public class Enemy_Rt : MonoBehaviour
 
         if (distance <= 10.0f)
         {
-            Vector3 target = _player.transform.position - transform.position;
+            var target_pos = _player.transform.position - transform.position;
+            Vector3 target = new Vector3(target_pos.x, 0, target_pos.z); 
             var from = transform.rotation;
-            target = new Vector3(target.x, from.y, target.z);
             var to = Quaternion.LookRotation(target);
             transform.rotation = Quaternion.Lerp(from, to, Time.deltaTime * rotationSpeed);
         }
