@@ -3088,6 +3088,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 631580346347928151, guid: b06e878908dac2d499ebc4b5ca51e0f1,
         type: 3}
+      propertyPath: defaultMat
+      value: 
+      objectReference: {fileID: 2100000, guid: e7023b428ad59364a95742d8ae8974ec, type: 2}
+    - target: {fileID: 631580346347928151, guid: b06e878908dac2d499ebc4b5ca51e0f1,
+        type: 3}
       propertyPath: playerInfo
       value: 
       objectReference: {fileID: 1269118476}
@@ -3202,6 +3207,16 @@ PrefabInstance:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 5831045001265866914, guid: b06e878908dac2d499ebc4b5ca51e0f1,
+        type: 3}
+      propertyPath: m_Materials.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5831045001265866914, guid: b06e878908dac2d499ebc4b5ca51e0f1,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: e7023b428ad59364a95742d8ae8974ec, type: 2}
     - target: {fileID: 7874855662994104602, guid: b06e878908dac2d499ebc4b5ca51e0f1,
         type: 3}
       propertyPath: idx

@@ -32,7 +32,6 @@ public class EventManager : MonoBehaviour
         isSunny
     }
     private varWeather currWeather = varWeather.isSunny;
-
     public DAYnNIGHT DnN;
     private bool debug_TopCam = false;
     private bool debug_godMode = false;
@@ -48,6 +47,7 @@ public class EventManager : MonoBehaviour
         canvas = GameObject.Find("Canvas");
         player = GameObject.Find("Player");
         player.GetComponent<PlayerInfo>().healthbar = GameObject.Find("Health Bar").GetComponent<HealthBar>();
+
         player.GetComponent<PlayerInfo>().SetUpMaxHealth();
         player.GetComponent<PlayerMovement>().mainCam = Camera.main;
         player.transform.SetParent(GameObjects.transform);
@@ -109,7 +109,25 @@ public class EventManager : MonoBehaviour
             CreateVote();
         }
 
-        
+        else if (Input.GetKeyDown(KeyCode.F8))
+        {
+            PlayerElement element = player.GetComponent<PlayerInfo>().playerElement;
+            switch (element)
+            {
+                case PlayerElement.Fire:
+                    player.GetComponent<PlayerInfo>().playerElement = PlayerElement.Ice;
+                    break;
+                case PlayerElement.Ice:
+                    player.GetComponent<PlayerInfo>().playerElement = PlayerElement.Lightning;
+                    break;
+                case PlayerElement.Lightning:
+                    player.GetComponent<PlayerInfo>().playerElement = PlayerElement.None;
+                    break;
+                case PlayerElement.None:
+                    player.GetComponent<PlayerInfo>().playerElement = PlayerElement.Fire;
+                    break;
+            }
+        }
     }
 
     public void OnChangePriorty()

@@ -24,7 +24,7 @@ public class WeatherManager : MonoBehaviour
         isSunny
     }
 
-    private weather currWeather = weather.isSunny;
+    public weather currWeather = weather.isSunny;
     public float changeTime = 0f;
 
     void Awake()

@@ -23,7 +23,7 @@ public class VoteSceneManager : MonoBehaviour
     private void Start()
     {
         timertext.text = "시간 : " + Mathf.Round(LimitTimer);
-        settingStagePoints = new List<int>{0,0,0,0,0};
+        settingStagePoints = new List<int>{0,0,0,0};
         foreach (var stgP in stagePoints)
         {
             int idx = 0;
@@ -46,7 +46,6 @@ public class VoteSceneManager : MonoBehaviour
                 break;
             case 1:
             case 3:
-            case 4:
                 SceneManager.LoadScene("OneRoomScene");
                 break;
             default:
@@ -93,11 +92,6 @@ public class VoteSceneManager : MonoBehaviour
         else if (Input.GetKeyDown(KeyCode.F4))
         {
             //생존
-            SceneManager.LoadScene("DefenceRoom");
-        }
-        else if (Input.GetKeyDown(KeyCode.F5))
-        {
-            //방어
             SceneManager.LoadScene("DefenceRoom");
         }
     }
